@@ -1,3 +1,6 @@
 ---
 Name: coretoolsconfig
 ---
+ContentObject:
+  extensions:
+    - Linkable
