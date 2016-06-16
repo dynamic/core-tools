@@ -5,54 +5,38 @@ class PreviewExtension extends DataExtension
     private static $db = array(
         'PreviewTitle' => 'HTMLVarchar',
         'Abstract' => 'HTMLText',
-        'AbstractFirstParagraph' => 'Boolean', );
+    );
 
     private static $has_one = array(
-        'Thumbnail' => 'Image',
+        'PreviewImage' => 'Image',
     );
 
     public function updateCMSFields(FieldList $fields)
     {
-        $ThumbField = UploadField::create('Thumbnail', 'Thumbnail Image');
+        $ThumbField = UploadField::create('PreviewImage')
+            ->setFolderName('Uploads/Preview')
+            ->setConfig('allowedMaxFileNumber', 1)
+        ;
         $ThumbField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-        $ThumbField->setFolderName('Uploads/DetailThumb');
-        $ThumbField->setConfig('allowedMaxFileNumber', 1);
         if ($this->owner->stat('customThumbnailTitle')) {
             $ThumbField->setRightTitle($this->owner->stat('customThumbnailTitle'));
         } else {
-            $ThumbField->setRightTitle('Small image used in summary');
+            $ThumbField->setRightTitle('Small image displayed in summary');
         }
-        $ThumbField->getValidator()->setAllowedMaxFileSize(CORE_IMAGE_FILE_SIZE_LIMIT);
+        $ThumbField->getValidator()->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
 
         // Preview
         $fields->addFieldsToTab('Root.Preview', array(
-            TextField::create('PreviewTitle', 'Preview Title'),
-            CheckboxField::create('AbstractFirstParagraph', 'Use first paragraph as abstract'),
-            $abstract = TextareaField::create('Abstract'),
+            TextField::create('PreviewTitle', 'Preview Title')
+                ->setDescription('If empty, will default to Page Name'),
+            $abstract = TextareaField::create('Abstract')
+                ->setDescription('If empty, will default to first paragraph of Content'),
             $ThumbField,
         ));
 
         if (class_exists('DisplayLogicFormField')) {
             $abstract->displayUnless('AbstractFirstParagraph')->isChecked();
         }
-    }
-
-    // summary for list layout
-    public function getSummary()
-    {
-        return $this->owner->renderWith('DetailListSummary');
-    }
-
-    // summary for text grid layout
-    public function getTextGridSummary()
-    {
-        return $this->owner->renderWith('DetailTextGridSummary');
-    }
-
-    // summary for image grid layout
-    public function getImageGridSummary()
-    {
-        return $this->owner->renderWith('DetailImageGridSummary');
     }
 
     // getters for summary view
@@ -69,8 +53,8 @@ class PreviewExtension extends DataExtension
 
     public function getPreviewThumb()
     {
-        if ($this->owner->ThumbnailID) {
-            return $this->owner->Thumbnail();
+        if ($this->owner->PreviewImageID) {
+            return $this->owner->PreviewImage();
         } elseif ($this->owner->ImageID) {
             return $this->owner->Image();
         }
