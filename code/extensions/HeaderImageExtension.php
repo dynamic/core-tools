@@ -5,7 +5,7 @@ class HeaderImageExtension extends DataExtension
     private static $has_one = array(
         'HeaderImage' => 'Image',
     );
-    
+
     public function updateCMSFields(FieldList $fields)
     {
         $ImageField = UploadField::create('HeaderImage', 'Header Image')

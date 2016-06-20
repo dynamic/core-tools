@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class FileObject
+ * Class FileObject.
  *
  * Base class for simple file attachments. Intended not be used directly, but extended in projects.
  */
@@ -48,7 +48,7 @@ class FileObject extends ContentObject
             $file,
             TextField::create('FileLink')
                 ->setDescription('URL of external file. will display on page if no Download is specified above.')
-                ->setAttribute('placeholder', 'http://')
+                ->setAttribute('placeholder', 'http://'),
         ));
 
         $fields->dataFieldByName('Image')

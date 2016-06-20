@@ -14,6 +14,7 @@ class CoreToolsPageDataExtension extends DataExtension
      */
     private static $many_many = array(
         'Promos' => 'Promo',
+        'Videos' => 'YouTubeVideo',
     );
 
     /**
@@ -21,6 +22,9 @@ class CoreToolsPageDataExtension extends DataExtension
      */
     private static $many_many_extraFields = array(
         'Promos' => array(
+            'SortOrder' => 'Int',
+        ),
+        'Videos' => array(
             'SortOrder' => 'Int',
         ),
     );
