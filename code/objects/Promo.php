@@ -34,15 +34,17 @@ class Promo extends ContentObject implements PermissionProvider
         $fields->dataFieldByName('Image')->setFolderName('Uploads/Promos');
 
         // pages
-        $config = GridFieldConfig_RecordViewer::create();
-        $config->removeComponent($config->getComponentByType('GridFieldViewButton'));
-        $pages = $this->Pages()->sort('Title');
-        $pageField = new GridField('Pages', 'Pages', $pages, $config);
+        if(singleton('Page')->hasExtension('CoreToolsPageDataExtension')) {
+            $config = GridFieldConfig_RecordViewer::create();
+            $config->removeComponent($config->getComponentByType('GridFieldViewButton'));
+            $pages = $this->Pages()->sort('Title');
+            $pageField = new GridField('Pages', 'Pages', $pages, $config);
 
-        $fields->addFieldsToTab('Root.Pages', array(
-            HeaderField::create('PagesHD', 'Used on the following pages', 3),
-            $pageField,
-        ));
+            $fields->addFieldsToTab('Root.Pages', array(
+                HeaderField::create('PagesHD', 'Used on the following pages', 3),
+                $pageField,
+            ));
+        }
 
         return $fields;
     }
