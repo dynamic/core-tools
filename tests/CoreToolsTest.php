@@ -64,3 +64,4 @@ TestPage::add_extension('PageSectionManager');
 TestPage::add_extension('PromoManager');
 TestPage::add_extension('PreviewExtension');
 TestPage::add_extension('YouTubeManager');
+TestPage::add_extension('TagManager');
