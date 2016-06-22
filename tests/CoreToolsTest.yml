@@ -1,0 +1,32 @@
+Page:
+  default:
+    Title: "Page One"
+TestPage:
+  parent:
+    Title: "Parent Page"
+    Content: "<p>Content</p>"
+  subpage:
+    Title: "Child Page"
+    ParentID: =>TestPage.parent
+ContentObject:
+  default:
+    Name: "Content Object"
+    Title: "First Content Object"
+PageSection:
+  default:
+    Name: "Page Section"
+    Title: "First Page Section"
+Promo:
+  default:
+    Name: "Promo"
+    Title: "First Promo"
+YouTubeVideo:
+  default:
+    Name: "YouTube Video"
+    Title: "First YouTube Video"
+    Video: "https://www.youtube.com/watch?v=dM15HfUYwF0"
+Image:
+  header:
+    Title: "Header Image"
+  preview:
+    Title: "Preview Image"

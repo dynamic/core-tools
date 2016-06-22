@@ -24,5 +24,8 @@
         "process-timeout": 600
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "installer-name": "core-tools"
+    }
 }

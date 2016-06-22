@@ -35,7 +35,7 @@ class YouTubeVideo extends ContentObject
 
         $fields->addFieldToTab(
             'Root.Main',
-            YoutubeField::create('Video')
+            YouTubeField::create('Video')
                 ->setTitle('Video link')
                 ->setRightTitle('Paste the link from the address bar in your browser while viewing the video on YouTube'),
             'Content'
