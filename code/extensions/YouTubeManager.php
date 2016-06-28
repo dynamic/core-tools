@@ -40,6 +40,6 @@ class YouTubeManager extends DataExtension
      */
     public function contentcontrollerInit($controller)
     {
-        Requirements::javascript(CORE_TOOLS_PATH.'/javascript/videos/VideoPlaylist.js');
+        Requirements::javascript(CORE_TOOLS_DIR.'/javascript/videos/VideoPlaylist.js');
     }
 }
