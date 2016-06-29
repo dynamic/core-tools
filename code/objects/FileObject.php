@@ -41,8 +41,9 @@ class FileObject extends ContentObject
         $file = UploadField::create('Download')
             ->setFolderName('Uploads/FileDownloads')
             ->setConfig('allowedMaxFileNumber', 1)
+            ->setAllowedFileCategories('doc')
+            ->setAllowedMaxFileNumber(1)
         ;
-        $file->getValidator()->allowedExtensions = array('pdf');
 
         $fields->addFieldsToTab('Root.Download', array(
             $file,
