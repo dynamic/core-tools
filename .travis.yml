@@ -10,6 +10,9 @@ addons:
 php:
   - 7.0
 
+before_install:
+  - pip install --user codecov
+
 env:
   global:
     - DB=MYSQL CORE_RELEASE=3.4
@@ -19,6 +22,9 @@ env:
 
     # The path of the module when installed by composer
     - MODULE_PATH=core-tools
+
+    # codecov token
+    - CODECOV_TOKEN=4de7cd62-439d-47db-8a7b-6d9aa724b32b
 
 matrix:
   include:
@@ -57,4 +63,4 @@ after_script:
   - "if [ \"$COVERAGE\" = \"1\" ]; then mv coverage.clover ~/build/$TRAVIS_REPO_SLUG/; fi"
   - cd ~/build/$TRAVIS_REPO_SLUG
   - wget https://scrutinizer-ci.com/ocular.phar
-  - "if [ \"$COVERAGE\" = \"1\" ]; then travis_retry php ocular.phar code-coverage:upload --format=php-clover --access-token='d0cb5cb06d4d296fe4d849c2bd5008934cbf8afe5d256ef146df32d935a783a6' coverage.clover; fi"
+  - "if [ \"$COVERAGE\" = \"1\" ]; then bash <(curl -s https://codecov.io/bash) -t 4de7cd62-439d-47db-8a7b-6d9aa724b32b && travis_retry php ocular.phar code-coverage:upload --format=php-clover --access-token='d0cb5cb06d4d296fe4d849c2bd5008934cbf8afe5d256ef146df32d935a783a6' coverage.clover; fi"
