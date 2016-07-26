@@ -19,6 +19,13 @@ class Linkable extends DataExtension
     );
 
     /**
+     * @var array
+     */
+    private static $defaults = array(
+        'LinkType' => 'None',
+    );
+
+    /**
      * @return string
      */
     public function getLinkStatus()
