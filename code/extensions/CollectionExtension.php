@@ -107,6 +107,7 @@ class CollectionExtension extends Extension
         $form
             ->setFormMethod('get')
             ->disableSecurityToken()
+            ->loadDataFrom($request->getVars())
         ;
         return $form;
     }
