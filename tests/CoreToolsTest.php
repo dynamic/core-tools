@@ -57,6 +57,9 @@ class CoreToolsTest extends FunctionalTest
  */
 class TestPage extends Page implements TestOnly
 {
+    private static $many_many = array(
+        'Tags' => 'Tag',
+    );
 }
 
 class TestPage_Controller extends Page_Controller implements TestOnly
