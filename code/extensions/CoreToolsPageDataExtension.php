@@ -15,7 +15,6 @@ class CoreToolsPageDataExtension extends DataExtension
     private static $many_many = array(
         'Promos' => 'Promo',
         'Videos' => 'YouTubeVideo',
-        'Tags' => 'Tag',
     );
 
     /**
