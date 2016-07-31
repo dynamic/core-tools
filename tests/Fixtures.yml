@@ -1,0 +1,52 @@
+Group:
+  administrators:
+    Title: Administrators
+Permission:
+  administrators:
+    Code: ADMIN
+    Type: 1
+    Group: =>Group.administrators
+Member:
+  admin:
+    FirstName: Default
+    Surname: Admin
+    Email: admin@dynamicagency.com
+    Groups: =>Group.administrators
+  default:
+    FirstName: Default
+    Surname: User
+    Email: user@dynamicagency.com
+Page:
+  default:
+    Title: "Page One"
+  subpage:
+    Title: "Sub Page"
+    ParentID: =>Page.default
+ContentObject:
+  default:
+    Name: "Content Object"
+    Title: "First Content Object"
+PageSection:
+  default:
+    Name: "Page Section"
+    Title: "First Page Section"
+Promo:
+  default:
+    Name: "Promo"
+    Title: "First Promo"
+YouTubeVideo:
+  default:
+    Name: "YouTube Video"
+    Title: "First YouTube Video"
+    Video: "https://www.youtube.com/watch?v=dM15HfUYwF0"
+FileObject:
+  default:
+    Name: "image.jpg"
+Image:
+  header:
+    Title: "Header Image"
+  preview:
+    Title: "Preview Image"
+Tag:
+  one:
+    Title: "Tag One"

@@ -21,8 +21,8 @@ class CoreToolsPageFieldsDataExtension extends DataExtension
         $meta = ToggleCompositeField::create('Metadata', _t('SiteTree.MetadataToggle', 'Metadata'),
             array(
                 $metaTitle = new TextField('PageTitle', 'Page Title'),
-                $metaFieldDesc = new TextareaField("MetaDescription", 'MetaDescription'),
-                $metaFieldExtra = new TextareaField("ExtraMeta", 'ExtraMeta')
+                $metaFieldDesc = new TextareaField('MetaDescription', 'MetaDescription'),
+                $metaFieldExtra = new TextareaField('ExtraMeta', 'ExtraMeta'),
             )
         )->setHeadingLevel(4);
         // Help text for MetaData on page content editor
@@ -30,7 +30,7 @@ class CoreToolsPageFieldsDataExtension extends DataExtension
             ->setRightTitle(
                 _t(
                     'SiteTree.METADESCHELP',
-                    "Search engines use this content for displaying search results (although it will not influence their ranking)."
+                    'Search engines use this content for displaying search results (although it will not influence their ranking).'
                 )
             )
             ->addExtraClass('help');
@@ -38,7 +38,7 @@ class CoreToolsPageFieldsDataExtension extends DataExtension
             ->setRightTitle(
                 _t(
                     'SiteTree.METAEXTRAHELP',
-                    "HTML tags for additional meta information. For example &lt;meta name=\"customName\" content=\"your custom content here\" /&gt;"
+                    'HTML tags for additional meta information. For example &lt;meta name="customName" content="your custom content here" /&gt;'
                 )
             )
             ->addExtraClass('help');

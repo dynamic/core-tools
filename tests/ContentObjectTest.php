@@ -1,12 +1,19 @@
 <?php
 
-class ContentObjectTest extends CoreToolsTest
+class ContentObjectTest extends SapphireTest
 {
+    /**
+     * @var array
+     */
+    protected static $fixture_file = array(
+        'core-tools/tests/Fixtures.yml',
+    );
+
     public function testGetCMSFields()
     {
-        $object = new ContentObject();
-        $fieldset = $object->getCMSFields();
-        $this->assertTrue(is_a($fieldset, 'FieldList'));
+        $object = $this->objFromFixture('ContentObject', 'default');
+        $fields = $object->getCMSFields();
+        $this->assertInstanceOf('FieldList', $fields);
     }
 
     public function testValidateName()
@@ -20,52 +27,44 @@ class ContentObjectTest extends CoreToolsTest
     public function testCanView()
     {
         $object = $this->objFromFixture('ContentObject', 'default');
-        $this->logInWithPermission('ADMIN');
-        $this->assertTrue($object->canView());
-        $this->logOut();
 
-        $nullMember = Member::create();
-        $nullMember->write();
-        $this->assertTrue($object->canView($nullMember));
-        $nullMember->delete();
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canView($admin));
+
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertTrue($object->canView($member));
     }
 
     public function testCanEdit()
     {
         $object = $this->objFromFixture('ContentObject', 'default');
-        $object->write();
-        $objectID = $object->ID;
-        $this->logInWithPermission('ADMIN');
-        $originalTitle = $object->Title;
-        $this->assertEquals($originalTitle, 'First Content Object');
-        $this->assertTrue($object->canEdit());
-        $object->Title = 'Changed Title';
-        $object->write();
-        $testEdit = ContentObject::get()->byID($objectID);
-        $this->assertEquals($testEdit->Title, 'Changed Title');
-        $this->logOut();
+
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canEdit($admin));
+
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertTrue($object->canEdit($member));
     }
 
     public function testCanDelete()
     {
         $object = $this->objFromFixture('ContentObject', 'default');
-        $object->write();
-        $this->logInWithPermission('ADMIN');
-        $this->assertTrue($object->canDelete());
-        $checkObject = $object;
-        $object->delete();
-        $this->assertEquals($checkObject->ID, 0);
+
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canDelete($admin));
+
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertTrue($object->canDelete($member));
     }
 
     public function testCanCreate()
     {
-        $object = singleton('ContentObject');
-        $this->logInWithPermission('ADMIN');
-        $this->assertTrue($object->canCreate());
-        $this->logOut();
-        $nullMember = Member::create();
-        $nullMember->write();
-        $this->assertTrue($object->canCreate($nullMember));
-        $nullMember->delete();
+        $object = $this->objFromFixture('ContentObject', 'default');
+
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canCreate($admin));
+
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertTrue($object->canCreate($member));
     }
 }

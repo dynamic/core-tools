@@ -53,17 +53,18 @@ class PageSection extends ContentObject implements PermissionProvider
             'PageSection_EDIT' => 'Page Section Edit',
             'PageSection_DELETE' => 'Page Section Delete',
             'PageSection_CREATE' => 'Page Section Create',
+            'PageSection_VIEW' => 'Page Section View',
         );
     }
 
     /**
-     * @param null $member
+     * @param Member $member
      *
-     * @return bool|int
+     * @return bool
      */
-    public function canCreate($member = null)
+    public function canView($member = null)
     {
-        return Permission::check('PageSection_CREATE');
+        return Permission::check('PageSection_VIEW', 'any', $member);
     }
 
     /**
@@ -73,7 +74,7 @@ class PageSection extends ContentObject implements PermissionProvider
      */
     public function canEdit($member = null)
     {
-        return Permission::check('PageSection_EDIT');
+        return Permission::check('PageSection_EDIT', 'any', $member);
     }
 
     /**
@@ -83,16 +84,16 @@ class PageSection extends ContentObject implements PermissionProvider
      */
     public function canDelete($member = null)
     {
-        return Permission::check('PageSection_DELETE');
+        return Permission::check('PageSection_DELETE', 'any', $member);
     }
 
     /**
      * @param null $member
      *
-     * @return bool
+     * @return bool|int
      */
-    public function canView($member = null)
+    public function canCreate($member = null)
     {
-        return true;
+        return Permission::check('PageSection_CREATE', 'any', $member);
     }
 }

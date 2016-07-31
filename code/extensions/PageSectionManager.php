@@ -25,3 +25,10 @@ class PageSectionManager extends DataExtension
         return $this->owner->Sections()->sort('SortOrder');
     }
 }
+
+class PageSectionRelation extends DataExtension
+{
+    private static $has_many = array(
+        'Sections' => 'PageSection',
+    );
+}

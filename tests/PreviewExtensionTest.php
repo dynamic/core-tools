@@ -1,10 +1,15 @@
 <?php
 
-class PreviewExtensionTest extends CoreToolsTest
+class PreviewExtensionTest extends SapphireTest
 {
+    /**
+     * @var string
+     */
+    protected static $fixture_file = 'core-tools/tests/Fixtures.yml';
+
     public function testUpdateCMSFields()
     {
-        $object = $this->objFromFixture('TestPage', 'parent');
+        $object = $this->objFromFixture('Page', 'default');
         $fields = $object->getCMSFields();
 
         $this->assertTrue(is_a($fields, 'FieldList'));
@@ -15,7 +20,7 @@ class PreviewExtensionTest extends CoreToolsTest
 
     public function testGetPreviewHeadline()
     {
-        $object = $this->objFromFixture('TestPage', 'parent');
+        $object = $this->objFromFixture('Page', 'default');
         $this->assertEquals($object->getPreviewHeadline(), $object->Title);
 
         $object->PreviewTitle = 'Preview';
@@ -24,7 +29,7 @@ class PreviewExtensionTest extends CoreToolsTest
 
     public function testGetPreviewThumb()
     {
-        $object = $this->objFromFixture('TestPage', 'parent');
+        $object = $this->objFromFixture('Page', 'default');
         $image = $this->objFromFixture('Image', 'preview');
         $this->assertFalse($object->getPreviewThumb());
 
@@ -34,10 +39,13 @@ class PreviewExtensionTest extends CoreToolsTest
 
     public function testGetPreviewAbstract()
     {
-        $object = $this->objFromFixture('TestPage', 'parent');
+        $object = $this->objFromFixture('Page', 'default');
         $this->assertEquals($object->getPreviewAbstract(), $object->obj('Content')->FirstParagraph());
 
         $object->Abstract = 'Preview';
         $this->assertEquals($object->getPreviewAbstract(), $object->Abstract);
     }
 }
+
+Page::add_extension('PageSectionRelation');
+Page::add_extension('PreviewExtension');
