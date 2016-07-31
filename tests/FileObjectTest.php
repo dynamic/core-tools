@@ -1,11 +1,18 @@
 <?php
 
-class FileObjectTest extends CoreToolsTest
+class FileObjectTest extends SapphireTest
 {
+    /**
+     * @var array
+     */
+    protected static $fixture_file = array(
+        'core-tools/tests/Fixtures.yml',
+    );
+
     public function testGetCMSFields()
     {
-        $object = new FileObject();
-        $fieldset = $object->getCMSFields();
-        $this->assertTrue(is_a($fieldset, 'FieldList'));
+        $object = $this->objFromFixture('FileObject', 'default');
+        $fields = $object->getCMSFields();
+        $this->assertInstanceOf('FieldList', $fields);
     }
 }

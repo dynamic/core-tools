@@ -5,11 +5,16 @@ class CoreToolsTest extends FunctionalTest
     /**
      * @var string
      */
-    protected static $fixture_file = 'core-tools/tests/CoreToolsTest.yml';
+    protected static $fixture_file = array(
+        'core-tools/tests/CoreToolsTest.yml',
+        'core-tools/tests/Fixtures.yml',
+    );
+
     /**
      * @var bool
      */
     protected static $disable_themes = true;
+
     /**
      * @var bool
      */
@@ -20,7 +25,7 @@ class CoreToolsTest extends FunctionalTest
      */
     protected $extraDataObjects = array(
         'TestPage',
-        'TestPage_Controller'
+        'TestPage_Controller',
     );
 
     /**
@@ -81,8 +86,6 @@ class TestPage_Controller extends Page_Controller implements TestOnly
 {
 }
 
-TestPage::add_extension('HeaderImageDataExtension');
-TestPage::add_extension('PageSectionManager');
 TestPage::add_extension('PromoManager');
 TestPage::add_extension('PreviewExtension');
 TestPage::add_extension('YouTubeManager');

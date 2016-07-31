@@ -1,64 +1,63 @@
 <?php
 
-class PageSectionTest extends CoreToolsTest
+class PageSectionTest extends SapphireTest
 {
+    /**
+     * @var array
+     */
+    protected static $fixture_file = array(
+        'core-tools/tests/Fixtures.yml',
+    );
+
     public function testGetCMSFields()
     {
-        $object = new PageSection();
-        $fieldset = $object->getCMSFields();
-        $this->assertTrue(is_a($fieldset, 'FieldList'));
+        $object = $this->objFromFixture('PageSection', 'default');
+        $fields = $object->getCMSFields();
+        $this->assertInstanceOf('FieldList', $fields);
     }
 
     public function testCanView()
     {
         $object = $this->objFromFixture('PageSection', 'default');
-        $this->logInWithPermission('ADMIN');
-        $this->assertTrue($object->canView());
-        $this->logOut();
 
-        $nullMember = Member::create();
-        $nullMember->write();
-        $this->assertTrue($object->canView($nullMember));
-        $nullMember->delete();
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canView($admin));
+
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertFalse($object->canView($member));
     }
 
     public function testCanEdit()
     {
         $object = $this->objFromFixture('PageSection', 'default');
-        $object->write();
-        $objectID = $object->ID;
-        $this->logInWithPermission('ADMIN');
-        $originalTitle = $object->Title;
-        $this->assertEquals($originalTitle, 'First Page Section');
-        $this->assertTrue($object->canEdit());
-        $object->Title = 'Changed Title';
-        $object->write();
-        $testEdit = PageSection::get()->byID($objectID);
-        $this->assertEquals($testEdit->Title, 'Changed Title');
-        $this->logOut();
+
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canEdit($admin));
+
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertFalse($object->canEdit($member));
     }
 
     public function testCanDelete()
     {
         $object = $this->objFromFixture('PageSection', 'default');
-        $object->write();
-        $this->logInWithPermission('ADMIN');
-        $this->assertTrue($object->canDelete());
-        $checkObject = $object;
-        $object->delete();
-        $this->assertEquals($checkObject->ID, 0);
+
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canDelete($admin));
+
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertFalse($object->canDelete($member));
     }
 
     public function testCanCreate()
     {
         $object = singleton('PageSection');
-        $this->logInWithPermission('ADMIN');
-        $this->assertTrue($object->canCreate());
-        $this->logOut();
-        $nullMember = Member::create();
-        $nullMember->write();
-        $this->assertFalse($object->canCreate($nullMember));
-        $nullMember->delete();
+
+        $admin = $this->objFromFixture('Member', 'admin');
+        $this->assertTrue($object->canCreate($admin));
+
+        $member = $this->objFromFixture('Member', 'default');
+        $this->assertFalse($object->canCreate($member));
     }
 
     public function testProvidePermissions()
@@ -68,6 +67,7 @@ class PageSectionTest extends CoreToolsTest
             'PageSection_EDIT' => 'Page Section Edit',
             'PageSection_DELETE' => 'Page Section Delete',
             'PageSection_CREATE' => 'Page Section Create',
+            'PageSection_VIEW' => 'Page Section View',
         );
         $this->assertEquals($expected, $object->providePermissions());
     }

@@ -34,7 +34,7 @@ class Promo extends ContentObject implements PermissionProvider
         $fields->dataFieldByName('Image')->setFolderName('Uploads/Promos');
 
         // pages
-        if(singleton('Page')->hasExtension('CoreToolsPageDataExtension')) {
+        if (singleton('Page')->hasExtension('CoreToolsPageDataExtension')) {
             $config = GridFieldConfig_RecordViewer::create();
             $config->removeComponent($config->getComponentByType('GridFieldViewButton'));
             $pages = $this->Pages()->sort('Title');

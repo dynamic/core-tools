@@ -1,7 +1,14 @@
 <?php
 
-class CoreToolsPageFieldsDataExtensionTest extends CoreToolsTest
+class CoreToolsPageFIeldsDataExtensionTest extends SapphireTest
 {
+    /**
+     * @var array
+     */
+    protected static $fixture_file = array(
+        'core-tools/tests/Fixtures.yml',
+    );
+
     public function testUpdateCMSFields()
     {
         $object = singleton('TestPage');

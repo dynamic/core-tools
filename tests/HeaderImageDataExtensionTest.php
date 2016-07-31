@@ -1,7 +1,14 @@
 <?php
 
-class HeaderImageDataExtensionTest extends CoreToolsTest
+class HeaderImageDataExtensionTest extends SapphireTest
 {
+    /**
+     * @var array
+     */
+    protected static $fixture_file = array(
+        'core-tools/tests/Fixtures.yml',
+    );
+
     public function testUpdateCMSFields()
     {
         $object = singleton('TestPage');
@@ -15,8 +22,8 @@ class HeaderImageDataExtensionTest extends CoreToolsTest
 
     public function testGetPageHeaderImage()
     {
-        $page = $this->objFromFixture('TestPage', 'parent');
-        $subpage = $this->objFromFixture('TestPage', 'subpage');
+        $page = $this->objFromFixture('Page', 'default');
+        $subpage = $this->objFromFixture('Page', 'subpage');
         $image = $this->objFromFixture('Image', 'header');
 
         $this->assertNull($subpage->getPageHeaderImage());
@@ -32,3 +39,5 @@ class HeaderImageDataExtensionTest extends CoreToolsTest
         $this->assertInstanceOf('Image', $subpage->getPageHeaderImage());
     }
 }
+
+Page::add_extension('HeaderImageDataExtension');

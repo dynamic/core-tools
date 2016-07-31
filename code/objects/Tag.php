@@ -2,18 +2,18 @@
 
 class Tag extends DataObject
 {
-	/**
-	 * @var array
-	 */
+    /**
+     * @var array
+     */
     private static $db = array(
-        'Title' => 'Varchar(200)'
+        'Title' => 'Varchar(200)',
     );
 
     /**
      * @var array
      */
     private static $belongs_many_many = array(
-        'Pages' => 'Page'
+        'Pages' => 'Page',
     );
 
     /**

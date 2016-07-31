@@ -28,3 +28,16 @@ class PromoManager extends DataExtension
         }
     }
 }
+
+class PromoRelation extends DataExtension
+{
+    private static $many_many = array(
+        'Promos' => 'Promo',
+    );
+
+    private static $many_many_extraFields = array(
+        'Promos' => array(
+            'SortOrder' => 'Int',
+        ),
+    );
+}

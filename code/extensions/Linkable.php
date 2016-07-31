@@ -32,11 +32,13 @@ class Linkable extends DataExtension
     {
         if ($this->owner->LinkType != 'None') {
             if ($this->owner->LinkType == 'Internal' && $this->owner->PageLink()->exists()) {
-                return 'yes';
+                return 'internal';
             }
             if ($this->owner->LinkType == 'External' && $this->owner->ExternalLink) {
-                return 'yes';
+                return 'external';
             }
+
+            return 'error';
         }
 
         return 'no';

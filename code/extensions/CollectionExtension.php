@@ -6,7 +6,7 @@ class CollectionExtension extends Extension
      * @var array
      */
     private static $allowed_actions = array(
-        'CollectionSearchForm'
+        'CollectionSearchForm',
     );
 
     /**
@@ -15,8 +15,9 @@ class CollectionExtension extends Extension
     public function getCollectionObject()
     {
         if ($object = $this->owner->config()->managed_object) {
-            return (string)$object;
+            return (string) $object;
         }
+
         return 'Page';
     }
 
@@ -26,13 +27,15 @@ class CollectionExtension extends Extension
     public function getCollectionSize()
     {
         if ($object = $this->owner->config()->page_size) {
-            return (int)$object;
+            return (int) $object;
         }
+
         return 10;
     }
 
     /**
      * @param array $searchCriteria
+     *
      * @return PaginatedList
      */
     public function CollectionItems($searchCriteria = array())
@@ -50,9 +53,9 @@ class CollectionExtension extends Extension
         }
 
         $object = $this->getCollectionObject();
-        $sort = ($request->getVar('Sort')) ? (string)$request->getVar('Sort') : singleton($object)->stat('default_sort');
+        $sort = ($request->getVar('Sort')) ? (string) $request->getVar('Sort') : singleton($object)->stat('default_sort');
 
-        $start = ($request->getVar('start')) ? (int)$request->getVar('start') : 0;
+        $start = ($request->getVar('start')) ? (int) $request->getVar('start') : 0;
         $context = (method_exists($object, 'getCustomSearchContext')) ? singleton($object)->getCustomSearchContext() : singleton($object)->getDefaultSearchContext();
 
         $records = $context->getResults($searchCriteria)
@@ -60,6 +63,7 @@ class CollectionExtension extends Extension
         $records = PaginatedList::create($records, $this->owner->request);
         $records->setPageStart($start);
         $records->setPageLength($this->getCollectionSize());
+
         return $records;
     }
 
@@ -73,7 +77,7 @@ class CollectionExtension extends Extension
         $fields = $context->getSearchFields();
 
         $request = ($this->owner->request) ? $this->owner->request : $this->owner->parentController->getRequest();
-        $sort = ($request->getVar('Sort')) ? (string)$request->getVar('Sort') : singleton($object)->stat('default_sort');
+        $sort = ($request->getVar('Sort')) ? (string) $request->getVar('Sort') : singleton($object)->stat('default_sort');
 
         // add sort field if managed object specs getSortOptions()
         if (method_exists($object, 'getSortOptions')) {
@@ -109,22 +113,24 @@ class CollectionExtension extends Extension
             ->disableSecurityToken()
             ->loadDataFrom($request->getVars())
         ;
+
         return $form;
     }
 
     /**
-     * Results filtered by query
+     * Results filtered by query.
      *
      * @param $data
      * @param $form
      * @param $request
+     *
      * @return string
      */
     public function collectionSearch($data, $form, $request)
     {
         return $this->owner->render(array(
             'Items' => $this->owner->CollectionItems($data),
-            'AdvSearchForm' => $form
+            'AdvSearchForm' => $form,
         ));
     }
 }

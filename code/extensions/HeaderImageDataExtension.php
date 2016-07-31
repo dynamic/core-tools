@@ -48,6 +48,7 @@ class HeaderImageDataExtension extends DataExtension
         } elseif ($parent) {
             return self::getParentHeaderImage($parent);
         }
+
         return;
     }
 }
