@@ -57,8 +57,23 @@ class CoreToolsTest extends FunctionalTest
  */
 class TestPage extends Page implements TestOnly
 {
+    private static $has_many = array(
+        'Sections' => 'PageSection',
+    );
+
     private static $many_many = array(
+        'Promos' => 'Promo',
+        'Videos' => 'YouTubeVideo',
         'Tags' => 'Tag',
+    );
+
+    private static $many_many_extraFields = array(
+        'Promos' => array(
+            'SortOrder' => 'Int',
+        ),
+        'Videos' => array(
+            'SortOrder' => 'Int',
+        ),
     );
 }
 
@@ -66,7 +81,6 @@ class TestPage_Controller extends Page_Controller implements TestOnly
 {
 }
 
-TestPage::add_extension('CoreToolsPageDataExtension');
 TestPage::add_extension('HeaderImageDataExtension');
 TestPage::add_extension('PageSectionManager');
 TestPage::add_extension('PromoManager');

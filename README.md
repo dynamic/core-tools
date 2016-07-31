@@ -21,6 +21,34 @@ This is how you install core-tools.
 
 You use core-tools like this.
 
+In your project's `Page.php`:
+
+	private static $has_many = array(
+		'Sections' => 'PageSection',
+	);
+	
+	private static $many_many = array(
+		'Promos' => 'Promo',
+		'Videos' => 'YouTubeVideo',
+	);
+	
+	private static $many_many_extraFields = array(
+		'Promos' => array(
+			'SortOrder' => 'Int',
+		),
+		'Videos' => array(
+			'SortOrder' => 'Int',
+		),
+	);
+
+To use `Tags`, add the `Tags` relation to the dataobjects and pages desired:
+
+	private static $many_many = array(
+		'Tags' => 'Tag',
+	);
+
+note: the relation name `Tags` conflicts with Blog and likely other modules. Therefore we don't recommend applying the ralation to `Page`
+
 ## Documentation
 
 See the [docs/en](docs/en/index.md) folder.
