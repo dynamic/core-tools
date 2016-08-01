@@ -82,8 +82,10 @@ class CollectionExtension extends Extension
         // add sort field if managed object specs getSortOptions()
         if (method_exists($object, 'getSortOptions')) {
             $sortOptions = singleton($object)->getSortOptions();
-            $defaultSort = array(singleton($object)->stat('default_sort') => 'Default');
-            $sortOptions = array_merge($defaultSort, $sortOptions);
+            if(singleton($object)->stat('default_sort')) {
+                $defaultSort = array(str_replace('"', '', singleton($object)->stat('default_sort')) => 'Default');
+                $sortOptions = array_merge($defaultSort, $sortOptions);
+            }
             $fields->add(
                 DropdownField::create('Sort', 'Sort by:', $sortOptions, $sort)
             );
