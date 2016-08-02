@@ -1,0 +1,14 @@
+---
+After: 'silverstripe-optimisedimage/config#core'
+---
+Image:
+  extensions:
+    - ResampleImage
+  backend: OptimisedGDBackend
+ResampleImage:
+  max_x: 2000
+  max_y: 2500
+ImageOptimiserService:
+  enabledCommands:
+    - jpegoptim
+    - optipng

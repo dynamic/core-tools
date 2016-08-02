@@ -16,7 +16,10 @@
         "silverstripe/cms": "^3.2",
         "silverstripe/framework": "^3.2",
         "unclecheese/display-logic": "^1.2",
-        "silverstripe/tagfield": "^1.3"
+        "silverstripe/tagfield": "^1.3",
+        "heyday/silverstripe-optimisedimage": "^2.2",
+        "jonom/focuspoint": "^2.2"
+
     },
     "require-dev": {
         "phpunit/PHPUnit": "^3.7"
