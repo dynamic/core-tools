@@ -2,44 +2,58 @@
 
 class PreviewExtension extends DataExtension
 {
+    /**
+     * @var array
+     */
     private static $db = array(
         'PreviewTitle' => 'HTMLVarchar',
         'Abstract' => 'HTMLText',
     );
 
+    /**
+     * @var array
+     */
     private static $has_one = array(
         'PreviewImage' => 'Image',
     );
 
+    /**
+     * @param FieldList $fields
+     */
     public function updateCMSFields(FieldList $fields)
     {
-        $ThumbField = UploadField::create('PreviewImage')
+        $thumbnail = ImageUploadField::create('PreviewImage')
             ->setFolderName('Uploads/Preview')
-            ->setConfig('allowedMaxFileNumber', 1)
         ;
-        $ThumbField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-        if ($this->owner->stat('customThumbnailTitle')) {
-            $ThumbField->setRightTitle($this->owner->stat('customThumbnailTitle'));
+
+        // custom field description
+        if ($this->owner->config()->customThumbnailTitle) {
+            $thumbnail->setDescription($this->owner->config()->customThumbnailTitle);
         } else {
-            $ThumbField->setRightTitle('Small image displayed in summary');
+            $thumbnail->setDescription('optional, small image displayed with preview');
         }
-        $ThumbField->getValidator()->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
+
+        $previewFields = FieldList::create(
+            TextField::create('PreviewTitle', 'Preview Title')
+                ->setAttribute('placeholder', $this->owner->getTitle())
+                ->setDescription('optional, defaults to Page Name'),
+            $abstract = HtmlEditorField::create('Abstract')
+                ->setRows(5)
+                ->setDescription('optional, defaults to first paragraph of Content'),
+            $thumbnail
+        );
 
         // Preview
-        $fields->addFieldsToTab('Root.Preview', array(
-            TextField::create('PreviewTitle', 'Preview Title')
-                ->setDescription('If empty, will default to Page Name'),
-            $abstract = TextareaField::create('Abstract')
-                ->setDescription('If empty, will default to first paragraph of Content'),
-            $ThumbField,
-        ));
-
-        if (class_exists('DisplayLogicFormField')) {
-            $abstract->displayUnless('AbstractFirstParagraph')->isChecked();
-        }
+        $previewField = ToggleCompositeField::create('PreviewHD', 'Custom Preview', $previewFields)
+            ->setHeadingLevel(4)
+            ->setStartClosed(true)
+        ;
+        $fields->addFieldToTab('Root.Main', $previewField, 'Metadata');
     }
 
-    // getters for summary view
+    /**
+     * @return bool|string
+     */
     public function getPreviewHeadline()
     {
         if ($this->owner->PreviewTitle) {
@@ -47,10 +61,12 @@ class PreviewExtension extends DataExtension
         } elseif ($this->owner->Title) {
             return $this->owner->Title;
         }
-
         return false;
     }
 
+    /**
+     * @return bool|Image
+     */
     public function getPreviewThumb()
     {
         if ($this->owner->PreviewImageID) {
@@ -58,10 +74,12 @@ class PreviewExtension extends DataExtension
         } elseif ($this->owner->ImageID) {
             return $this->owner->Image();
         }
-
         return false;
     }
 
+    /**
+     * @return bool|string
+     */
     public function getPreviewAbstract()
     {
         if (!$this->owner->AbstractFirstParagraph && $this->owner->Abstract) {
@@ -71,5 +89,6 @@ class PreviewExtension extends DataExtension
 
             return $content->FirstParagraph();
         }
+        return false;
     }
 }
