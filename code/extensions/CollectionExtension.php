@@ -46,11 +46,15 @@ class CollectionExtension extends Extension
         }
 
         // customize searchCriteria
+        // todo: phase out for `updateCollectionFilters` extend
         if (method_exists($this->owner->Classname, 'getCustomFilters')) {
             foreach ($this->owner->getCustomFilters() as $key => $value) {
                 $searchCriteria[$key] = $value;
             }
         }
+
+        // allow $searchCriteria to be updated via extension
+        $this->owner->extend('updateCollectionFilters', $searchCriteria);
 
         $object = $this->getCollectionObject();
         $sort = ($request->getVar('Sort')) ? (string) $request->getVar('Sort') : singleton($object)->stat('default_sort');
@@ -60,6 +64,10 @@ class CollectionExtension extends Extension
 
         $records = $context->getResults($searchCriteria)
             ->sort($sort);
+
+        // allow $records to be updated via extension
+        $this->owner->extend('updateCollectionItems', $records);
+
         $records = PaginatedList::create($records, $this->owner->request);
         $records->setPageStart($start);
         $records->setPageLength($this->getCollectionSize());
@@ -73,11 +81,11 @@ class CollectionExtension extends Extension
     public function CollectionSearchForm()
     {
         $object = $this->getCollectionObject();
-        $context = (method_exists($object, 'getCustomSearchContext')) ? singleton($object)->getCustomSearchContext() : singleton($object)->getDefaultSearchContext();
-        $fields = $context->getSearchFields();
-
         $request = ($this->owner->request) ? $this->owner->request : $this->owner->parentController->getRequest();
         $sort = ($request->getVar('Sort')) ? (string) $request->getVar('Sort') : singleton($object)->stat('default_sort');
+
+        $context = (method_exists($object, 'getCustomSearchContext')) ? singleton($object)->getCustomSearchContext() : singleton($object)->getDefaultSearchContext();
+        $fields = $context->getSearchFields();
 
         // add sort field if managed object specs getSortOptions()
         if (method_exists($object, 'getSortOptions')) {
@@ -90,6 +98,9 @@ class CollectionExtension extends Extension
                 DropdownField::create('Sort', 'Sort by:', $sortOptions, $sort)
             );
         }
+
+        // allow $fields to be updated via extension
+        $this->owner->extend('updateCollectionFields', $fields);
 
         $actions = new FieldList(
             new FormAction('collectionSearch', 'Search')
@@ -132,7 +143,7 @@ class CollectionExtension extends Extension
     {
         return $this->owner->render(array(
             'Items' => $this->owner->CollectionItems($data),
-            'AdvSearchForm' => $form,
+            'CollectionSearchForm' => $form,
         ));
     }
 }
