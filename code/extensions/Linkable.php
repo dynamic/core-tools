@@ -57,17 +57,30 @@ class Linkable extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->removeByName('PageLinkID');
-        $fields->addFieldsToTab('Root.Link', array(
+        $fields->removeByName(array(
+            'PageLinkID',
+            'LinkType',
+            'ExternalLink',
+            'LinkLabel',
+        ));
+
+        $linkFields = FieldList::create(
             OptionSetField::create('LinkType', 'Link', singleton($this->owner->class)->dbObject('LinkType')->enumValues()),
-            TextField::create('LinkLabel', 'Link Label')
-                ->displayIf('LinkType')->isEqualTo('Internal')->orIf('LinkType')->isEqualTo('External')->end(),
             DisplayLogicWrapper::create(
                 TreeDropdownField::create('PageLinkID', 'Link to Page', 'SiteTree')
             )->displayIf('LinkType')->isEqualTo('Internal')->end(),
             TextField::create('ExternalLink', 'External URL')
                 ->setAttribute('Placeholder', 'http://')
                 ->displayIf('LinkType')->isEqualTo('External')->end(),
-        ));
+            TextField::create('LinkLabel', 'Link Label')
+                ->displayIf('LinkType')->isEqualTo('Internal')->orIf('LinkType')->isEqualTo('External')->end()
+        );
+
+        // Link Field
+        $linkField = ToggleCompositeField::create('LinkHD', 'Featured Link', $linkFields)
+            ->setHeadingLevel(4)
+            ->setStartClosed(true)
+        ;
+        $fields->addFieldToTab('Root.Main', $linkField, 'Content');
     }
 }
