@@ -50,3 +50,6 @@ Image:
 Tag:
   one:
     Title: "Tag One"
+EmailRecipient:
+  default:
+    Name: "George Constanza"
