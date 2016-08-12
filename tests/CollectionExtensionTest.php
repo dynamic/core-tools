@@ -2,10 +2,20 @@
 
 class CollectionExtensionTest extends CoreToolsTest
 {
+    public function testGetCollection()
+    {
+        $object = $this->objFromFixture('TestPage', 'default');
+        $controller = new TestPage_Controller($object);
+        $this->assertInstanceOf('DataList', $controller->getCollection());
+
+        $object = $controller->config()->managed_object;
+        $this->assertInstanceOf($object, $controller->getCollection()->first());
+    }
+
     public function testGetManagedObject()
     {
         $object = TestPage_Controller::create();
-        $one = 'Page';
+        $one = 'ContentObject';
         $two = $object->getCollectionObject();
         $this->assertEquals($one, $two);
     }
@@ -18,20 +28,28 @@ class CollectionExtensionTest extends CoreToolsTest
         $this->assertEquals($one, $two);
     }
 
-    public function testItems()
+    public function testPaginatedList()
     {
         $object = $this->objFromFixture('TestPage', 'default');
         $controller = new TestPage_Controller($object);
-        $this->assertInstanceOf('PaginatedList', $controller->CollectionItems());
+        $this->assertInstanceOf('PaginatedList', $controller->PaginatedList());
     }
 
-    public function testAdvSearchForm()
+    public function testGroupedList()
+    {
+        $object = $this->objFromFixture('TestPage', 'default');
+        $controller = new TestPage_Controller($object);
+        $this->assertInstanceOf('GroupedList', $controller->GroupedList());
+    }
+
+    public function testCollectionSearchForm()
     {
         $object = $this->objFromFixture('TestPage', 'default');
         $controller = new TestPage_Controller($object);
         $this->assertInstanceOf('Form', $controller->CollectionSearchForm());
     }
 
+    /*
     public function testSearch()
     {
         $object = $this->objFromFixture('TestPage', 'default');
@@ -45,4 +63,5 @@ class CollectionExtensionTest extends CoreToolsTest
         $data['Topics__ID'] = 1;
         $this->assertInstanceOf('ViewableData', $controller->collectionSearch($data, $form, $request));
     }
+    */
 }

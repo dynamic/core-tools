@@ -84,6 +84,7 @@ class TestPage extends Page implements TestOnly
 
 class TestPage_Controller extends Page_Controller implements TestOnly
 {
+    private static $managed_object = 'ContentObject';
 }
 
 TestPage::add_extension('PromoManager');
