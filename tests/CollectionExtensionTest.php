@@ -48,20 +48,4 @@ class CollectionExtensionTest extends CoreToolsTest
         $controller = new TestPage_Controller($object);
         $this->assertInstanceOf('Form', $controller->CollectionSearchForm());
     }
-
-    /*
-    public function testSearch()
-    {
-        $object = $this->objFromFixture('TestPage', 'default');
-        $controller = new TestPage_Controller($object);
-        $request = $controller->getRequest();
-        $data = $request;
-        $form = $controller->CollectionSearchForm();
-        $this->assertInstanceOf('ViewableData', $controller->collectionSearch($data, $form, $request));
-
-        $data['Title'] = 'Test';
-        $data['Topics__ID'] = 1;
-        $this->assertInstanceOf('ViewableData', $controller->collectionSearch($data, $form, $request));
-    }
-    */
 }

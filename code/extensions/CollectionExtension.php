@@ -15,19 +15,6 @@ class CollectionExtension extends Extension
     private $collection;
 
     /**
-     * @param SS_HTTPRequest $request
-     * @return ViewableData_Customised
-     */
-    public function index(SS_HTTPRequest $request)
-    {
-        $collection = $this->getCollection();
-
-        return $this->owner->customise(array(
-            'CollectionItems' => $collection,
-        ));
-    }
-
-    /**
      * @return ArrayList|DataList
      */
     public function getCollection()
@@ -49,14 +36,6 @@ class CollectionExtension extends Extension
         }
         $searchCriteria = $request->requestVars();
 
-        // customize searchCriteria
-        // todo: phase out for `updateCollectionFilters` extend
-        if (method_exists($this->owner->Classname, 'getCustomFilters')) {
-            foreach ($this->owner->getCustomFilters() as $key => $value) {
-                $searchCriteria[$key] = $value;
-            }
-        }
-
         // allow $searchCriteria to be updated via extension
         $this->owner->extend('updateCollectionFilters', $searchCriteria);
 
@@ -73,7 +52,7 @@ class CollectionExtension extends Extension
         $collection = $context->getResults($searchCriteria)->sort($sort);
 
         // allow $collection to be updated via extension
-        $this->owner->extend('updateCollectionItems', $collection);
+        $this->owner->extend('updateCollectionItems', $collection, $searchCriteria);
 
         $this->collection = $collection;
         return $this;
@@ -114,11 +93,12 @@ class CollectionExtension extends Extension
         }
         $start = ($request->getVar('start')) ? (int) $request->getVar('start') : 0;
 
-        $records = $this->getCollection();
-
-        $records = PaginatedList::create($records, $this->owner->request);
+        $records = PaginatedList::create($this->getCollection(), $this->owner->request);
         $records->setPageStart($start);
         $records->setPageLength($this->getCollectionSize());
+
+        // allow $records to be updated via extension
+        $this->owner->extend('updatePaginatedList', $records);
 
         return $records;
     }
@@ -128,11 +108,16 @@ class CollectionExtension extends Extension
      */
     public function GroupedList()
     {
-        return GroupedList::create($this->getCollection());
+        $records = GroupedList::create($this->getCollection());
+
+        // allow $records to be updated via extension
+        $this->owner->extend('updateGroupedList', $records);
+
+        return $records;
     }
 
     /**
-     * @return mixed
+     * @return Form
      */
     public function CollectionSearchForm()
     {
@@ -146,7 +131,7 @@ class CollectionExtension extends Extension
         // add sort field if managed object specs getSortOptions()
         if (method_exists($object, 'getSortOptions')) {
             $sortOptions = singleton($object)->getSortOptions();
-            if(singleton($object)->stat('default_sort')) {
+            if (singleton($object)->stat('default_sort')) {
                 $defaultSort = array(str_replace('"', '', singleton($object)->stat('default_sort')) => 'Default');
                 $sortOptions = array_merge($defaultSort, $sortOptions);
             }
