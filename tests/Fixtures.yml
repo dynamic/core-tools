@@ -47,6 +47,8 @@ Image:
     Title: "Header Image"
   preview:
     Title: "Preview Image"
+  logo:
+    Name: Logo
 Tag:
   one:
     Title: "Tag One"
