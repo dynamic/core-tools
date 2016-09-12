@@ -48,7 +48,7 @@ class PreviewExtension extends DataExtension
             ->setHeadingLevel(4)
             ->setStartClosed(true)
         ;
-        $fields->addFieldToTab('Root.Main', $previewField, 'Metadata');
+        $fields->addFieldToTab('Root.Main', $previewField);
     }
 
     /**
