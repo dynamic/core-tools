@@ -6,7 +6,7 @@ class PreviewExtension extends DataExtension
      * @var array
      */
     private static $db = array(
-        'PreviewTitle' => 'HTMLVarchar',
+        'PreviewTitle' => 'HTMLVarchar(255)',
         'Abstract' => 'HTMLText',
     );
 
