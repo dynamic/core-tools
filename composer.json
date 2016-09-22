@@ -37,6 +37,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
-        "installer-name": "core-tools"
+        "installer-name": "core-tools",
+        "branch-alias": {
+      		"dev-master": "1.0.x-dev"
+    	}
     }
 }
