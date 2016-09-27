@@ -22,6 +22,12 @@ class PreviewExtension extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
+        $fields->removeByName(array(
+            'PreviewTitle',
+            'Abstract',
+            'PreviewImage',
+        ));
+
         $thumbnail = ImageUploadField::create('PreviewImage')
             ->setFolderName('Uploads/Preview')
         ;
