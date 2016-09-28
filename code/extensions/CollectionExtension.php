@@ -64,10 +64,14 @@ class CollectionExtension extends Extension
     public function getCollectionObject()
     {
         if ($object = $this->owner->config()->managed_object) {
-            return (string) $object;
+            $object = (string) $object;
+        } else {
+            $object = 'Page';
         }
 
-        return 'Page';
+        $this->owner->extend('updateCollectionObject', $object);
+
+        return $object;
     }
 
     /**
