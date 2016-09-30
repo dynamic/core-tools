@@ -4,3 +4,6 @@ Name: coretoolsconfig
 ContentObject:
   extensions:
     - Linkable
+DataList:
+  extensions:
+    - CoreToolsDataListDataExtension
