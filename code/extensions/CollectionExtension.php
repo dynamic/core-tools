@@ -173,6 +173,9 @@ class CollectionExtension extends Extension
             ->setFormAction($this->owner->Link())
         ;
 
+        // allow $form to be extended via extension
+        $this->owner->extend('updateCollectionForm', $form);
+
         return $form;
     }
 }
