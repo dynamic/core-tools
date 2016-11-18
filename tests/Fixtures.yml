@@ -55,3 +55,9 @@ Tag:
 EmailRecipient:
   default:
     Name: "George Constanza"
+NavigationColumn:
+  one:
+    Title: "Column One"
+NavigationGroup:
+  one:
+    Title: "Group One"
