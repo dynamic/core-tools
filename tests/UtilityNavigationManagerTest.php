@@ -11,12 +11,12 @@ class UtilityNavigationManagerTest extends SapphireTest
      * @var array
      */
     protected $extraDataObjects = [
-        'TestSiteConfig',
+        'UtilitySiteConfig',
     ];
 
     public function testGetCMSFields()
     {
-        $object = new TestSiteConfig();
+        $object = new UtilitySiteConfig();
         $fieldset = $object->getCMSFields();
         $this->assertTrue(is_a($fieldset, 'FieldList'));
         $this->assertNull($fieldset->dataFieldByName('UtilityLinks'));
@@ -29,7 +29,7 @@ class UtilityNavigationManagerTest extends SapphireTest
 
 }
 
-class TestSiteConfig extends SiteConfig implements TestOnly
+class UtilitySiteConfig extends SiteConfig implements TestOnly
 {
     private static $extensions = ['UtilityNavigationManager'];
 }

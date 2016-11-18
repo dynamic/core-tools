@@ -11,7 +11,7 @@ class FooterNavigationManagerTest extends SapphireTest
      * @var array
      */
     protected $extraDataObjects = [
-        'TestSiteConfig',
+        'FooterSiteConfig',
     ];
 
     /**
@@ -19,7 +19,7 @@ class FooterNavigationManagerTest extends SapphireTest
      */
     public function testGetCMSFields()
     {
-        $object = new TestSiteConfig();
+        $object = new FooterSiteConfig();
         $fields = $object->getCMSFields();
         $this->assertInstanceOf('FieldList', $fields);
         $this->assertNull($fields->dataFieldByName('NavigationColumns'));
@@ -31,7 +31,7 @@ class FooterNavigationManagerTest extends SapphireTest
     }
 }
 
-class TestSiteConfig extends SiteConfig implements TestOnly
+class FooterSiteConfig extends SiteConfig implements TestOnly
 {
     private static $extensions = ['FooterNavigationManager'];
 }
