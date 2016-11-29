@@ -3,6 +3,10 @@
 /**
  * Class FileObject.
  *
+ * @property string $FileLink
+ * @property int $DownloadID
+ * @method File $Download
+ *
  * Base class for simple file attachments. Intended not be used directly, but extended in projects.
  */
 class FileObject extends ContentObject
@@ -42,8 +46,7 @@ class FileObject extends ContentObject
             ->setFolderName('Uploads/FileDownloads')
             ->setConfig('allowedMaxFileNumber', 1)
             ->setAllowedFileCategories('doc')
-            ->setAllowedMaxFileNumber(1)
-        ;
+            ->setAllowedMaxFileNumber(1);
 
         $fields->addFieldsToTab('Root.Download', array(
             $file,
@@ -54,9 +57,23 @@ class FileObject extends ContentObject
 
         $fields->dataFieldByName('Image')
             ->setFolderName('Uploads/FileImages')
-            ->setDescription('Preview image of file')
-        ;
+            ->setDescription('Preview image of file');
 
         return $fields;
     }
+
+    /**
+     * @return bool|string
+     */
+    public function getFileLinkURL()
+    {
+        if ($this->DownloadID > 0) {
+            return $this->Download()->Filename;
+        }
+        if ($this->FileLink) {
+            return $this->FileLink;
+        }
+        return false;
+    }
+
 }
