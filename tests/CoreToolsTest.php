@@ -89,6 +89,5 @@ class TestPage_Controller extends Page_Controller implements TestOnly
 
 TestPage::add_extension('PromoManager');
 TestPage::add_extension('PreviewExtension');
-TestPage::add_extension('YouTubeManager');
 TestPage::add_extension('TagManager');
 TestPage_Controller::add_extension('CollectionExtension');
