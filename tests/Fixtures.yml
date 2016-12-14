@@ -34,11 +34,6 @@ Promo:
   default:
     Name: "Promo"
     Title: "First Promo"
-YouTubeVideo:
-  default:
-    Name: "YouTube Video"
-    Title: "First YouTube Video"
-    Video: "https://www.youtube.com/watch?v=dM15HfUYwF0"
 FileObject:
   default:
     Name: "image.jpg"
