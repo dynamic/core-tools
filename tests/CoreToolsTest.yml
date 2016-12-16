@@ -1,4 +1,4 @@
-TestPage:
+Dyamic\\CoreTools\\Tests\\TestPage:
   default:
     Title: "Test Page"
   parent:
@@ -6,4 +6,4 @@ TestPage:
     Content: "<p>Content</p>"
   subpage:
     Title: "Child Page"
-    ParentID: =>TestPage.parent
+    ParentID: =>Dynamic\\CoreTools\\Tests\\TestPage.parent

@@ -12,7 +12,7 @@ before_install:
 
 env:
   global:
-    - DB=MYSQL CORE_RELEASE=3.4
+    - DB=MYSQL CORE_RELEASE=4.0
     - COVERAGE=0
     - MODULE_PATH=core-tools
     - CODECOV_TOKEN=4de7cd62-439d-47db-8a7b-6d9aa724b32b
@@ -27,10 +27,6 @@ matrix:
     - php: 5.6
       env: COVERAGE=1
     - php: 7.0
-      env: CORE_RELEASE=master
-  allow_failures:
-    - php: 7.0
-      env: CORE_RELEASE=master
 
 before_script:
   - phpenv rehash

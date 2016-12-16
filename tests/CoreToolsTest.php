@@ -1,5 +1,16 @@
 <?php
 
+namespace Dynamic\CoreTools\Tests;
+
+use SilverStripe\Dev\FunctionalTest,
+    SilverStripe\Dev\TestOnly,
+    \Page,
+    \Page_Controller;
+
+/**
+ * Class CoreToolsTest
+ * @package Dynamic\CoreTools\Tests
+ */
 class CoreToolsTest extends FunctionalTest
 {
     /**
@@ -24,8 +35,8 @@ class CoreToolsTest extends FunctionalTest
      * @var array
      */
     protected $extraDataObjects = array(
-        'TestPage',
-        'TestPage_Controller',
+        'Dynamic\\CoreTools\\Tests\\TestPage',
+        'Dynamic\\CoreTools\\Tests\\TestPage_Controller',
     );
 
     /**
@@ -49,45 +60,48 @@ class CoreToolsTest extends FunctionalTest
         $this->session()->clear('logInWithPermission');
     }
 
-    /**
-     * empty test to prevent throwing an error.
-     */
-    public function testCoreTools()
-    {
-    }
 }
 
 /**
- * Class TestPage.
+ * Class TestPage
+ * @package Dynamic\CoreTools\Tests
  */
 class TestPage extends Page implements TestOnly
 {
+
+    /**
+     * @var array
+     */
+    private static $db = [
+        'TestPageDBField' => 'Varchar',
+    ];
+
     private static $has_many = array(
-        'Sections' => 'PageSection',
+        'Sections' => 'Dynamic\\CoreTools\\Model\\PageSection',
     );
 
     private static $many_many = array(
-        'Promos' => 'Promo',
-        'Videos' => 'YouTubeVideo',
-        'Tags' => 'CoreTag',
+        'Promos' => 'Dynamic\\CoreTools\\Model\\Promo',
+        'Tags' => 'Dynamic\\CoreTools\\Model\\Tag',
     );
 
     private static $many_many_extraFields = array(
         'Promos' => array(
             'SortOrder' => 'Int',
         ),
-        'Videos' => array(
-            'SortOrder' => 'Int',
-        ),
     );
 }
 
+/**
+ * Class TestPage_Controller
+ * @package Dynamic\CoreTools\Tests
+ */
 class TestPage_Controller extends Page_Controller implements TestOnly
 {
-    private static $managed_object = 'ContentObject';
+    private static $managed_object = 'Dynamic\\CoreTools\\Model\\ContentObject';
 }
 
-TestPage::add_extension('PromoManager');
-TestPage::add_extension('PreviewExtension');
-TestPage::add_extension('TagManager');
-TestPage_Controller::add_extension('CollectionExtension');
+TestPage::add_extension('Dynamic\\CoreTools\\Extensions\\PromoManager');
+TestPage::add_extension('Dynamic\\CoreTools\\Extensions\\PreviewExtension');
+TestPage::add_extension('Dynamic\\CoreTools\\Extensions\\TagManager');
+TestPage_Controller::add_extension('Dynamic\\CoreTools\\Extensions\\CollectionExtension');
