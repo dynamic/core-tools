@@ -1,4 +1,4 @@
-Dyamic\\CoreTools\\Tests\\TestPage:
+Dyamic\CoreTools\Tests\TestPage:
   default:
     Title: "Test Page"
   parent:

@@ -17,9 +17,9 @@ class CollectionExtensionTest extends CoreToolsTest
      */
     public function testGetCollection()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Tests\\TestPage', 'default');
+        $object = $this->objFromFixture('Dynamic\CoreTools\Tests\TestPage', 'default');
         $controller = TestPage_Controller::create($object);
-        $this->assertInstanceOf('SilverStripe\\ORM\\DataList', $controller->getCollection());
+        $this->assertInstanceOf('SilverStripe\ORM\DataList', $controller->getCollection());
 
         $object = $controller->config()->managed_object;
         $this->assertInstanceOf($object, $controller->getCollection()->first());
