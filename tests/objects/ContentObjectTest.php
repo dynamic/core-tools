@@ -35,7 +35,7 @@ class ContentObjectTest extends SapphireTest
     {
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
         $object->Name = '';
-        $this->setExpectedException('ValidationException');
+        $this->setExpectedException('SilverStripe\\ORM\\ValidationException');
         $object->write();
     }
 
