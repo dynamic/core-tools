@@ -39,7 +39,7 @@
     "extra": {
         "installer-name": "core-tools",
         "branch-alias": {
-      		"1.0": "1.0.x-dev"
+      		"dev-master": "2.0.x-dev"
     	}
     }
 }
