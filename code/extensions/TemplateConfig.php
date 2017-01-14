@@ -19,22 +19,6 @@ class TemplateConfig extends DataExtension
     /**
      * @var array
      */
-    private static $many_many = array(
-        'FooterLinks' => 'SiteTree'
-    );
-
-    /**
-     * @var array
-     */
-    private static $many_many_extraFields = array(
-        'FooterLinks' => array(
-            'SortOrder' => 'Int'
-        )
-    );
-
-    /**
-     * @var array
-     */
     private static $defaults = array(
         'TitleLogo' => 'Title'
     );
@@ -44,30 +28,27 @@ class TemplateConfig extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $ImageField = UploadField::create('Logo');
-        $ImageField->getValidator()->allowedExtensions = array('jpg', 'gif', 'png');
-        $ImageField->setFolderName('Uploads/Logo');
-        $ImageField->setConfig('allowedMaxFileNumber', 1);
+        $fields->removeByName([
+            'Title',
+            'Tagline',
+            'Logo',
+        ]);
 
         // options for logo or title display
         $logoOptions = array('Title' => 'Display Site Title and Slogan', 'Logo' => 'Display Logo');
+        $ImageField = ImageUploadField::create('Logo')
+            ->setFolderName('Uploads/Logo');
 
-        $fields->addFieldsToTab('Root.Header', array(
+        $fields->addFieldsToTab('Root.Main', [
             OptionsetField::create('TitleLogo', 'Branding', $logoOptions),
-            $ImageField
-        ));
-
-        $config = GridFieldConfig_RelationEditor::create();
-        if (class_exists('GridFieldSortableRows')) {
-            $config->addComponent(new GridFieldSortableRows("SortOrder"));
-        }
-
-        $FooterGridField = GridField::create("FooterLinks", "Footer Links", $this->owner->FooterLinks()->sort('SortOrder'), $config);
-
-        // add FlexSlider, width and height
-        $fields->addFieldsToTab("Root.Footer", array(
-            $FooterGridField
-        ));
+            DisplayLogicWrapper::create(
+                TextField::create('Title', 'Site Title'),
+                TextField::create('Tagline', 'Site Tagline/Slogan')
+            )->displayIf('TitleLogo')->isEqualTo('Title')->end(),
+            DisplayLogicWrapper::create(
+                $ImageField
+            )->displayIf('TitleLogo')->isEqualTo('Logo')->end(),
+        ]);
     }
 
     /**
@@ -79,15 +60,5 @@ class TemplateConfig extends DataExtension
             return $this->owner->Logo();
         }
         return false;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFooterLinkList()
-    {
-        if ($this->owner->FooterLinks()->exists()) {
-            return $this->owner->FooterLinks()->sort('SortOrder');
-        }
     }
 }
