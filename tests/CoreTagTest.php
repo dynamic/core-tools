@@ -1,10 +1,10 @@
 <?php
 
-class TagTest extends CoreToolsTest
+class CoreTagTest extends CoreToolsTest
 {
     public function testValidateTitle()
     {
-        $object = $this->objFromFixture('Tag', 'one');
+        $object = $this->objFromFixture('CoreTag', 'one');
         $object->Title = '';
         $this->setExpectedException('ValidationException');
         $object->write();
@@ -12,7 +12,7 @@ class TagTest extends CoreToolsTest
 
     public function testCanView()
     {
-        $object = $this->objFromFixture('Tag', 'one');
+        $object = $this->objFromFixture('CoreTag', 'one');
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canView());
         $this->logOut();
@@ -25,7 +25,7 @@ class TagTest extends CoreToolsTest
 
     public function testCanEdit()
     {
-        $object = $this->objFromFixture('Tag', 'one');
+        $object = $this->objFromFixture('CoreTag', 'one');
         $object->write();
         $objectID = $object->ID;
         $this->logInWithPermission('ADMIN');
@@ -34,14 +34,14 @@ class TagTest extends CoreToolsTest
         $this->assertTrue($object->canEdit());
         $object->Title = 'Changed Title';
         $object->write();
-        $testEdit = Tag::get()->byID($objectID);
+        $testEdit = CoreTag::get()->byID($objectID);
         $this->assertEquals($testEdit->Title, 'Changed Title');
         $this->logOut();
     }
 
     public function testCanDelete()
     {
-        $object = $this->objFromFixture('Tag', 'one');
+        $object = $this->objFromFixture('CoreTag', 'one');
         $object->write();
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canDelete());
@@ -52,7 +52,7 @@ class TagTest extends CoreToolsTest
 
     public function testCanCreate()
     {
-        $object = singleton('Tag');
+        $object = singleton('CoreTag');
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canCreate());
         $this->logOut();
