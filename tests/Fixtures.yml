@@ -44,7 +44,7 @@ Image:
     Title: "Preview Image"
   logo:
     Name: Logo
-CoreTag:
+Tag:
   one:
     Title: "Tag One"
 EmailRecipient:
