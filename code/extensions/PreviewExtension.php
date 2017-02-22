@@ -15,6 +15,7 @@ class PreviewExtension extends DataExtension
      */
     private static $has_one = array(
         'PreviewImage' => 'Image',
+        'Thumbnail' => 'Image',
     );
 
     /**
@@ -26,6 +27,7 @@ class PreviewExtension extends DataExtension
             'PreviewTitle',
             'Abstract',
             'PreviewImage',
+            'Thumbnail',
         ));
 
         $thumbnail = ImageUploadField::create('PreviewImage')
@@ -96,5 +98,15 @@ class PreviewExtension extends DataExtension
             return $content->FirstParagraph();
         }
         return false;
+    }
+
+    /**
+     * getter for backwards compatability with dynamic/core
+     *
+     * @return mixed
+     */
+    public function Thumbnail()
+    {
+        return $this->owner->PreviewImage();
     }
 }
