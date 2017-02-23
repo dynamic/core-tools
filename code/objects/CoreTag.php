@@ -1,6 +1,6 @@
 <?php
 
-class Tag extends DataObject
+class CoreTag extends DataObject
 {
     /**
      * @var array
@@ -24,7 +24,7 @@ class Tag extends DataObject
         $result = parent::validate();
 
         if (!$this->Title) {
-            $result->error('Title is requied before you can save');
+            $result->error('Title is required before you can save');
         }
 
         return $result;

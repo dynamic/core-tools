@@ -69,7 +69,7 @@ class TestPage extends Page implements TestOnly
     private static $many_many = array(
         'Promos' => 'Promo',
         'Videos' => 'YouTubeVideo',
-        'Tags' => 'Tag',
+        'Tags' => 'CoreTag',
     );
 
     private static $many_many_extraFields = array(
