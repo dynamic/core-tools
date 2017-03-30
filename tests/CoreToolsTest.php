@@ -5,7 +5,7 @@ namespace Dynamic\CoreTools\Tests;
 use SilverStripe\Dev\FunctionalTest,
     SilverStripe\Dev\TestOnly,
     \Page,
-    \Page_Controller;
+    \PageController;
 
 /**
  * Class CoreToolsTest
