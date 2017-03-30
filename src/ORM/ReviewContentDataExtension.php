@@ -1,7 +1,14 @@
 <?php
 
+namespace Dynamic\CoreTools\ORM;
+
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\View\TemplateGlobalProvider;
+use SilverStripe\Core\Config\Config;
+
 /**
  * Class ReviewContentDataExtension
+ * @package Dynamic\CoreTools\ORM
  *
  * This DataExtensions is meant to be applied to SiteConfig to allow wrapping
  * review content in a variable of $ShowReviewContent. This allows for easily turning review content on and off.
@@ -22,16 +29,19 @@ class ReviewContentDataExtension extends DataExtension implements TemplateGlobal
     /**
      * @return bool
      */
-    public static function get_show_review_content() {
-        return (bool)Config::inst()->get('ReviewContentDataExtension', 'show_review_content');
+    public static function get_show_review_content()
+    {
+        return (bool)Config::inst()
+          ->get('ReviewContentDataExtension', 'show_review_content');
     }
 
     /**
      * Add $SiteConfig to all SSViewers
      */
-    public static function get_template_global_variables() {
+    public static function get_template_global_variables()
+    {
         return array(
-            'ShowReviewContent' => 'get_show_review_content',
+          'ShowReviewContent' => 'get_show_review_content',
         );
     }
 

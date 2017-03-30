@@ -1,7 +1,12 @@
 <?php
 
+namespace Dynamic\CoreTools\ORM;
+
+use SilverStripe\ORM\DataExtension;
+
 /**
  * Class ContentAuthorPermissionManager
+ * @package Dynamic\CoreTools\ORM
  *
  * Apply to DataObjects that don't have permisisons set for non-admins
  */
