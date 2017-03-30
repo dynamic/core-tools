@@ -2,9 +2,12 @@
 
 namespace Dynamic\CoreTools\Model;
 
-use SilverStripe\ORM\DataObject,
-    SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor,
-    SilverStripe\Forms\GridField\GridField;
+use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\GridFieldExtensions\GridFieldAddExistingSearchButton;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\CMS\Model\SiteTree;
 
 /**
  * Class NavigationGroup
@@ -20,32 +23,37 @@ class NavigationGroup extends DataObject
      * @var array
      */
     private static $db = array(
-        'Title' => 'Varchar(255)',
-        'SortOrder' => 'Int',
+      'Title' => 'Varchar(255)',
+      'SortOrder' => 'Int',
     );
 
     /**
      * @var array
      */
     private static $has_one = array(
-        'NavigationColumn' => 'Dynamic\\CoreTools\\Model\\NavigationColumn',
+      'NavigationColumn' => NavigationColumn::class,
     );
 
     /**
      * @var array
      */
     private static $many_many = array(
-        'NavigationLinks' => 'SilverStripe\\CMS\\Model\\SiteTree',
+      'NavigationLinks' => SiteTree::class,
     );
 
     /**
      * @var array
      */
     private static $many_many_extraFields = array(
-        'NavigationLinks' => array(
-            'SortOrder' => 'Int',
-        ),
+      'NavigationLinks' => array(
+        'SortOrder' => 'Int',
+      ),
     );
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'NavigationGroup';
 
     /**
      * @return \SilverStripe\Forms\FieldList
@@ -55,15 +63,15 @@ class NavigationGroup extends DataObject
         $fields = parent::getCMSFields();
 
         $fields->removeByName(array(
-            'SortOrder',
-            'NavigationColumnID',
-            'NavigationLinks',
+          'SortOrder',
+          'NavigationColumnID',
+          'NavigationLinks',
         ));
 
         if ($this->ID) {
             $config = GridFieldConfig_RelationEditor::create();
             if (class_exists('GridFieldSortableRows')) {
-                $config->addComponent(new GridFieldSortableRows('SortOrder'));
+                $config->addComponent(new GridFieldOrderableRows('SortOrder'));
             }
             if (class_exists('GridFieldAddExistingSearchButton')) {
                 $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
@@ -71,10 +79,11 @@ class NavigationGroup extends DataObject
             }
             $config->removeComponentsByType($config->getComponentByType('GridFieldAddNewButton'));
             $promos = $this->NavigationLinks()->sort('SortOrder');
-            $linksField = GridField::create('NavigationLinks', 'Navigation Links', $promos, $config);
+            $linksField = GridField::create('NavigationLinks',
+              'Navigation Links', $promos, $config);
 
             $fields->addFieldsToTab('Root.Main', array(
-                $linksField,
+              $linksField,
             ));
         }
 

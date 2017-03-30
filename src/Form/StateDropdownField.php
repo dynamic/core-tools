@@ -1,6 +1,6 @@
 <?php
 
-namespace Dynamic\CoreTools\Forms;
+namespace Dynamic\CoreTools\Form;
 
 use SilverStripe\Forms\DropdownField;
 

@@ -2,8 +2,9 @@
 
 namespace Dynamic\CoreTools\Model;
 
-use SilverStripe\Security\PermissionProvider,
-    SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
+use SilverStripe\Security\Permission;
+use Page;
 
 class PageSection extends ContentObject implements PermissionProvider
 {
@@ -21,15 +22,20 @@ class PageSection extends ContentObject implements PermissionProvider
      * @var array
      */
     private static $db = array(
-        'SortOrder' => 'Int',
+      'SortOrder' => 'Int',
     );
 
     /**
      * @var array
      */
     private static $has_one = array(
-        'Page' => '\Page',
+      'Page' => Page::class,
     );
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'PageSection';
 
     /**
      * @return \SilverStripe\Forms\FieldList
@@ -39,12 +45,13 @@ class PageSection extends ContentObject implements PermissionProvider
         $fields = parent::getCMSFields();
 
         $fields->removeByName(array(
-            'PageID',
-            'SortOrder',
+          'PageID',
+          'SortOrder',
         ));
 
         // override folder name
-        $fields->dataFieldByName('Image')->setFolderName('Uploads/PageSections');
+        $fields->dataFieldByName('Image')
+          ->setFolderName('Uploads/PageSections');
 
         return $fields;
     }
@@ -55,10 +62,10 @@ class PageSection extends ContentObject implements PermissionProvider
     public function providePermissions()
     {
         return array(
-            'PageSection_EDIT' => 'Page Section Edit',
-            'PageSection_DELETE' => 'Page Section Delete',
-            'PageSection_CREATE' => 'Page Section Create',
-            'PageSection_VIEW' => 'Page Section View',
+          'PageSection_EDIT' => 'Page Section Edit',
+          'PageSection_DELETE' => 'Page Section Delete',
+          'PageSection_CREATE' => 'Page Section Create',
+          'PageSection_VIEW' => 'Page Section View',
         );
     }
 

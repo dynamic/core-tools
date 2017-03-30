@@ -1,9 +1,9 @@
 <?php
 
-namespace Dynamic\CoreTools\Extensions;
+namespace Dynamic\CoreTools\ORM;
 
-use SilverStripe\ORM\DataExtension,
-    SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\DataObject;
 
 /**
  * Class CoreToolsDataListDataExtension
@@ -22,7 +22,7 @@ class CoreToolsDataListDataExtension extends DataExtension
     {
         $object = singleton($this->owner->dataClass);
         if ($slug === null || !($object instanceof DataObject) || !array_key_exists('URLSegment',
-                DataObject::database_fields($this->owner->dataClass))
+            DataObject::database_fields($this->owner->dataClass))
         ) {
             return false;
         }

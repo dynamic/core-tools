@@ -2,12 +2,13 @@
 
 namespace Dynamic\CoreTools\Model;
 
-use SilverStripe\Security\PermissionProvider,
-    SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer,
-    SilverStripe\Forms\GridField\GridField,
-    SilverStripe\Forms\HeaderField,
-    SilverStripe\Security\Permission,
-    SilverStripe\Core\Injector\Injector;
+use SilverStripe\Security\PermissionProvider;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Security\Permission;
+use SilverStripe\Core\Injector\Injector;
+use Page;
 
 /**
  * Class Promo
@@ -29,8 +30,13 @@ class Promo extends ContentObject implements PermissionProvider
      * @var array
      */
     private static $belongs_many_many = array(
-        'Pages' => '\Page',
+      'Pages' => Page::class,
     );
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'Promo';
 
     /**
      * @return \SilverStripe\Forms\FieldList
@@ -40,22 +46,25 @@ class Promo extends ContentObject implements PermissionProvider
         $fields = parent::getCMSFields();
 
         $fields->removeByName(array(
-            'Pages',
+          'Pages',
         ));
 
         // override folder name
         $fields->dataFieldByName('Image')->setFolderName('Uploads/Promos');
 
         // pages
-        if (Injector::inst()->create('Page')->hasExtension('CoreToolsPageDataExtension')) {
+        if (Injector::inst()
+          ->create('Page')
+          ->hasExtension('CoreToolsPageDataExtension')
+        ) {
             $config = GridFieldConfig_RecordViewer::create();
             $config->removeComponent($config->getComponentByType('GridFieldViewButton'));
             $pages = $this->Pages()->sort('Title');
             $pageField = new GridField('Pages', 'Pages', $pages, $config);
 
             $fields->addFieldsToTab('Root.Pages', array(
-                HeaderField::create('PagesHD', 'Used on the following pages', 3),
-                $pageField,
+              HeaderField::create('PagesHD', 'Used on the following pages', 3),
+              $pageField,
             ));
         }
 
@@ -68,9 +77,9 @@ class Promo extends ContentObject implements PermissionProvider
     public function providePermissions()
     {
         return array(
-            'Promo_EDIT' => 'Promo Edit',
-            'Promo_DELETE' => 'Promo Delete',
-            'Promo_CREATE' => 'Promo Create',
+          'Promo_EDIT' => 'Promo Edit',
+          'Promo_DELETE' => 'Promo Delete',
+          'Promo_CREATE' => 'Promo Create',
         );
     }
 

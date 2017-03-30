@@ -1,10 +1,11 @@
 <?php
 
-namespace Dynamic\CoreTools\Extensions;
+namespace Dynamic\CoreTools\ORM;
 
-use SilverStripe\ORM\DataExtension,
-    SilverStripe\Forms\FieldList,
-    SilverStripe\Forms\UploadField;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
 
 /**
  * Class HeaderImageDataExtension
@@ -18,7 +19,7 @@ class HeaderImageDataExtension extends DataExtension
      * @var array
      */
     private static $has_one = array(
-        'HeaderImage' => 'SilverStripe\\Assets\\Image',
+      'HeaderImage' => Image::class,
     );
 
     /**
@@ -27,13 +28,18 @@ class HeaderImageDataExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $ImageField = UploadField::create('HeaderImage', 'Header Image')
-            ->setFolderName('Uploads/HeaderImages')
-            ->setConfig('allowedMaxFileNumber', 1)
-        ;
-        $ImageField->getValidator()->allowedExtensions = array('jpg', 'jpeg', 'gif', 'png');
-        $ImageField->getValidator()->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
+          ->setFolderName('Uploads/HeaderImages')
+          ->setConfig('allowedMaxFileNumber', 1);
+        $ImageField->getValidator()->allowedExtensions = array(
+          'jpg',
+          'jpeg',
+          'gif',
+          'png'
+        );
+        $ImageField->getValidator()
+          ->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
         $fields->addFieldsToTab('Root.Images', array(
-            $ImageField,
+          $ImageField,
         ));
     }
 

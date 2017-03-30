@@ -2,8 +2,9 @@
 
 namespace Dynamic\CoreTools\Model;
 
-use SilverStripe\Forms\UploadField,
-    SilverStripe\Forms\TextField;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Assets\File;
 
 /**
  * Class FileObject
@@ -31,15 +32,20 @@ class FileObject extends ContentObject
      * @var array
      */
     private static $db = array(
-        'FileLink' => 'Varchar(255)',
+      'FileLink' => 'Varchar(255)',
     );
 
     /**
      * @var array
      */
     private static $has_one = array(
-        'Download' => 'SilverStripe\\Assets\\File',
+      'Download' => File::class,
     );
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'FileObject';
 
     /**
      * @return \SilverStripe\Forms\FieldList
@@ -49,21 +55,21 @@ class FileObject extends ContentObject
         $fields = parent::getCMSFields();
 
         $file = UploadField::create('Download')
-            ->setFolderName('Uploads/FileDownloads')
-            ->setConfig('allowedMaxFileNumber', 1)
-            ->setAllowedFileCategories('doc')
-            ->setAllowedMaxFileNumber(1);
+          ->setFolderName('Uploads/FileDownloads')
+          ->setConfig('allowedMaxFileNumber', 1)
+          ->setAllowedFileCategories('doc')
+          ->setAllowedMaxFileNumber(1);
 
         $fields->addFieldsToTab('Root.Download', array(
-            $file,
-            TextField::create('FileLink')
-                ->setDescription('URL of external file. will display on page if no Download is specified above.')
-                ->setAttribute('placeholder', 'http://'),
+          $file,
+          TextField::create('FileLink')
+            ->setDescription('URL of external file. will display on page if no Download is specified above.')
+            ->setAttribute('placeholder', 'http://'),
         ));
 
         $fields->dataFieldByName('Image')
-            ->setFolderName('Uploads/FileImages')
-            ->setDescription('Preview image of file');
+          ->setFolderName('Uploads/FileImages')
+          ->setDescription('Preview image of file');
 
         return $fields;
     }

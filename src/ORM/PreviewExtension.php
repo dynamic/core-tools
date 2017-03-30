@@ -1,13 +1,14 @@
 <?php
 
-namespace Dynamic\CoreTools\Extensions;
+namespace Dynamic\CoreTools\ORM;
 
-use SilverStripe\ORM\DataExtension,
-    SilverStripe\Forms\FieldList,
-    SilverStripe\Forms\TextField,
-    SilverStripe\Forms\HTMLEditor\HtmlEditorField,
-    SilverStripe\Forms\ToggleCompositeField,
-    SilverStripe\Forms\UploadField;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\HTMLEditor\HtmlEditorField;
+use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
 
 /**
  * Class PreviewExtension
@@ -15,7 +16,7 @@ use SilverStripe\ORM\DataExtension,
  *
  * @property string $PreviewTitle
  * @property string $Abstract
- * @property int $PreviewImage
+ * @property int $PreviewImageID
  */
 class PreviewExtension extends DataExtension
 {
@@ -23,15 +24,15 @@ class PreviewExtension extends DataExtension
      * @var array
      */
     private static $db = array(
-        'PreviewTitle' => 'HTMLVarchar(255)',
-        'Abstract' => 'HTMLText',
+      'PreviewTitle' => 'HTMLVarchar(255)',
+      'Abstract' => 'HTMLText',
     );
 
     /**
      * @var array
      */
     private static $has_one = array(
-        'PreviewImage' => 'SilverStripe\\Assets\\Image',
+      'PreviewImage' => Image::class,
     );
 
     /**
@@ -40,14 +41,14 @@ class PreviewExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName(array(
-            'PreviewTitle',
-            'Abstract',
-            'PreviewImage',
+          'PreviewTitle',
+          'Abstract',
+          'PreviewImage',
         ));
 
         $thumbnail = (class_exists('ImageUploadField'))
-            ? ImageUploadField::create('PreviewImage')
-            : UploadField::create('PreviewImage');
+          ? ImageUploadField::create('PreviewImage')
+          : UploadField::create('PreviewImage');
         $thumbnail->setFolderName('Uploads/Preview');
 
         // custom field description
@@ -58,19 +59,20 @@ class PreviewExtension extends DataExtension
         }
 
         $previewFields = FieldList::create(
-            TextField::create('PreviewTitle', 'Preview Title')
-                ->setAttribute('placeholder', $this->owner->getTitle())
-                ->setDescription('optional, defaults to Page Name'),
-            $abstract = HtmlEditorField::create('Abstract')
-                ->setRows(5)
-                ->setDescription('optional, defaults to first paragraph of Content'),
-            $thumbnail
+          TextField::create('PreviewTitle', 'Preview Title')
+            ->setAttribute('placeholder', $this->owner->getTitle())
+            ->setDescription('optional, defaults to Page Name'),
+          $abstract = HtmlEditorField::create('Abstract')
+            ->setRows(5)
+            ->setDescription('optional, defaults to first paragraph of Content'),
+          $thumbnail
         );
 
         // Preview
-        $previewField = ToggleCompositeField::create('PreviewHD', 'Custom Preview', $previewFields)
-            ->setHeadingLevel(4)
-            ->setStartClosed(true);
+        $previewField = ToggleCompositeField::create('PreviewHD',
+          'Custom Preview', $previewFields)
+          ->setHeadingLevel(4)
+          ->setStartClosed(true);
         $fields->addFieldToTab('Root.Main', $previewField);
     }
 

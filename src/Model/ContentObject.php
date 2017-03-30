@@ -2,12 +2,18 @@
 
 namespace Dynamic\CoreTools\Model;
 
-use SilverStripe\ORM\DataObject,
-    SilverStripe\Forms\UploadField;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
 
 /**
  * Class ContentObject
  * @package Dynamic\CoreTools\Model
+ *
+ * @property string $Name
+ * @property string $Title
+ * @property \SilverStripe\ORM\FieldType\DBHTMLText $Content
+ * @property int $ImageID
  */
 class ContentObject extends DataObject
 {
@@ -25,16 +31,16 @@ class ContentObject extends DataObject
      * @var array
      */
     private static $db = array(
-        'Name' => 'Varchar(255)',
-        'Title' => 'Varchar(255)',
-        'Content' => 'HTMLText',
+      'Name' => 'Varchar(255)',
+      'Title' => 'Varchar(255)',
+      'Content' => 'HTMLText',
     );
 
     /**
      * @var array
      */
     private static $has_one = array(
-        'Image' => 'SilverStripe\\Asstes\\Image',
+      'Image' => Image::class,
     );
 
     /**
@@ -46,18 +52,23 @@ class ContentObject extends DataObject
      * @var array
      */
     private static $summary_fields = array(
-        'Image.CMSThumbnail' => 'Image',
-        'Name' => 'Name',
-        'Title' => 'Title',
+      'Image.CMSThumbnail' => 'Image',
+      'Name' => 'Name',
+      'Title' => 'Title',
     );
 
     /**
      * @var array
      */
     private static $searchable_fields = array(
-        'Name' => 'Name',
-        'Title' => 'Title',
+      'Name' => 'Name',
+      'Title' => 'Title',
     );
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'ContentObject';
 
     /**
      * @return \SilverStripe\Forms\FieldList
@@ -66,14 +77,16 @@ class ContentObject extends DataObject
     {
         $fields = parent::getCMSFields();
 
-        $fields->dataFieldByName('Name')->setDescription('For internal reference only');
+        $fields->dataFieldByName('Name')
+          ->setDescription('For internal reference only');
 
         $ImageField = UploadField::create('Image', 'Image')
-            ->setFolderName('Uploads/ContentObjects')
-            ->setConfig('allowedMaxFileNumber', 1)
-            ->setAllowedFileCategories('image')
-            ->setAllowedMaxFileNumber(1);
-        $ImageField->getValidator()->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
+          ->setFolderName('Uploads/ContentObjects')
+          ->setConfig('allowedMaxFileNumber', 1)
+          ->setAllowedFileCategories('image')
+          ->setAllowedMaxFileNumber(1);
+        $ImageField->getValidator()
+          ->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
 
         $fields->insertBefore($ImageField, 'Content');
 

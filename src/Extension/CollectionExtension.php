@@ -1,17 +1,17 @@
 <?php
 
-namespace Dynamic\CoreTools\Extensions;
+namespace Dynamic\CoreTools\Extension;
 
-use SilverStripe\Core\Extension,
-    SilverStripe\Control\HTTPRequest,
-    SilverStripe\ORM\PaginatedList,
-    SilverStripe\ORM\GroupedList,
-    SilverStripe\Forms\Form,
-    SilverStripe\Forms\FieldList,
-    SilverStripe\Forms\DropdownField,
-    SilverStripe\Forms\FormAction,
-    SilverStripe\ORM\DataList,
-    SilverStripe\ORM\ArrayList;
+use SilverStripe\Core\Extension;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\ORM\PaginatedList;
+use SilverStripe\ORM\GroupedList;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\ORM\DataList;
+use SilverStripe\ORM\ArrayList;
 
 /**
  * Class CollectionExtension
@@ -23,7 +23,7 @@ class CollectionExtension extends Extension
      * @var array
      */
     private static $allowed_actions = array(
-        'CollectionSearchForm',
+      'CollectionSearchForm',
     );
 
     /**
@@ -59,17 +59,18 @@ class CollectionExtension extends Extension
         $object = $this->getCollectionObject();
 
         $context = ($object->hasMethod('getCustomSearchContext'))
-            ? singleton($object)->getCustomSearchContext()
-            : singleton($object)->getDefaultSearchContext();
+          ? singleton($object)->getCustomSearchContext()
+          : singleton($object)->getDefaultSearchContext();
 
         $sort = ($request->getVar('Sort'))
-            ? (string)$request->getVar('Sort')
-            : singleton($object)->stat('default_sort');
+          ? (string)$request->getVar('Sort')
+          : singleton($object)->stat('default_sort');
 
         $collection = $context->getResults($searchCriteria)->sort($sort);
 
         // allow $collection to be updated via extension
-        $this->owner->extend('updateCollectionItems', $collection, $searchCriteria);
+        $this->owner->extend('updateCollectionItems', $collection,
+          $searchCriteria);
 
         $this->collection = $collection;
         return $this;
@@ -114,7 +115,8 @@ class CollectionExtension extends Extension
         }
         $start = ($request->getVar('start')) ? (int)$request->getVar('start') : 0;
 
-        $records = PaginatedList::create($this->getCollection(), $this->owner->request);
+        $records = PaginatedList::create($this->getCollection(),
+          $this->owner->request);
         $records->setPageStart($start);
         $records->setPageLength($this->getCollectionSize());
 
@@ -146,18 +148,22 @@ class CollectionExtension extends Extension
         $request = ($this->owner->request) ? $this->owner->request : $this->owner->parentController->getRequest();
         $sort = ($request->getVar('Sort')) ? (string)$request->getVar('Sort') : singleton($object)->stat('default_sort');
 
-        $context = (method_exists($object, 'getCustomSearchContext')) ? singleton($object)->getCustomSearchContext() : singleton($object)->getDefaultSearchContext();
+        $context = (method_exists($object,
+          'getCustomSearchContext')) ? singleton($object)->getCustomSearchContext() : singleton($object)->getDefaultSearchContext();
         $fields = $context->getSearchFields();
 
         // add sort field if managed object specs getSortOptions()
         if (method_exists($object, 'getSortOptions')) {
             $sortOptions = singleton($object)->getSortOptions();
             if (singleton($object)->stat('default_sort')) {
-                $defaultSort = array(str_replace('"', '', singleton($object)->stat('default_sort')) => 'Default');
+                $defaultSort = array(
+                  str_replace('"', '',
+                    singleton($object)->stat('default_sort')) => 'Default'
+                );
                 $sortOptions = array_merge($defaultSort, $sortOptions);
             }
             $fields->add(
-                DropdownField::create('Sort', 'Sort by:', $sortOptions, $sort)
+              DropdownField::create('Sort', 'Sort by:', $sortOptions, $sort)
             );
         }
 
@@ -165,29 +171,29 @@ class CollectionExtension extends Extension
         $this->owner->extend('updateCollectionFields', $fields);
 
         $actions = new FieldList(
-            new FormAction($this->owner->Link(), 'Search')
+          new FormAction($this->owner->Link(), 'Search')
         );
 
         if (class_exists('BootstrapForm')) {
             $form = BootstrapForm::create(
-                $this->owner,
-                'CollectionSearchForm',
-                $fields,
-                $actions
+              $this->owner,
+              'CollectionSearchForm',
+              $fields,
+              $actions
             );
         } else {
             $form = Form::create(
-                $this->owner,
-                'CollectionSearchForm',
-                $fields,
-                $actions
+              $this->owner,
+              'CollectionSearchForm',
+              $fields,
+              $actions
             );
         }
         $form
-            ->setFormMethod('get')
-            ->disableSecurityToken()
-            ->loadDataFrom($request->getVars())
-            ->setFormAction($this->owner->Link());
+          ->setFormMethod('get')
+          ->disableSecurityToken()
+          ->loadDataFrom($request->getVars())
+          ->setFormAction($this->owner->Link());
 
         // allow $form to be extended via extension
         $this->owner->extend('updateCollectionForm', $form);

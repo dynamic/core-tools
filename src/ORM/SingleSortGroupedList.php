@@ -2,9 +2,9 @@
 
 namespace Dynamic\CoreTools\ORM;
 
-use SilverStripe\ORM\GroupedList,
-    SilverStripe\ORM\ArrayList,
-    SilverStripe\View\ArrayData;
+use SilverStripe\ORM\GroupedList;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\View\ArrayData;
 
 /**
  * Class SingleSortGroupedList
@@ -26,8 +26,12 @@ class SingleSortGroupedList extends GroupedList
      * @param  string $direction The sort direction
      * @return ArrayList
      */
-    public function GroupedBy($index, $children = 'Children', $sort = null, $direction = 'ASC')
-    {
+    public function GroupedBy(
+      $index,
+      $children = 'Children',
+      $sort = null,
+      $direction = 'ASC'
+    ) {
         $grouped = $this->groupBy($index);
         $result = new ArrayList();
         $direction = ($direction == 'ASC' || $direction == 'DESC') ? $direction : 'ASC';
@@ -38,8 +42,8 @@ class SingleSortGroupedList extends GroupedList
                 $list = $list->sort([$sort => $direction]);
             }
             $result->push(new ArrayData(array(
-                $index => $indVal,
-                $children => $list
+              $index => $indVal,
+              $children => $list
             )));
         }
 
