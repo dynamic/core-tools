@@ -1,5 +1,11 @@
 <?php
 
+namespace Dynamic\CoreTools\Tests;
+
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Dev\TestOnly;
+
 class ContentAuthorPermissionManagerTest extends SapphireTest
 {
     /**

@@ -2,10 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests;
 
-use SilverStripe\Dev\FunctionalTest,
-    SilverStripe\Dev\TestOnly,
-    \Page,
-    \PageController;
+use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\Dev\TestOnly;
+use \Page;
+use \PageController;
 
 /**
  * Class CoreToolsTest
@@ -96,7 +96,7 @@ class TestPage extends Page implements TestOnly
  * Class TestPage_Controller
  * @package Dynamic\CoreTools\Tests
  */
-class TestPage_Controller extends Page_Controller implements TestOnly
+class TestPage_Controller extends PageController implements TestOnly
 {
     private static $managed_object = 'Dynamic\\CoreTools\\Model\\ContentObject';
 }
