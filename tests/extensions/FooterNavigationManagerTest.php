@@ -48,5 +48,5 @@ class FooterNavigationManagerTest extends SapphireTest
  */
 class FooterSiteConfig extends SiteConfig implements TestOnly
 {
-    private static $extensions = ['Dynamic\\CoreTools\\Extensions\\FooterNavigationManager'];
+    private static $extensions = ['Dynamic\\CoreTools\\ORM\\FooterNavigationManager'];
 }
