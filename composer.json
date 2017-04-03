@@ -20,7 +20,8 @@
   ],
   "require": {
     "silverstripe/cms": "^4.0",
-    "silverstripe/framework": "^4.0"
+    "silverstripe/framework": "^4.0",
+    "silverstripe-australia/gridfieldextensions": "2.0.x-dev"
   },
   "config": {
     "process-timeout": 600
