@@ -101,7 +101,7 @@ class ContentObject extends DataObject
         $result = parent::validate();
 
         if (!$this->Name) {
-            $result->error('Name is requied before you can save');
+            $result->addError('Name is requied before you can save');
         }
 
         return $result;

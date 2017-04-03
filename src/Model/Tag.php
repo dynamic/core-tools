@@ -40,7 +40,7 @@ class Tag extends DataObject
         $result = parent::validate();
 
         if (!$this->Title) {
-            $result->error('Title is requied before you can save');
+            $result->addError('Title is requied before you can save');
         }
 
         return $result;

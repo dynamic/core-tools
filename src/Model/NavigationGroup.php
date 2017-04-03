@@ -98,7 +98,7 @@ class NavigationGroup extends DataObject
         $result = parent::validate();
 
         if (!$this->Title) {
-            $result->error('A Title is required before you can save');
+            $result->addError('A Title is required before you can save');
         }
 
         return $result;
