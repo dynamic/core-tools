@@ -4,6 +4,7 @@ namespace Dynamic\CoreTools\Tests\Model;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\ORM\ValidationException;
 
 /**
  * Class NavigationColumnTest
@@ -42,7 +43,7 @@ class NavigationColumnTest extends SapphireTest
     {
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\NavigationColumn', 'one');
         $object->Title = '';
-        $this->expectException('SilverStripe\\ORM\\ValidationException');
+        $this->setExpectedException(ValidationException::class);
         $object->write();
     }
 
