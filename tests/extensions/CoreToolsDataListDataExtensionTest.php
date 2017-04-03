@@ -17,8 +17,8 @@ class CoreToolsDataListDataExtensionTest extends SapphireTest
      * @var array
      */
     public static $extra_data_objects = [
-        NoSlugDataObject::class,
-        SlugDataObject::class,
+      NoSlugDataObject::class,
+      SlugDataObject::class,
     ];
 
     /**
@@ -29,12 +29,16 @@ class CoreToolsDataListDataExtensionTest extends SapphireTest
 
         $noSlug = NoSlugDataObject::create(['Title' => 'No Slug']);
         $noSlug->write();
-        $slug = SlugDataObject::create(['Title' => 'Slug', 'URLSegment' => 'i-has-url-segment']);
+        $slug = SlugDataObject::create([
+          'Title' => 'Slug',
+          'URLSegment' => 'i-has-url-segment'
+        ]);
         $slug->write();
 
 
         //$this->assertFalse(NoSlugDataObject::get()->byUrlSegment('some-url-segment'));
-        $this->assertInstanceOf('SilverStripe\\ORM\\DataObject', SlugDataObject::get()->byUrlSegment('i-has-url-segment'));
+        $this->assertInstanceOf('SilverStripe\\ORM\\DataObject',
+          SlugDataObject::get()->byUrlSegment('i-has-url-segment'));
 
     }
 
@@ -53,8 +57,13 @@ class NoSlugDataObject extends DataObject implements TestOnly
      * @var array
      */
     private static $db = [
-        'Title' => 'Varchar(50)',
+      'Title' => 'Varchar(50)',
     ];
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'NoSlugDataObject_Test';
 
 }
 
@@ -72,8 +81,13 @@ class SlugDataObject extends DataObject implements TestOnly
      * @var array
      */
     private static $db = [
-        'Title' => 'Varchar(50)',
-        'URLSegment' => 'Varchar(255)',
+      'Title' => 'Varchar(50)',
+      'URLSegment' => 'Varchar(255)',
     ];
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'SlugDataObject_Test';
 
 }

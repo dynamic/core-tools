@@ -6,6 +6,7 @@ use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Siteconfig\SiteConfig;
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\Core\Injector\Injector;
+use Dynamic\CoreTools\ORM\FooterNavigationManager;
 
 /**
  * Class FooterNavigationManagerTest
@@ -48,5 +49,10 @@ class FooterNavigationManagerTest extends SapphireTest
  */
 class FooterSiteConfig extends SiteConfig implements TestOnly
 {
-    private static $extensions = ['Dynamic\\CoreTools\\ORM\\FooterNavigationManager'];
+    private static $extensions = [FooterNavigationManager::class];
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'FooterSiteConfig_Test';
 }
