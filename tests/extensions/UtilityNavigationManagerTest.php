@@ -6,6 +6,7 @@ use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Dev\TestOnly;
+use Dynamic\CoreTools\ORM\UtilityNavigationManager;
 
 /**
  * Class UtilityNavigationManagerTest
@@ -22,7 +23,7 @@ class UtilityNavigationManagerTest extends SapphireTest
      * @var array
      */
     public static $extra_data_objects = [
-        UtilitySiteConfig::class,
+      UtilitySiteConfig::class,
     ];
 
     /**
@@ -49,5 +50,5 @@ class UtilityNavigationManagerTest extends SapphireTest
  */
 class UtilitySiteConfig extends SiteConfig implements TestOnly
 {
-    private static $extensions = ['Dynamic\\CoreTools\\ORM\\UtilityNavigationManager'];
+    private static $extensions = [UtilityNavigationManager::class];
 }

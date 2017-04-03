@@ -4,6 +4,8 @@ namespace Dynamic\CoreTools\Tests\Extensions;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
+use Dynamic\CoreTools\ORM\PromoManager;
+use Dynamic\CoreTools\ORM\PromoRelation;
 use \Page;
 
 /**
@@ -52,5 +54,5 @@ class PromoManagerTest extends SapphireTest
 
 }
 
-Page::add_extension('Dynamic\\CoreTools\\ORM\\PromoManager');
-Page::add_extension('Dynamic\\CoreTools\\ORM\\PromoRelation');
+Page::add_extension(PromoManager::class);
+Page::add_extension(PromoRelation::class);

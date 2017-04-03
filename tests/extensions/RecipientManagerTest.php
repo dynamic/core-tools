@@ -3,6 +3,7 @@
 namespace Dynamic\CoreTools\Tests\Extensions;
 
 use SilverStripe\Dev\SapphireTest;
+use Dynamic\CoreTools\ORM\RecipientManager;
 use \Page;
 
 /**
@@ -33,4 +34,4 @@ class RecipientManagerTest extends SapphireTest
     }
 }
 
-Page::add_extension('Dynamic\\CoreTools\\ORM\\RecipientManager');
+Page::add_extension(RecipientManager::class);

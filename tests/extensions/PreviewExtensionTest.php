@@ -3,6 +3,8 @@
 namespace Dynamic\CoreTools\Tests\Extensions;
 
 use SilverStripe\Dev\SapphireTest;
+use Dynamic\CoreTools\ORM\PageSectionRelation;
+use Dynamic\CoreTools\ORM\PreviewExtension;
 use \Page;
 
 class PreviewExtensionTest extends SapphireTest
@@ -65,5 +67,5 @@ class PreviewExtensionTest extends SapphireTest
 
 }
 
-Page::add_extension('Dynamic\\CoreTools\\ORM\\PageSectionRelation');
-Page::add_extension('Dynamic\\CoreTools\\ORM\\PreviewExtension');
+Page::add_extension(PageSectionRelation::class);
+Page::add_extension(PreviewExtension::class);
