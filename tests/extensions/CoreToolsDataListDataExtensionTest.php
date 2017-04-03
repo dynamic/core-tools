@@ -16,9 +16,9 @@ class CoreToolsDataListDataExtensionTest extends SapphireTest
     /**
      * @var array
      */
-    protected $extraDataObjects = [
-        'Dynamic\\CoreTools\\Tests\\Extensions\\NoSlugDataObject',
-        'Dynamic\\CoreTools\\Tests\\Extensions\\SlugDataObject',
+    public static $extra_data_objects = [
+        NoSlugDataObject::class,
+        SlugDataObject::class,
     ];
 
     /**

@@ -37,9 +37,9 @@ class CoreToolsTest extends FunctionalTest
     /**
      * @var array
      */
-    protected $extraDataObjects = array(
-        'Dynamic\\CoreTools\\Tests\\TestPage',
-        'Dynamic\\CoreTools\\Tests\\TestPage_Controller',
+    public static $extra_data_objects = array(
+        TestPage::class,
+        TestPage_Controller::class,
     );
 
     /**

@@ -21,8 +21,8 @@ class FooterNavigationManagerTest extends SapphireTest
     /**
      * @var array
      */
-    protected $extraDataObjects = [
-        'Dynamic\\CoreTools\\Tests\\Extensions\\FooterSiteConfig',
+    public static $extra_data_objects = [
+        FooterSiteConfig::class,
     ];
 
     /**

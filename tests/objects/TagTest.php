@@ -6,6 +6,7 @@ use Dynamic\CoreTools\Tests\CoreToolsTest;
 use Dynamic\CoreTools\Model\Tag;
 use SilverStripe\Security\Member;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\ORM\ValidationException;
 
 /**
  * Class TagTest
@@ -21,7 +22,7 @@ class TagTest extends CoreToolsTest
     {
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\Tag', 'one');
         $object->Title = '';
-        $this->setExpectedException('SilverStripe\\ORM\\ValidationException');
+        $this->setExpectedException(ValidationException::class);
         $object->write();
     }
 

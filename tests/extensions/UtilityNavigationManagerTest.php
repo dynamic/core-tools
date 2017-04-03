@@ -21,8 +21,8 @@ class UtilityNavigationManagerTest extends SapphireTest
     /**
      * @var array
      */
-    protected $extraDataObjects = [
-        'Dynamic\\CoreTools\\Tests\\Extensions\\UtilitySiteConfig',
+    public static $extra_data_objects = [
+        UtilitySiteConfig::class,
     ];
 
     /**

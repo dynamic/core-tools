@@ -4,6 +4,7 @@ namespace Dynamic\CoreTools\Tests\Model;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\ORM\ValidationException;
 
 /**
  * Class NavigationGroupTest
@@ -40,7 +41,7 @@ class NavigationGroupTest extends SapphireTest
     {
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\NavigationGroup', 'one');
         $object->Title = '';
-        $this->setExpectedException('SilverStripe\\ORM\\ValidationException');
+        $this->setExpectedException(ValidationException::class);
         $object->write();
     }
 

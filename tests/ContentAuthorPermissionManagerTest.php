@@ -18,8 +18,8 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
     /**
      * @var array
      */
-    protected $extraDataObjects = array(
-        'TestContentAuthorObject',
+    public static $extra_data_objects = array(
+        TestContentAuthorObject::class,
     );
 
     /**
