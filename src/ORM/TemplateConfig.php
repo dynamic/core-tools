@@ -1,6 +1,6 @@
 <?php
 
-namespace Dynamic\CoreTools\Extensions;
+namespace Dynamic\CoreTools\ORM;
 
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
