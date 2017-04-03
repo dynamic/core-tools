@@ -69,15 +69,11 @@ class NavigationGroup extends DataObject
         ));
 
         if ($this->ID) {
-            $config = GridFieldConfig_RelationEditor::create();
-            if (class_exists('GridFieldSortableRows')) {
-                $config->addComponent(new GridFieldOrderableRows('SortOrder'));
-            }
-            if (class_exists('GridFieldAddExistingSearchButton')) {
-                $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-                $config->addComponent(new GridFieldAddExistingSearchButton());
-            }
-            $config->removeComponentsByType($config->getComponentByType('GridFieldAddNewButton'));
+            $config = GridFieldConfig_RelationEditor::create()
+              ->addComponent(new GridFieldOrderableRows('SortOrder'))
+              ->removeComponentsByType('GridFieldAddExistingAutocompleter')
+              ->addComponent(new GridFieldAddExistingSearchButton())
+              ->removeComponentsByType('GridFieldAddNewButton');
             $promos = $this->NavigationLinks()->sort('SortOrder');
             $linksField = GridField::create('NavigationLinks',
               'Navigation Links', $promos, $config);
