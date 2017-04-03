@@ -1,10 +1,10 @@
 ---
 Name: coretoolsconfig
 ---
-ContentObject:
+Dynamic\CoreTools\Model\ContentObject:
   extensions:
-    - Linkable
-DataList:
+    - Dynamic\CoreTools\ORM\Linkable
+SilverStripe\ORM\DataList:
   extensions:
     - CoreToolsDataListDataExtension
 GlobalSiteSetting:
