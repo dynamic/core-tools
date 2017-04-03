@@ -29,10 +29,10 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
     {
         $object = new TestContentAuthorObject();
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
         $this->assertTrue($object->canView($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
         $this->assertTrue($object->canView($member));
     }
 
@@ -43,10 +43,10 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
     {
         $object = new TestContentAuthorObject();
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
         $this->assertTrue($object->canEdit($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
         $this->assertTrue($object->canEdit($member));
     }
 
@@ -57,10 +57,10 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
     {
         $object = new TestContentAuthorObject();
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
         $this->assertTrue($object->canDelete($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
         $this->assertTrue($object->canDelete($member));
     }
 
@@ -71,10 +71,10 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
     {
         $object = new TestContentAuthorObject();
 
-        $admin = $this->objFromFixture('Member', 'admin');
+        $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
         $this->assertTrue($object->canCreate($admin));
 
-        $member = $this->objFromFixture('Member', 'default');
+        $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
         $this->assertTrue($object->canCreate($member));
     }
 }

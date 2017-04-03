@@ -1,6 +1,7 @@
 <?php
 
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Core\Injector\Injector;
 
 class MultiLinksManagerTest extends SapphireTest
 {
@@ -16,16 +17,16 @@ class MultiLinksManagerTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = singleton('Page');
+        $object = Injector::inst()->get('\\Page');
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('FieldList', $fields);
+        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
         $this->assertNull($fields->dataFieldByName('ContentLinks'));
 
-        $object = $this->objFromFixture('Page', 'default');
+        $object = $this->objFromFixture('\\Page', 'default');
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('FieldList', $fields);
+        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
         $this->assertNotNull($fields->dataFieldByName('ContentLinks'));
     }
 }
