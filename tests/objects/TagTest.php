@@ -2,10 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests\Model;
 
-use Dynamic\CoreTools\Tests\CoreToolsTest,
-    Dynamic\CoreTools\Model\Tag,
-    SilverStripe\Security\Member,
-    SilverStripe\Core\Injector\Injector;
+use Dynamic\CoreTools\Tests\CoreToolsTest;
+use Dynamic\CoreTools\Model\Tag;
+use SilverStripe\Security\Member;
+use SilverStripe\Core\Injector\Injector;
 
 /**
  * Class TagTest

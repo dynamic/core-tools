@@ -2,8 +2,8 @@
 
 namespace Dynamic\CoreTools\Tests\Extensions;
 
-use Dynamic\CoreTools\Tests\CoreToolsTest,
-    SilverStripe\Core\Injector\Injector;
+use Dynamic\CoreTools\Tests\CoreToolsTest;
+use SilverStripe\Core\Injector\Injector;
 
 /**
  * Class TagManagerTest

@@ -2,9 +2,9 @@
 
 namespace Dynamic\CoreTools\Tests\Extensions;
 
-use SilverStripe\Dev\SapphireTest,
-    SilverStripe\ORM\DataObject,
-    SilverStripe\Dev\TestOnly;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Dev\TestOnly;
 
 /**
  * Class CoreToolsDataListDataExtensionTest

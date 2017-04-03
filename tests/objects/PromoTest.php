@@ -2,10 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests\Model;
 
-use Dynamic\CoreTools\Tests\CoreToolsTest,
-    Dynamic\CoreTools\Model\Promo,
-    SilverStripe\Core\Injector\Injector,
-    SilverStripe\Security\Member;
+use Dynamic\CoreTools\Tests\CoreToolsTest;
+use Dynamic\CoreTools\Model\Promo;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Security\Member;
 
 /**
  * Class PromoTest

@@ -1,5 +1,6 @@
 <?php
 
+/*
 namespace Dynamic\CoreTools\Tests\Extensions;
 
 use Dynamic\CoreTools\Tests\CoreToolsTest,
@@ -8,13 +9,13 @@ use Dynamic\CoreTools\Tests\CoreToolsTest,
 /**
  * Class CollectionExtensionTest
  * @package Dynamic\CoreTools\Tests\Extensions
- */
+ *
 class CollectionExtensionTest extends CoreToolsTest
 {
     
     /**
      * 
-     */
+     *
     public function testGetCollection()
     {
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Tests\\TestPage', 'default');
@@ -27,7 +28,7 @@ class CollectionExtensionTest extends CoreToolsTest
 
     /**
      * 
-     */
+     *
     public function testGetManagedObject()
     {
         $object = TestPage_Controller::create();
@@ -37,7 +38,7 @@ class CollectionExtensionTest extends CoreToolsTest
 
     /**
      * 
-     */
+     *
     public function testGetPageSize()
     {
         $object = TestPage_Controller::create();
@@ -47,7 +48,7 @@ class CollectionExtensionTest extends CoreToolsTest
 
     /**
      * 
-     */
+     *
     public function testPaginatedList()
     {
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Tests\\TestPage', 'default');
@@ -57,7 +58,7 @@ class CollectionExtensionTest extends CoreToolsTest
 
     /**
      * 
-     */
+     *
     public function testGroupedList()
     {
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Tests\\TestPage', 'default');
@@ -67,7 +68,7 @@ class CollectionExtensionTest extends CoreToolsTest
 
     /**
      * 
-     */
+     *
     public function testCollectionSearchForm()
     {
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Tests\\TestPage', 'default');
@@ -76,3 +77,4 @@ class CollectionExtensionTest extends CoreToolsTest
     }
     
 }
+//*/

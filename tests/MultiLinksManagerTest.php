@@ -30,4 +30,4 @@ class MultiLinksManagerTest extends SapphireTest
     }
 }
 
-Page::add_extension('MultiLinksManager');
+Page::add_extension('Dynamic\\CoreTools\\ORM\\MultiLinksManager');

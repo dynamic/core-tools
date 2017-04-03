@@ -2,9 +2,9 @@
 
 namespace Dynamic\CoreTools\Tests\Extensions;
 
-use SilverStripe\Dev\SapphireTest,
-    SilverStripe\Core\Injector\Injector,
-    \Page;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Core\Injector\Injector;
+use \Page;
 
 /**
  * Class PageSectionManagerTest
@@ -48,5 +48,5 @@ class PageSectionManagerTest extends SapphireTest
 
 }
 
-Page::add_extension('Dynamic\\CoreTools\\Extensions\\PageSectionManager');
-Page::add_extension('Dynamic\\CoreTools\\Extensions\\PageSectionRelation');
+Page::add_extension('Dynamic\\CoreTools\\ORM\\PageSectionManager');
+Page::add_extension('Dynamic\\CoreTools\\ORM\\PageSectionRelation');

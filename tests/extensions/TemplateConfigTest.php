@@ -2,9 +2,9 @@
 
 namespace Dynamic\CoreTools\Tests\Extensions;
 
-use SilverStripe\Dev\SapphireTest,
-    SilverStripe\Core\Injector\Injector,
-    SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
  * Class TemplateConfigTest
@@ -44,4 +44,4 @@ class TemplateConfigTest extends SapphireTest
 
 }
 
-SiteConfig::add_extension('Dynamic\\CoreTools\\Extensions\\TemplateConfig');
+SiteConfig::add_extension('Dynamic\\CoreTools\\ORM\\TemplateConfig');

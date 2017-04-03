@@ -85,6 +85,6 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
 class TestContentAuthorObject extends DataObject implements TestOnly
 {
     private static $extensions = [
-        'ContentAuthorPermissionManager',
+        'Dynamic\\CoreTools\\ORM\\ContentAuthorPermissionManager',
     ];
 }

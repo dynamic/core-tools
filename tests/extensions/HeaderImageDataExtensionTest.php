@@ -2,9 +2,9 @@
 
 namespace Dynamic\CoreTools\Tests\Extensions;
 
-use SilverStripe\Dev\SapphireTest,
-    SilverStripe\Core\Injector\Injector,
-    \Page;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Core\Injector\Injector;
+use \Page;
 
 /**
  * Class HeaderImageDataExtensionTest
@@ -55,4 +55,4 @@ class HeaderImageDataExtensionTest extends SapphireTest
 
 }
 
-Page::add_extension('Dynamic\\CoreTools\\Extensions\\HeaderImageDataExtension');
+Page::add_extension('Dynamic\\CoreTools\\ORM\\HeaderImageDataExtension');

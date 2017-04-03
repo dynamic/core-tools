@@ -2,8 +2,8 @@
 
 namespace Dynamic\CoreTools\Tests\Model;
 
-use SilverStripe\Dev\SapphireTest,
-    SilverStripe\Assets\File;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Assets\File;
 
 /**
  * Class FileObjectTest

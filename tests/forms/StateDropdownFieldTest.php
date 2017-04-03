@@ -2,8 +2,8 @@
 
 namespace Dynamic\CoreTools\Tests\Forms;
 
-use Dynamic\CoreTools\Tests\CoreToolsTest,
-    Dynamic\CoreTools\Forms\StateDropdownField;
+use Dynamic\CoreTools\Tests\CoreToolsTest;
+use Dynamic\CoreTools\Form\StateDropdownField;
 
 /**
  * Class StateDropdownFieldTest

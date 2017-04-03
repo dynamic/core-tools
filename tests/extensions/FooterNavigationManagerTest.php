@@ -2,10 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests\Extensions;
 
-use SilverStripe\Dev\SapphireTest,
-    SilverStripe\Siteconfig\SiteConfig,
-    SilverStripe\Dev\TestOnly,
-    SilverStripe\Core\Injector\Injector;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Siteconfig\SiteConfig;
+use SilverStripe\Dev\TestOnly;
+use SilverStripe\Core\Injector\Injector;
 
 /**
  * Class FooterNavigationManagerTest

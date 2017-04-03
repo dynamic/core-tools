@@ -2,8 +2,8 @@
 
 namespace Dynamic\CoreTools\Tests\Extensions;
 
-use SilverStripe\Dev\SapphireTest,
-    SilverStripe\Core\Injector\Injector;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Core\Injector\Injector;
 
 /**
  * Class CoreToolsPageFieldsDataExtensionTest

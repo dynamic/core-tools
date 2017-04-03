@@ -2,8 +2,8 @@
 
 namespace Dynamic\CoreTools\Tests\Model;
 
-use SilverStripe\Dev\SapphireTest,
-    SilverStripe\Core\Injector\Injector;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Core\Injector\Injector;
 
 /**
  * Class PageSectionTest
@@ -76,7 +76,7 @@ class PageSectionTest extends SapphireTest
      */
     public function testCanCreate()
     {
-        $object = Injector::inst()->create('PageSection');
+        $object = Injector::inst()->create('Dynamic\\CoreTools\\Model\\PageSection');
 
         $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
         $this->assertTrue($object->canCreate($admin));
@@ -90,7 +90,7 @@ class PageSectionTest extends SapphireTest
      */
     public function testProvidePermissions()
     {
-        $object = Injector::inst()->create('PageSection');
+        $object = Injector::inst()->create('Dynamic\\CoreTools\\Model\\PageSection');
         $expected = array(
             'PageSection_EDIT' => 'Page Section Edit',
             'PageSection_DELETE' => 'Page Section Delete',

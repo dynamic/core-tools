@@ -2,10 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests\Extensions;
 
-use SilverStripe\Dev\SapphireTest,
-    SilverStripe\Core\Injector\Injector,
-    SilverStripe\SiteConfig\SiteConfig,
-    SilverStripe\Dev\TestOnly;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Dev\TestOnly;
 
 /**
  * Class UtilityNavigationManagerTest
@@ -49,5 +49,5 @@ class UtilityNavigationManagerTest extends SapphireTest
  */
 class UtilitySiteConfig extends SiteConfig implements TestOnly
 {
-    private static $extensions = ['Dynamic\\CoreTools\\Extensions\\UtilityNavigationManager'];
+    private static $extensions = ['Dynamic\\CoreTools\\ORM\\UtilityNavigationManager'];
 }

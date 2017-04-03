@@ -2,6 +2,9 @@
 
 namespace Dynamic\CoreTools\Tests;
 
+use Dynamic\CoreTools\Model\PageSection;
+use Dynamic\CoreTools\Model\Promo;
+use Dynamic\CoreTools\Model\Tag;
 use SilverStripe\Dev\FunctionalTest;
 use SilverStripe\Dev\TestOnly;
 use \Page;
@@ -77,12 +80,12 @@ class TestPage extends Page implements TestOnly
     ];
 
     private static $has_many = array(
-        'Sections' => 'Dynamic\\CoreTools\\Model\\PageSection',
+        'Sections' => PageSection::class,
     );
 
     private static $many_many = array(
-        'Promos' => 'Dynamic\\CoreTools\\Model\\Promo',
-        'Tags' => 'Dynamic\\CoreTools\\Model\\Tag',
+        'Promos' => Promo::class,
+        'Tags' => Tag::class,
     );
 
     private static $many_many_extraFields = array(
@@ -101,7 +104,7 @@ class TestPage_Controller extends PageController implements TestOnly
     private static $managed_object = 'Dynamic\\CoreTools\\Model\\ContentObject';
 }
 
-TestPage::add_extension('Dynamic\\CoreTools\\Extensions\\PromoManager');
-TestPage::add_extension('Dynamic\\CoreTools\\Extensions\\PreviewExtension');
-TestPage::add_extension('Dynamic\\CoreTools\\Extensions\\TagManager');
-TestPage_Controller::add_extension('Dynamic\\CoreTools\\Extensions\\CollectionExtension');
+TestPage::add_extension('Dynamic\\CoreTools\\ORM\\PromoManager');
+TestPage::add_extension('Dynamic\\CoreTools\\ORM\\PreviewExtension');
+TestPage::add_extension('Dynamic\\CoreTools\\ORM\\TagManager');
+//TestPage_Controller::add_extension('Dynamic\\CoreTools\\Extension\\CollectionExtension');
