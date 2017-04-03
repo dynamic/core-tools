@@ -42,7 +42,7 @@ class NavigationColumnTest extends SapphireTest
     {
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\NavigationColumn', 'one');
         $object->Title = '';
-        $this->setExpectedException('SilverStripe\\ORM\\ValidationException');
+        $this->expectException('SilverStripe\\ORM\\ValidationException');
         $object->write();
     }
 
