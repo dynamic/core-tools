@@ -82,9 +82,8 @@ class ContentObject extends DataObject
 
         $ImageField = UploadField::create('Image', 'Image')
           ->setFolderName('Uploads/ContentObjects')
-          ->setConfig('allowedMaxFileNumber', 1)
-          ->setAllowedFileCategories('image')
-          ->setAllowedMaxFileNumber(1);
+          ->setIsMultiUpload(false)
+          ->setAllowedFileCategories('image');
         $ImageField->getValidator()
           ->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
 
