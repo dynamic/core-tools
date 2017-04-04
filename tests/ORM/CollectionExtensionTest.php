@@ -1,7 +1,7 @@
 <?php
 
 /*
-namespace Dynamic\CoreTools\Tests\Extensions;
+namespace Dynamic\CoreTools\Tests\ORM;
 
 use Dynamic\CoreTools\Tests\CoreToolsTest,
     Dynamic\CoreTools\Tests\TestPage_Controller;

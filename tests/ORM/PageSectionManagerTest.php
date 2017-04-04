@@ -1,6 +1,6 @@
 <?php
 
-namespace Dynamic\CoreTools\Tests\Extensions;
+namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
@@ -9,7 +9,7 @@ use \Page;
 
 /**
  * Class PageSectionManagerTest
- * @package Dynamic\CoreTools\Tests\Extensions
+ * @package Dynamic\CoreTools\Tests\ORM
  */
 class PageSectionManagerTest extends SapphireTest
 {

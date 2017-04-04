@@ -1,13 +1,13 @@
 <?php
 
-namespace Dynamic\CoreTools\Tests\Extensions;
+namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
 
 /**
  * Class CoreToolsPageFieldsDataExtensionTest
- * @package Dynamic\CoreTools\Tests\Extensions
+ * @package Dynamic\CoreTools\Tests\ORM
  */
 class CoreToolsPageFieldsDataExtensionTest extends SapphireTest
 {

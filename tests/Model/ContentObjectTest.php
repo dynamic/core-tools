@@ -1,13 +1,17 @@
 <?php
 
-namespace Dynamic\CoreTools\Tests;
+namespace Dynamic\CoreTools\Tests\Model;
 
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\ORM\DataObject;
-use SilverStripe\Dev\TestOnly;
+use SilverStripe\ORM\ValidationException;
 
-class ContentAuthorPermissionManagerTest extends SapphireTest
+/**
+ * Class ContentObjectTest
+ * @package Dynamic\CoreTools\Tests\Model
+ */
+class ContentObjectTest extends SapphireTest
 {
+
     /**
      * @var array
      */
@@ -16,18 +20,33 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
     );
 
     /**
-     * @var array
+     *
      */
-    public static $extra_data_objects = array(
-        TestContentAuthorObject::class,
-    );
+    public function testGetCMSFields()
+    {
+        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $fields = $object->getCMSFields();
+        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+    }
+
+    /**
+     *
+     */
+    public function testValidateName()
+    {
+        //$this->markTestSkipped('Skipped');
+        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $object->Name = '';
+        $this->setExpectedException(ValidationException::class);
+        $object->write();
+    }
 
     /**
      *
      */
     public function testCanView()
     {
-        $object = new TestContentAuthorObject();
+        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
 
         $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
         $this->assertTrue($object->canView($admin));
@@ -41,7 +60,7 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
      */
     public function testCanEdit()
     {
-        $object = new TestContentAuthorObject();
+        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
 
         $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
         $this->assertTrue($object->canEdit($admin));
@@ -55,7 +74,7 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
      */
     public function testCanDelete()
     {
-        $object = new TestContentAuthorObject();
+        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
 
         $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
         $this->assertTrue($object->canDelete($admin));
@@ -69,7 +88,7 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
      */
     public function testCanCreate()
     {
-        $object = new TestContentAuthorObject();
+        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
 
         $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
         $this->assertTrue($object->canCreate($admin));
@@ -77,14 +96,5 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
         $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
         $this->assertTrue($object->canCreate($member));
     }
-}
 
-/**
- * Class TestContentAuthorObject.
- */
-class TestContentAuthorObject extends DataObject implements TestOnly
-{
-    private static $extensions = [
-        'Dynamic\\CoreTools\\ORM\\ContentAuthorPermissionManager',
-    ];
 }

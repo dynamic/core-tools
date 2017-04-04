@@ -1,12 +1,12 @@
 <?php
 
-namespace Dynamic\CoreTools\Tests\Extensions;
+namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
 
 /**
  * Class LinkableTest
- * @package Dynamic\CoreTools\Tests\Extensions
+ * @package Dynamic\CoreTools\Tests\ORM
  */
 class LinkableTest extends SapphireTest
 {

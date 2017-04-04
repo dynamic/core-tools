@@ -1,6 +1,6 @@
 <?php
 
-namespace Dynamic\CoreTools\Tests\Extensions;
+namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
 use Dynamic\CoreTools\ORM\RecipientManager;
@@ -8,7 +8,7 @@ use \Page;
 
 /**
  * Class RecipientManagerTest
- * @package Dynamic\CoreTools\Tests\Extensions
+ * @package Dynamic\CoreTools\Tests\ORM
  */
 class RecipientManagerTest extends SapphireTest
 {

@@ -1,12 +1,16 @@
 <?php
 
-namespace Dynamic\CoreTools\Tests\Extensions;
+namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
 use Dynamic\CoreTools\ORM\PageSectionRelation;
 use Dynamic\CoreTools\ORM\PreviewExtension;
 use \Page;
 
+/**
+ * Class PreviewExtensionTest
+ * @package Dynamic\CoreTools\Tests\ORM
+ */
 class PreviewExtensionTest extends SapphireTest
 {
     /**

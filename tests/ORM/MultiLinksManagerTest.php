@@ -1,15 +1,22 @@
 <?php
 
+namespace Dynamic\CoreTools\Tests\ORM;
+
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
+use \Page;
 
+/**
+ * Class MultiLinksManagerTest
+ * @package Dynamic\CoreTools\Tests\ORM
+ */
 class MultiLinksManagerTest extends SapphireTest
 {
     /**
      * @var array
      */
     protected static $fixture_file = array(
-        'core-tools/tests/Fixtures.yml',
+      'core-tools/tests/Fixtures.yml',
     );
 
     /**

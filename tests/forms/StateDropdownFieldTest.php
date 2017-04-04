@@ -18,7 +18,7 @@ class StateDropdownFieldTest extends CoreToolsTest
     public function testField()
     {
         $field = StateDropdownField::create('State');
-        $this->assertInstanceOf('SilverStripe\ORM\FieldType\DBHTMLText', $field->Field());
+        $this->assertInstanceOf('SilverStripe\\ORM\\FieldType\\DBHTMLText', $field->Field());
     }
 
 }

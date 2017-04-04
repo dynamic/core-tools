@@ -2,13 +2,12 @@
 
 namespace Dynamic\CoreTools\Tests;
 
-use Dynamic\CoreTools\Model\PageSection;
-use Dynamic\CoreTools\Model\Promo;
-use Dynamic\CoreTools\Model\Tag;
 use SilverStripe\Dev\FunctionalTest;
-use SilverStripe\Dev\TestOnly;
-use \Page;
-use \PageController;
+use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
+use Dynamic\CoreTools\Tests\TestOnly\Controller\TestPageController;
+use Dynamic\CoreTools\ORM\PromoManager;
+use Dynamic\CoreTools\ORM\PreviewExtension;
+use Dynamic\CoreTools\ORM\TagManager;
 
 /**
  * Class CoreToolsTest
@@ -39,7 +38,7 @@ class CoreToolsTest extends FunctionalTest
      */
     public static $extra_data_objects = array(
         TestPage::class,
-        TestPage_Controller::class,
+        TestPageController::class,
     );
 
     /**
@@ -65,46 +64,8 @@ class CoreToolsTest extends FunctionalTest
 
 }
 
-/**
- * Class TestPage
- * @package Dynamic\CoreTools\Tests
- */
-class TestPage extends Page implements TestOnly
-{
 
-    /**
-     * @var array
-     */
-    private static $db = [
-        'TestPageDBField' => 'Varchar',
-    ];
-
-    private static $has_many = array(
-        'Sections' => PageSection::class,
-    );
-
-    private static $many_many = array(
-        'Promos' => Promo::class,
-        'Tags' => Tag::class,
-    );
-
-    private static $many_many_extraFields = array(
-        'Promos' => array(
-            'SortOrder' => 'Int',
-        ),
-    );
-}
-
-/**
- * Class TestPage_Controller
- * @package Dynamic\CoreTools\Tests
- */
-class TestPage_Controller extends PageController implements TestOnly
-{
-    private static $managed_object = 'Dynamic\\CoreTools\\Model\\ContentObject';
-}
-
-TestPage::add_extension('Dynamic\\CoreTools\\ORM\\PromoManager');
-TestPage::add_extension('Dynamic\\CoreTools\\ORM\\PreviewExtension');
-TestPage::add_extension('Dynamic\\CoreTools\\ORM\\TagManager');
+TestPage::add_extension(PromoManager::class);
+TestPage::add_extension(PreviewExtension::class);
+TestPage::add_extension(TagManager::class);
 //TestPage_Controller::add_extension('Dynamic\\CoreTools\\Extension\\CollectionExtension');

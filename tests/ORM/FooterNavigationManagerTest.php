@@ -1,16 +1,14 @@
 <?php
 
-namespace Dynamic\CoreTools\Tests\Extensions;
+namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\Siteconfig\SiteConfig;
-use SilverStripe\Dev\TestOnly;
 use SilverStripe\Core\Injector\Injector;
-use Dynamic\CoreTools\ORM\FooterNavigationManager;
+use Dynamic\CoreTools\Tests\TestOnly\Object\FooterSiteConfig;
 
 /**
  * Class FooterNavigationManagerTest
- * @package Dynamic\CoreTools\Tests\Extensions
+ * @package Dynamic\CoreTools\Tests\ORM
  */
 class FooterNavigationManagerTest extends SapphireTest
 {
@@ -23,7 +21,7 @@ class FooterNavigationManagerTest extends SapphireTest
      * @var array
      */
     public static $extra_data_objects = [
-        FooterSiteConfig::class,
+      FooterSiteConfig::class,
     ];
 
     /**
@@ -43,16 +41,3 @@ class FooterNavigationManagerTest extends SapphireTest
     }
 }
 
-/**
- * Class FooterSiteConfig
- * @package Dynamic\CoreTools\Tests\Extensions
- */
-class FooterSiteConfig extends SiteConfig implements TestOnly
-{
-    private static $extensions = [FooterNavigationManager::class];
-
-    /**
-     * @var string
-     */
-    private static $table_name = 'FooterSiteConfig_Test';
-}
