@@ -25,39 +25,39 @@ class TestPage extends Page implements TestOnly
      * @var array
      */
     private static $db = [
-      'TestPageDBField' => 'Varchar',
+        'TestPageDBField' => 'Varchar',
     ];
 
     /**
      * @var array
      */
     private static $has_many = array(
-      'Sections' => PageSection::class,
+        'Sections' => PageSection::class,
     );
 
     /**
      * @var array
      */
     private static $many_many = array(
-      'Promos' => Promo::class,
-      'Tags' => Tag::class,
+        'Promos' => Promo::class,
+        'Tags' => Tag::class,
     );
 
     /**
      * @var array
      */
     private static $many_many_extraFields = array(
-      'Promos' => array(
-        'SortOrder' => 'Int',
-      ),
+        'Promos' => array(
+            'SortOrder' => 'Int',
+        ),
     );
 
     /**
      * @var array
      */
     private static $extensions = [
-      PromoManager::class,
-      PreviewExtension::class,
-      TagManager::class,
+        PromoManager::class,
+        PreviewExtension::class,
+        TagManager::class,
     ];
 }

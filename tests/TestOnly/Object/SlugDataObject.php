@@ -16,8 +16,8 @@ class SlugDataObject extends DataObject implements TestOnly
      * @var array
      */
     private static $db = [
-      'Title' => 'Varchar(50)',
-      'URLSegment' => 'Varchar(255)',
+        'Title' => 'Varchar(50)',
+        'URLSegment' => 'Varchar(255)',
     ];
 
     /**

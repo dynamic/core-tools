@@ -13,6 +13,6 @@ use Dynamic\CoreTools\ORM\ContentAuthorPermissionManager;
 class TestContentAuthorObject extends DataObject implements TestOnly
 {
     private static $extensions = [
-      ContentAuthorPermissionManager::class,
+        ContentAuthorPermissionManager::class,
     ];
 }

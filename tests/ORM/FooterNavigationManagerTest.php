@@ -21,7 +21,7 @@ class FooterNavigationManagerTest extends SapphireTest
      * @var array
      */
     public static $extra_data_objects = [
-      FooterSiteConfig::class,
+        FooterSiteConfig::class,
     ];
 
     /**

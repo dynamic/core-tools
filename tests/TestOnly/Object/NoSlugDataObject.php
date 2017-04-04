@@ -16,7 +16,7 @@ class NoSlugDataObject extends DataObject implements TestOnly
      * @var array
      */
     private static $db = [
-      'Title' => 'Varchar(50)',
+        'Title' => 'Varchar(50)',
     ];
 
     /**
