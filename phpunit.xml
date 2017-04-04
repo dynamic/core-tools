@@ -5,7 +5,7 @@
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true">
     <testsuites>
-        <testsuite name="ssconsole">
+        <testsuite name="core-tools">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
