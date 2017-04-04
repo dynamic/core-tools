@@ -78,25 +78,34 @@ class Linkable extends DataExtension
     {
         $fields->removeByName('PageLinkID');
 
-        $displayLogic = (class_exists('DisplayLogicWrapper'))
+        $tree = (class_exists('DisplayLogicWrapper'))
           ? DisplayLogicWrapper::create(
             TreeDropdownField::create('PageLinkID', 'Link to Page', 'SiteTree')
           )->displayIf('LinkType')->isEqualTo('Internal')->end()
           : TreeDropdownField::create('PageLinkID', 'Link to Page', 'SiteTree');
 
-        $fields->addFieldsToTab('Root.Link', array(
-          OptionSetField::create('LinkType', 'Link',
-            singleton($this->owner->class)->dbObject('LinkType')->enumValues()),
-          TextField::create('LinkLabel', 'Link Label')
+        $label = (class_exists('DisplayLogicWrapper'))
+          ? TextField::create('LinkLabel', 'Link Label')
             ->displayIf('LinkType')
             ->isEqualTo('Internal')
             ->orIf('LinkType')
             ->isEqualTo('External')
-            ->end(),
-          $displayLogic,
-          TextField::create('ExternalLink', 'External URL')
+            ->end()
+          : TextField::create('LinkLabel', 'Link Label');
+
+        $external = (class_exists('DisplayLogicWrapper'))
+          ? TextField::create('ExternalLink', 'External URL')
             ->setAttribute('Placeholder', 'http://')
-            ->displayIf('LinkType')->isEqualTo('External')->end(),
+            ->displayIf('LinkType')->isEqualTo('External')->end()
+          : TextField::create('ExternalLink', 'External URL');
+
+        $fields->addFieldsToTab('Root.Link', array(
+          OptionSetField::create('LinkType', 'Link',
+            singleton($this->owner->class)->dbObject('LinkType')->enumValues()),
+          $label
+          ,
+          $tree,
+          $external,
         ));
     }
 }
