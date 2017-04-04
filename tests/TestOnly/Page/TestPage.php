@@ -53,6 +53,11 @@ class TestPage extends Page implements TestOnly
     );
 
     /**
+     * @var string
+     */
+    private static $table_name = 'TestPage_Test';
+
+    /**
      * @var array
      */
     private static $extensions = [

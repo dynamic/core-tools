@@ -4,6 +4,7 @@ namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
+use Dynamic\CoreTools\ORM\MultiLinksManager;
 use \Page;
 
 /**
@@ -20,6 +21,16 @@ class MultiLinksManagerTest extends SapphireTest
     );
 
     /**
+     *
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        Page::add_extension(MultiLinksManager::class);
+    }
+
+        /**
      *
      */
     public function testUpdateCMSFields()

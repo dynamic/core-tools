@@ -22,6 +22,16 @@ class RecipientManagerTest extends SapphireTest
     /**
      *
      */
+    public function setUp()
+    {
+        parent::setUp();
+
+        Page::add_extension(RecipientManager::class);
+    }
+
+    /**
+     *
+     */
     public function testUpdateCMSFields()
     {
         $object = $this->objFromFixture('\Page', 'default');

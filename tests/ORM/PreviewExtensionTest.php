@@ -3,7 +3,6 @@
 namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
-use Dynamic\CoreTools\ORM\PageSectionRelation;
 use Dynamic\CoreTools\ORM\PreviewExtension;
 use \Page;
 
@@ -19,6 +18,16 @@ class PreviewExtensionTest extends SapphireTest
     protected static $fixture_file = 'core-tools/tests/Fixtures.yml';
 
     /**
+     *
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        Page::add_extension(PreviewExtension::class);
+    }
+
+        /**
      *
      */
     public function testUpdateCMSFields()

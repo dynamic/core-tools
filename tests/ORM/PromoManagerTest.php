@@ -22,16 +22,27 @@ class PromoManagerTest extends SapphireTest
     /**
      *
      */
+    public function setUp()
+    {
+        parent::setUp();
+
+        Page::add_extension(PromoManager::class);
+        Page::add_extension(PromoRelation::class);
+    }
+
+        /**
+     *
+     */
     public function testGetPromoList()
     {
-        $page = $this->objFromFixture('Page', 'default');
+        $page = $this->objFromFixture('\Page', 'default');
         $promo = $this->objFromFixture('Promo', 'default');
 
         $this->assertTrue($page->getPromoList()->Count() == 0);
 
         $page->Promos()->add($promo);
         $this->assertTrue($page->getPromoList()->Count() > 0);
-        $this->assertInstanceOf('Promo', $page->getPromoList()->First());
+        $this->assertInstanceOf('Promo', $page->getPromoList()->first());
     }
 
     /**
@@ -39,7 +50,7 @@ class PromoManagerTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = Injector::inst()->create('Page');
+        $object = Injector::inst()->create('\Page');
         $fields = $object->getCMSFields();
 
         $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);

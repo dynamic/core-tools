@@ -4,8 +4,8 @@ namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
-use SilverStripe\SiteConfig\SiteConfig;
 use Dynamic\CoreTools\ORM\TemplateConfig;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
  * Class TemplateConfigTest
@@ -23,9 +23,19 @@ class TemplateConfigTest extends SapphireTest
     /**
      *
      */
+    public function setUp()
+    {
+        parent::setUp();
+
+        SiteConfig::add_extension(TemplateConfig::class);
+    }
+
+        /**
+     *
+     */
     public function testUpdateCMSFields()
     {
-        $object = Injector::inst()->create('SiteConfig');
+        $object = Injector::inst()->create('SilverStripe\\SiteConfig\\SiteConfig');
         $fields = $object->getCMSFields();
 
         $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
@@ -37,7 +47,7 @@ class TemplateConfigTest extends SapphireTest
      */
     public function testGetSiteLogo()
     {
-        $object = Injector::inst()->create('SiteConfig');
+        $object = Injector::inst()->create('SilverStripe\\SiteConfig\\SiteConfig');
         $logo = $this->objFromFixture('SilverStripe\\Assets\\Image', 'logo');
         $object->LogoID = $logo->ID;
         $this->assertInstanceOf('SilverStripe\\Assets\\Image', $object->getSiteLogo());

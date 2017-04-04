@@ -2,8 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
+use Dynamic\CoreTools\ORM\TagManager;
 use Dynamic\CoreTools\Tests\CoreToolsTest;
 use SilverStripe\Core\Injector\Injector;
+use \Page;
 
 /**
  * Class TagManagerTest
@@ -11,6 +13,16 @@ use SilverStripe\Core\Injector\Injector;
  */
 class TagManagerTest extends CoreToolsTest
 {
+
+    /**
+     *
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        Page::add_extension(TagManager::class);
+    }
 
     /**
      *

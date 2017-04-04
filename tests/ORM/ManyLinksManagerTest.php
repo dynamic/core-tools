@@ -2,8 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
+use Dynamic\CoreTools\ORM\ManyLinksManager;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
+use \Page;
 
 /**
  * Class ManyLinksManagerTest
@@ -17,6 +19,16 @@ class ManyLinksManagerTest extends SapphireTest
     protected static $fixture_file = array(
         'core-tools/tests/Fixtures.yml',
     );
+
+    /**
+     *
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        Page::add_extension(ManyLinksManager::class);
+    }
 
     /**
      *

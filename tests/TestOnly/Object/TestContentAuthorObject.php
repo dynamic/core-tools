@@ -15,4 +15,9 @@ class TestContentAuthorObject extends DataObject implements TestOnly
     private static $extensions = [
         ContentAuthorPermissionManager::class,
     ];
+
+    /**
+     * @var string
+     */
+    private static $table_name = 'TestContentAuthorObject_Test';
 }

@@ -20,6 +20,16 @@ class PageSectionManagerTest extends SapphireTest
         'core-tools/tests/Fixtures.yml',
     );
 
+    /**
+     *
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        Page::add_extension(PageSectionManager::class);
+    }
+
     public function testUpdateCMSFields()
     {
         $object = Injector::inst()->create('\Page');
@@ -38,13 +48,22 @@ class PageSectionManagerTest extends SapphireTest
     public function testGetPageSections()
     {
         $page = $this->objFromFixture('\Page', 'default');
-        $section = $this->objFromFixture('Dynamic\\CoreTools\\Model\\PageSection', 'default');
+        $section = $this->objFromFixture(
+            'Dynamic\\CoreTools\\Model\\PageSection',
+            'default'
+        );
 
         $this->assertEquals(0, $page->getPageSections()->count());
 
         $page->Sections()->add($section);
-        $this->assertInstanceOf('SilverStripe\\ORM\\DataList', $page->getPageSections());
-        $this->assertInstanceOf('Dynamic\\CoreTools\\Model\\PageSection', $page->getPageSections()->First());
+        $this->assertInstanceOf(
+            'SilverStripe\\ORM\\DataList',
+            $page->getPageSections()
+        );
+        $this->assertInstanceOf(
+            'Dynamic\\CoreTools\\Model\\PageSection',
+            $page->getPageSections()->first()
+        );
     }
 
 }

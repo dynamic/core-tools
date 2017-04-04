@@ -24,17 +24,17 @@ class ManyLinksManager extends DataExtension
      * @var array
      */
     private static $many_many = array(
-      'ActionLinks' => SiteTree::class,
+        'ActionLinks' => SiteTree::class,
     );
 
     /**
      * @var array
      */
     private static $many_many_extraFields = array(
-      'ActionLinks' => array(
-        'LinkLabel' => 'Varchar(255)',
-        'SortOrder' => 'Int',
-      ),
+        'ActionLinks' => array(
+            'LinkLabel' => 'Varchar(255)',
+            'SortOrder' => 'Int',
+        ),
     );
 
     /**
@@ -43,20 +43,22 @@ class ManyLinksManager extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName(array(
-          'ActionLinks',
+            'ActionLinks',
         ));
 
         if ($this->owner->ID) {
-
             $config = GridFieldConfig_RelationEditor::create()
-              ->addComponent(new GridFieldOrderableRows('SortOrder'))
-              ->addComponent(new GridFieldAddExistingSearchButton())
-              ->removeComponentsByType('GridFieldAddExistingAutocompleter')
-              ->removeComponentsByType('GridFieldAddNewButton');
+                ->addComponent(new GridFieldOrderableRows('SortOrder'))
+                ->addComponent(new GridFieldAddExistingSearchButton())
+                ->removeComponentsByType('GridFieldAddExistingAutocompleter')
+                ->removeComponentsByType('GridFieldAddNewButton');
 
             // LinkLabel
             $linkFields = FieldList::create(
-              TextField::create('ManyMany[LinkLabel]', 'Link Label')
+                TextField::create(
+                    'ManyMany[LinkLabel]',
+                    'Link Label'
+                )
             );
 
             $config->removeComponentsByType(new GridFieldDetailForm());
@@ -67,17 +69,23 @@ class ManyLinksManager extends DataExtension
 
             $summaryfieldsconf = new GridFieldDataColumns();
             $summaryfieldsconf->setDisplayFields(array(
-              'MenuTitle' => 'Menu Title',
-              'URLSegment' => 'URLSegment',
-              'LinkLabel' => 'Link Label',
+                'MenuTitle' => 'Menu Title',
+                'URLSegment' => 'URLSegment',
+                'LinkLabel' => 'Link Label',
             ));
 
             $config->addComponent($edittest);
-            $config->addComponent($summaryfieldsconf,
-              new GridFieldFilterHeader());
+            $config->addComponent(
+                $summaryfieldsconf,
+                new GridFieldFilterHeader()
+            );
 
-            $linksField = GridField::create('ActionLinks', 'Links',
-              $this->owner->ActionLinks()->sort('SortOrder'), $config);
+            $linksField = GridField::create(
+                'ActionLinks',
+                'Links',
+                $this->owner->ActionLinks()->sort('SortOrder'),
+                $config
+            );
 
             $fields->addFieldToTab('Root.Links', $linksField);
         }

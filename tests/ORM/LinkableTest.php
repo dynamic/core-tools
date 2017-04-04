@@ -3,6 +3,8 @@
 namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
+use Dynamic\CoreTools\ORM\Linkable;
+use \Page;
 
 /**
  * Class LinkableTest
@@ -18,6 +20,16 @@ class LinkableTest extends SapphireTest
     );
 
     /**
+     *
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        Page::add_extension(Linkable::class);
+    }
+
+        /**
      *
      */
     public function testGetLinkStatus()

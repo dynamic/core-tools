@@ -4,9 +4,7 @@ namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
-use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\Dev\TestOnly;
-use Dynamic\CoreTools\ORM\UtilityNavigationManager;
+use Dynamic\CoreTools\Tests\TestOnly\UtilitySiteConfig;
 
 /**
  * Class UtilityNavigationManagerTest
@@ -23,7 +21,7 @@ class UtilityNavigationManagerTest extends SapphireTest
      * @var array
      */
     public static $extra_data_objects = [
-      UtilitySiteConfig::class,
+        UtilitySiteConfig::class,
     ];
 
     /**
@@ -31,7 +29,8 @@ class UtilityNavigationManagerTest extends SapphireTest
      */
     public function testGetCMSFields()
     {
-        $object = Injector::inst()->create('UtilitySiteConfig');
+        $object = Injector::inst()
+            ->create('Dynamic\\CoreTools\\Tests\\TestOnly\\UtilitySiteConfig');
         $fields = $object->getCMSFields();
         $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
         $this->assertNull($fields->dataFieldByName('UtilityLinks'));
@@ -42,13 +41,4 @@ class UtilityNavigationManagerTest extends SapphireTest
         $this->assertNotNull($fields->dataFieldByName('UtilityLinks'));
     }
 
-}
-
-/**
- * Class UtilitySiteConfig
- * @package Dynamic\CoreTools\Tests\Extensions
- */
-class UtilitySiteConfig extends SiteConfig implements TestOnly
-{
-    private static $extensions = [UtilityNavigationManager::class];
 }
