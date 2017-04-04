@@ -21,14 +21,18 @@ class PageSectionManager extends DataExtension
         if ($this->owner->ID) {
             // Sections
             $config = GridFieldConfig_RecordEditor::create()
-              ->addComponent(new GridFieldOrderableRows('SortOrder'))
-              ->removeComponentsByType('GridFieldAddExistingAutocompleter')
-              ->removeComponentsByType('GridFieldDeleteAction')
-              ->addComponent(new GridFieldDeleteAction(false));
-            $sectionsField = GridField::create('Sections', 'Sections',
-              $this->owner->Sections()->sort('SortOrder'), $config);
+                ->addComponent(new GridFieldOrderableRows('SortOrder'))
+                ->removeComponentsByType('GridFieldAddExistingAutocompleter')
+                ->removeComponentsByType('GridFieldDeleteAction')
+                ->addComponent(new GridFieldDeleteAction(false));
+            $sectionsField = GridField::create(
+                'Sections',
+                'Sections',
+                $this->owner->Sections()->sort('SortOrder'),
+                $config
+            );
             $fields->addFieldsToTab('Root.Sections', array(
-              $sectionsField,
+                $sectionsField,
             ));
         }
     }
@@ -46,6 +50,6 @@ class PageSectionManager extends DataExtension
 class PageSectionRelation extends DataExtension
 {
     private static $has_many = array(
-      'Sections' => PageSection::class,
+        'Sections' => PageSection::class,
     );
 }

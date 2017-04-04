@@ -56,7 +56,7 @@ class FileObject extends ContentObject
 
         $file = UploadField::create('Download')
           ->setFolderName('Uploads/FileDownloads')
-          ->setConfig('allowedMaxFileNumber', 1)
+          ->setIsMultiUpload(false)
           ->setAllowedFileCategories('doc')
           ->setAllowedMaxFileNumber(1);
 

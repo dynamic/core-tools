@@ -20,16 +20,16 @@ class UtilityNavigationManager extends DataExtension
      * @var array
      */
     private static $many_many = array(
-      'UtilityLinks' => SiteTree::class,
+        'UtilityLinks' => SiteTree::class,
     );
 
     /**
      * @var array
      */
     private static $many_many_extraFields = array(
-      'UtilityLinks' => array(
-        'SortOrder' => 'Int',
-      ),
+        'UtilityLinks' => array(
+            'SortOrder' => 'Int',
+        ),
     );
 
     /**
@@ -39,16 +39,20 @@ class UtilityNavigationManager extends DataExtension
     {
         if ($this->owner->ID) {
             $config = GridFieldConfig_RelationEditor::create()
-              ->addComponent(new GridFieldOrderableRows('SortOrder'))
-              ->removeComponentsByType('GridFieldAddExistingAutocompleter')
-              ->addComponent(new GridFieldAddExistingSearchButton())
-              ->removeComponentsByType('GridFieldAddNewButton');
+                ->addComponent(new GridFieldOrderableRows('SortOrder'))
+                ->removeComponentsByType('GridFieldAddExistingAutocompleter')
+                ->addComponent(new GridFieldAddExistingSearchButton())
+                ->removeComponentsByType('GridFieldAddNewButton');
             $promos = $this->owner->UtilityLinks()->sort('SortOrder');
-            $linksField = GridField::create('UtilityLinks', 'Utility Links',
-              $promos, $config);
+            $linksField = GridField::create(
+                'UtilityLinks',
+                'Utility Links',
+                $promos,
+                $config
+            );
 
             $fields->addFieldsToTab('Root.Utility', array(
-              $linksField,
+                $linksField,
             ));
         }
     }

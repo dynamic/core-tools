@@ -25,37 +25,37 @@ class TemplateConfig extends DataExtension
      * @var array
      */
     private static $db = array(
-      'TitleLogo' => "Enum('Logo, Title', 'Title')",
+        'TitleLogo' => "Enum('Logo, Title', 'Title')",
     );
 
     /**
      * @var array
      */
     private static $has_one = array(
-      'Logo' => Image::class,
+        'Logo' => Image::class,
     );
 
     /**
      * @var array
      */
     private static $many_many = array(
-      'FooterLinks' => SiteTree::class,
+        'FooterLinks' => SiteTree::class,
     );
 
     /**
      * @var array
      */
     private static $many_many_extraFields = array(
-      'FooterLinks' => array(
-        'SortOrder' => 'Int'
-      )
+        'FooterLinks' => array(
+            'SortOrder' => 'Int'
+        )
     );
 
     /**
      * @var array
      */
     private static $defaults = array(
-      'TitleLogo' => 'Title'
+        'TitleLogo' => 'Title'
     );
 
     /**
@@ -65,33 +65,37 @@ class TemplateConfig extends DataExtension
     {
         $ImageField = UploadField::create('Logo');
         $ImageField->getValidator()->allowedExtensions = array(
-          'jpg',
-          'gif',
-          'png'
+            'jpg',
+            'gif',
+            'png'
         );
         $ImageField->setFolderName('Uploads/Logo');
-        $ImageField->setConfig('allowedMaxFileNumber', 1);
+        $ImageField->setIsMultiUpload(false);
 
         // options for logo or title display
         $logoOptions = array(
-          'Title' => 'Display Site Title and Slogan',
-          'Logo' => 'Display Logo'
+            'Title' => 'Display Site Title and Slogan',
+            'Logo' => 'Display Logo'
         );
 
         $fields->addFieldsToTab('Root.Header', array(
-          OptionsetField::create('TitleLogo', 'Branding', $logoOptions),
-          $ImageField
+            OptionsetField::create('TitleLogo', 'Branding', $logoOptions),
+            $ImageField
         ));
 
         $config = GridFieldConfig_RelationEditor::create()
-          ->addComponent(new GridFieldOrderableRows("SortOrder"));
+            ->addComponent(new GridFieldOrderableRows("SortOrder"));
 
-        $FooterGridField = GridField::create("FooterLinks", "Footer Links",
-          $this->owner->FooterLinks()->sort('SortOrder'), $config);
+        $FooterGridField = GridField::create(
+            "FooterLinks",
+            "Footer Links",
+            $this->owner->FooterLinks()->sort('SortOrder'),
+            $config
+        );
 
         // add FlexSlider, width and height
         $fields->addFieldsToTab("Root.Footer", array(
-          $FooterGridField
+            $FooterGridField
         ));
     }
 
@@ -109,7 +113,8 @@ class TemplateConfig extends DataExtension
     public function getFooterLinkList()
     {
         return ($this->owner->FooterLinks()
-          ->exists()) ? $this->owner->FooterLinks()->sort('SortOrder') : false;
+            ->exists()) ? $this->owner->FooterLinks()
+            ->sort('SortOrder') : false;
     }
 
 }

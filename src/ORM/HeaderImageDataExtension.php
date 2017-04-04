@@ -19,7 +19,7 @@ class HeaderImageDataExtension extends DataExtension
      * @var array
      */
     private static $has_one = array(
-      'HeaderImage' => Image::class,
+        'HeaderImage' => Image::class,
     );
 
     /**
@@ -28,18 +28,18 @@ class HeaderImageDataExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $ImageField = UploadField::create('HeaderImage', 'Header Image')
-          ->setFolderName('Uploads/HeaderImages')
-          ->setConfig('allowedMaxFileNumber', 1);
+            ->setFolderName('Uploads/HeaderImages')
+            ->setIsMultiUpload(false);
         $ImageField->getValidator()->allowedExtensions = array(
-          'jpg',
-          'jpeg',
-          'gif',
-          'png'
+            'jpg',
+            'jpeg',
+            'gif',
+            'png'
         );
         $ImageField->getValidator()
-          ->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
+            ->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
         $fields->addFieldsToTab('Root.Images', array(
-          $ImageField,
+            $ImageField,
         ));
     }
 

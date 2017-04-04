@@ -24,15 +24,15 @@ class PreviewExtension extends DataExtension
      * @var array
      */
     private static $db = array(
-      'PreviewTitle' => 'HTMLVarchar(255)',
-      'Abstract' => 'HTMLText',
+        'PreviewTitle' => 'HTMLVarchar(255)',
+        'Abstract' => 'HTMLText',
     );
 
     /**
      * @var array
      */
     private static $has_one = array(
-      'PreviewImage' => Image::class,
+        'PreviewImage' => Image::class,
     );
 
     /**
@@ -41,14 +41,14 @@ class PreviewExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName(array(
-          'PreviewTitle',
-          'Abstract',
-          'PreviewImage',
+            'PreviewTitle',
+            'Abstract',
+            'PreviewImage',
         ));
 
         $thumbnail = (class_exists('ImageUploadField'))
-          ? ImageUploadField::create('PreviewImage')
-          : UploadField::create('PreviewImage');
+            ? ImageUploadField::create('PreviewImage')
+            : UploadField::create('PreviewImage');
         $thumbnail->setFolderName('Uploads/Preview');
 
         // custom field description
@@ -59,20 +59,26 @@ class PreviewExtension extends DataExtension
         }
 
         $previewFields = FieldList::create(
-          TextField::create('PreviewTitle', 'Preview Title')
-            ->setAttribute('placeholder', $this->owner->getTitle())
-            ->setDescription('optional, defaults to Page Name'),
-          $abstract = HtmlEditorField::create('Abstract')
-            ->setRows(5)
-            ->setDescription('optional, defaults to first paragraph of Content'),
-          $thumbnail
+            TextField::create(
+                'PreviewTitle',
+                'Preview Title'
+            )
+                ->setAttribute('placeholder', $this->owner->getTitle())
+                ->setDescription('optional, defaults to Page Name'),
+            $abstract = HtmlEditorField::create('Abstract')
+                ->setRows(5)
+                ->setDescription('optional, defaults to first paragraph of Content'),
+            $thumbnail
         );
 
         // Preview
-        $previewField = ToggleCompositeField::create('PreviewHD',
-          'Custom Preview', $previewFields)
-          ->setHeadingLevel(4)
-          ->setStartClosed(true);
+        $previewField = ToggleCompositeField::create(
+            'PreviewHD',
+            'Custom Preview',
+            $previewFields
+        )
+            ->setHeadingLevel(4)
+            ->setStartClosed(true);
         $fields->addFieldToTab('Root.Main', $previewField);
     }
 
@@ -90,7 +96,7 @@ class PreviewExtension extends DataExtension
     }
 
     /**
-     * @return bool|\SilverStripe\Assets\Image;
+     * @return bool|\SilverStripe\Assets\Image
      */
     public function getPreviewThumb()
     {
@@ -109,7 +115,10 @@ class PreviewExtension extends DataExtension
     {
         if (!$this->owner->AbstractFirstParagraph && $this->owner->Abstract) {
             return $this->owner->Abstract;
-        } elseif ((!$this->owner->AbstractFirstParagraph && !$this->owner->Abstract) || $this->owner->AbstractFirstParagraph) {
+        } elseif ((
+                !$this->owner->AbstractFirstParagraph && !$this->owner->Abstract
+            ) || $this->owner->AbstractFirstParagraph
+        ) {
             $content = $this->owner->obj('Content');
 
             return $content->FirstParagraph();

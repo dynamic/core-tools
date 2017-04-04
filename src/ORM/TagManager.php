@@ -18,12 +18,16 @@ class TagManager extends DataExtension
         if ($this->owner->exists()) {
             if (class_exists('Tag')) {
                 $tagField = (class_exists('TagField'))
-                  ? TagField::create('Tags', 'Tags', Tag::get(),
-                    $this->owner->Tags())
-                    ->setShouldLazyLoad(true)
-                    ->setCanCreate(true)
-                  : CheckboxSetField::create('Tags')
-                    ->setSource(Tag::get()->map());
+                    ? TagField::create(
+                        'Tags',
+                        'Tags',
+                        Tag::get(),
+                        $this->owner->Tags()
+                    )
+                        ->setShouldLazyLoad(true)
+                        ->setCanCreate(true)
+                    : CheckboxSetField::create('Tags')
+                        ->setSource(Tag::get()->map());
                 $fields->insertBefore($tagField, 'Content');
             }
         }

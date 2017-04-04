@@ -26,15 +26,19 @@ class PromoManager extends DataExtension
         // add Spiff grid field if record exists
         if ($this->owner->exists()) {
             $config = GridFieldConfig_RelationEditor::create()
-              ->addComponent(new GridFieldOrderableRows('SortOrder'))
-              ->removeComponentsByType('GridFieldAddExistingAutocompleter')
-              ->addComponent(new GridFieldAddExistingSearchButton());
+                ->addComponent(new GridFieldOrderableRows('SortOrder'))
+                ->removeComponentsByType('GridFieldAddExistingAutocompleter')
+                ->addComponent(new GridFieldAddExistingSearchButton());
             $promos = $this->owner->Promos()->sort('SortOrder');
-            $promoField = GridField::create('Promos', 'Promos', $promos,
-              $config);
+            $promoField = GridField::create(
+                'Promos',
+                'Promos',
+                $promos,
+                $config
+            );
 
             $fields->addFieldsToTab('Root.Promos', array(
-              $promoField,
+                $promoField,
             ));
         }
     }
@@ -47,12 +51,12 @@ class PromoManager extends DataExtension
 class PromoRelation extends DataExtension
 {
     private static $many_many = array(
-      'Promos' => Promo::class,
+        'Promos' => Promo::class,
     );
 
     private static $many_many_extraFields = array(
-      'Promos' => array(
-        'SortOrder' => 'Int',
-      ),
+        'Promos' => array(
+            'SortOrder' => 'Int',
+        ),
     );
 }
