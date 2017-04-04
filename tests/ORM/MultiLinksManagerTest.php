@@ -37,5 +37,3 @@ class MultiLinksManagerTest extends SapphireTest
         $this->assertNotNull($fields->dataFieldByName('ContentLinks'));
     }
 }
-
-Page::add_extension('Dynamic\\CoreTools\\ORM\\MultiLinksManager');

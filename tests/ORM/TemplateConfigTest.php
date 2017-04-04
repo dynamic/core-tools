@@ -44,5 +44,3 @@ class TemplateConfigTest extends SapphireTest
     }
 
 }
-
-SiteConfig::add_extension(TemplateConfig::class);

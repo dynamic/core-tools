@@ -53,6 +53,3 @@ class PromoManagerTest extends SapphireTest
     }
 
 }
-
-Page::add_extension(PromoManager::class);
-Page::add_extension(PromoRelation::class);

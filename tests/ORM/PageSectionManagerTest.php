@@ -48,6 +48,3 @@ class PageSectionManagerTest extends SapphireTest
     }
 
 }
-
-Page::add_extension(PageSectionManager::class);
-Page::add_extension(PageSectionManager::class);

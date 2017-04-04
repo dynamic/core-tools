@@ -33,5 +33,3 @@ class RecipientManagerTest extends SapphireTest
         $this->assertNotNull($fields->dataFieldByName('ThankYouMessage'));
     }
 }
-
-Page::add_extension(RecipientManager::class);

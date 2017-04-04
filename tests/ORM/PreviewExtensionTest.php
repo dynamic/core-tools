@@ -70,6 +70,3 @@ class PreviewExtensionTest extends SapphireTest
     }
 
 }
-
-Page::add_extension(PageSectionRelation::class);
-Page::add_extension(PreviewExtension::class);
