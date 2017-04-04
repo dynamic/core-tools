@@ -29,7 +29,7 @@ class FooterNavigationManagerTest extends SapphireTest
      */
     public function testGetCMSFields()
     {
-        $object = Injector::inst()->create('FooterSiteConfig');
+        $object = Injector::inst()->create('Dynamic\\CoreTools\\Tests\\TestOnly\\Object\\FooterSiteConfig');
         $fields = $object->getCMSFields();
         $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
         $this->assertNull($fields->dataFieldByName('NavigationColumns'));

@@ -23,7 +23,7 @@ class CoreToolsPageFieldsDataExtensionTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = Injector::inst()->create('Dynamic\\CoreTools\\Tests\\TestPage');
+        $object = Injector::inst()->create('Dynamic\\CoreTools\\Tests\\TestOnly\\Page\\TestPage');
         $fields = $object->getCMSFields();
 
         $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);

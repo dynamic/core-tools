@@ -32,13 +32,13 @@ class PageSectionManagerTest extends SapphireTest
 
     public function testUpdateCMSFields()
     {
-        $object = Injector::inst()->create('\Page');
+        $object = Injector::inst()->create('\\Page');
         $fields = $object->getCMSFields();
 
         $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
         $this->assertNull($fields->dataFieldByName('Sections'));
 
-        $object = $this->objFromFixture('\Page', 'default');
+        $object = $this->objFromFixture('\\Page', 'default');
         $fields = $object->getCMSFields();
 
         $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
@@ -47,7 +47,7 @@ class PageSectionManagerTest extends SapphireTest
 
     public function testGetPageSections()
     {
-        $page = $this->objFromFixture('\Page', 'default');
+        $page = $this->objFromFixture('\\Page', 'default');
         $section = $this->objFromFixture(
             'Dynamic\\CoreTools\\Model\\PageSection',
             'default'

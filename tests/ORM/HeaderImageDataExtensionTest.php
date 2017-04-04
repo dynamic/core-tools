@@ -35,7 +35,7 @@ class HeaderImageDataExtensionTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = Injector::inst()->create('Dynamic\\CoreTools\\Tests\\TestPage');
+        $object = Injector::inst()->create('Dynamic\\CoreTools\\Tests\\TestOnly\\Page\\TestPage');
         $fields = $object->getCMSFields();
 
         $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
@@ -47,8 +47,8 @@ class HeaderImageDataExtensionTest extends SapphireTest
      */
     public function testGetPageHeaderImage()
     {
-        $page = $this->objFromFixture('\Page', 'default');
-        $subpage = $this->objFromFixture('\Page', 'subpage');
+        $page = $this->objFromFixture('\\Page', 'default');
+        $subpage = $this->objFromFixture('\\Page', 'subpage');
         $image = $this->objFromFixture('SilverStripe\\Assets\\Image', 'header');
 
         $this->assertNull($subpage->getPageHeaderImage());

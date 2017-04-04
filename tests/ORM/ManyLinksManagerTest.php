@@ -35,7 +35,7 @@ class ManyLinksManagerTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = Injector::inst()->create('\Page');
+        $object = Injector::inst()->create('\\Page');
         $fields = $object->getCMSFields();
 
         $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);

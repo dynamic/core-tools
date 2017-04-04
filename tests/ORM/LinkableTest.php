@@ -34,7 +34,7 @@ class LinkableTest extends SapphireTest
      */
     public function testGetLinkStatus()
     {
-        $page = $this->objFromFixture('\Page', 'default');
+        $page = $this->objFromFixture('\\Page', 'default');
         $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
         $object->LinkType = 'Internal';
         $object->PageLinkID = $page->ID;
