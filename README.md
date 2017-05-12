@@ -49,6 +49,10 @@ To use `Tags`, add the `Tags` relation to the dataobjects and pages desired:
 
 note: the relation name `Tags` conflicts with Blog and likely other modules. Therefore we don't recommend applying the ralation to `Page`
 
+## Upgrading
+
+Upgrading form 2.0.0-alpha2 or before be sure to run the `SettingsToConfigTask` to migrate data from SiteConfig to the new `GlobalSiteSetting` DataObject.
+
 ## Documentation
 
 See the [docs/en](docs/en/index.md) folder.
