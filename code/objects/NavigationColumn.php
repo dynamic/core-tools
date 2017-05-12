@@ -15,6 +15,7 @@ class NavigationColumn extends DataObject
      */
     private static $has_one = array(
         'SiteConfig' => 'SiteConfig',
+        'GlobalConfig' => 'GlobalSiteSetting',
     );
 
     /**

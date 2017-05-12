@@ -7,3 +7,16 @@ ContentObject:
 DataList:
   extensions:
     - CoreToolsDataListDataExtension
+GlobalSiteSetting:
+  extensions:
+    - CompanyConfig
+    - UtilityNavigationManager
+    - FooterNavigationManager
+---
+Only:
+  moduleexists: 'Addressable'
+---
+GlobalSiteSetting:
+  extensions:
+    - Addressable
+    - Geocodable

@@ -18,7 +18,7 @@ class CompanyConfig extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->addFieldsToTab('Root.Address', array(
+        $fields->addFieldsToTab('Root.Main', array(
             HeaderField::create('CompanyInfo', 'Company Information'),
             LiteralField::create('EnterInfo',
                 '<p>Enter your company contact information, which will be used throughout your website</p>'),
