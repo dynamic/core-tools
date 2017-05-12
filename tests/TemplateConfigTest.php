@@ -11,7 +11,7 @@ class TemplateConfigTest extends SapphireTest
 
     public function testUpdateCMSFields()
     {
-        $object = singleton('SiteConfig');
+        $object = GlobalSiteSetting::current_global_config();
         $fields = $object->getCMSFields();
 
         $this->assertInstanceOf('FieldList', $fields);
@@ -20,11 +20,11 @@ class TemplateConfigTest extends SapphireTest
 
     public function testGetSiteLogo()
     {
-        $object = singleton('SiteConfig');
+        $object = GlobalSiteSetting::current_global_config();
         $logo = $this->objFromFixture('Image', 'logo');
         $object->LogoID = $logo->ID;
         $this->assertInstanceOf('Image', $object->getSiteLogo());
     }
 }
 
-SiteConfig::add_extension('TemplateConfig');
+Object::add_extension('GlobalSiteSetting', 'TemplateConfig');
