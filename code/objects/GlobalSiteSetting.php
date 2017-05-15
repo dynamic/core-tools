@@ -27,7 +27,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider
         $fields = new FieldList(
             new TabSet("Root",
                 $tabMain = new Tab(
-                    'GlobalSiteSettings'
+                    'Main'
                 )
             ),
             HiddenField::create('ID')
