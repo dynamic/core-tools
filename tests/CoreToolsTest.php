@@ -13,6 +13,14 @@ use Dynamic\CoreTools\Tests\TestOnly\Controller\TestPageController;
 class CoreToolsTest extends FunctionalTest
 {
     /**
+     * @var array
+     */
+    protected static $extra_dataobjects = array(
+        TestPage::class,
+        TestPageController::class,
+    );
+
+    /**
      * @var string
      */
     protected static $fixture_file = array(
@@ -29,14 +37,6 @@ class CoreToolsTest extends FunctionalTest
      * @var bool
      */
     protected static $use_draft_site = false;
-
-    /**
-     * @var array
-     */
-    public static $extra_data_objects = array(
-        TestPage::class,
-        TestPageController::class,
-    );
 
     /**
      *
