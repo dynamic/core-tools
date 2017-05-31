@@ -58,7 +58,8 @@ class FileObject extends ContentObject
           ->setFolderName('Uploads/FileDownloads')
           ->setIsMultiUpload(false)
           ->setAllowedFileCategories('document')
-          ->setAllowedMaxFileNumber(1);
+          //->setAllowedMaxFileNumber(1)
+        ;
 
         $fields->addFieldsToTab('Root.Download', array(
           $file,

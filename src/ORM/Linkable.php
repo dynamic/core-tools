@@ -80,9 +80,9 @@ class Linkable extends DataExtension
 
         $tree = (class_exists('DisplayLogicWrapper'))
           ? DisplayLogicWrapper::create(
-            TreeDropdownField::create('PageLinkID', 'Link to Page', 'SiteTree')
+            TreeDropdownField::create('PageLinkID', 'Link to Page', SiteTree::class)
           )->displayIf('LinkType')->isEqualTo('Internal')->end()
-          : TreeDropdownField::create('PageLinkID', 'Link to Page', 'SiteTree');
+          : TreeDropdownField::create('PageLinkID', 'Link to Page', SiteTree::class);
 
         $label = (class_exists('DisplayLogicWrapper'))
           ? TextField::create('LinkLabel', 'Link Label')
@@ -101,7 +101,7 @@ class Linkable extends DataExtension
 
         $fields->addFieldsToTab('Root.Link', array(
           OptionSetField::create('LinkType', 'Link',
-            singleton($this->owner->class)->dbObject('LinkType')->enumValues()),
+            singleton($this->owner->ClassName)->dbObject('LinkType')->enumValues()),
           $label
           ,
           $tree,

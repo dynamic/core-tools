@@ -24,12 +24,16 @@
     "silverstripe/asset-admin": "^1.0",
     "silverstripe-australia/gridfieldextensions": "2.0.x-dev"
   },
+  "require-dev": {
+    "phpunit/PHPUnit": "^5.7"
+  },
   "config": {
     "process-timeout": 600
   },
   "autoload": {
     "psr-4": {
-      "Dynamic\\CoreTools\\": "src/"
+      "Dynamic\\CoreTools\\": "src/",
+      "Dynamic\\CoreTools\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "dev",

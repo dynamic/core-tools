@@ -5,6 +5,7 @@ namespace Dynamic\CoreTools\Model;
 use SilverStripe\Security\PermissionProvider;
 use SilverStripe\Security\Permission;
 use Page;
+use SilverStripe\Versioned\Versioned;
 
 class PageSection extends ContentObject implements PermissionProvider
 {

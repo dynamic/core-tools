@@ -2,6 +2,7 @@
 
 namespace Dynamic\CoreTools\ORM;
 
+use SilverStripe\Dev\Debug;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\DataObject;
 
@@ -21,9 +22,8 @@ class CoreToolsDataListDataExtension extends DataExtension
     public function byUrlSegment($slug = null)
     {
         $object = singleton($this->owner->dataClass);
-        if ($slug === null || !($object instanceof DataObject) || !array_key_exists('URLSegment',
-            DataObject::database_fields($this->owner->dataClass))
-        ) {
+        //Debug::show($object);
+        if ($slug === null || !($object instanceof DataObject) || !$object->hasDatabaseField('URLSegment')) {
             return false;
         }
         return $this->owner->filter('URLSegment', $slug)->first();

@@ -16,7 +16,7 @@ class CoreToolsDataListDataExtensionTest extends SapphireTest
     /**
      * @var array
      */
-    public static $extra_data_objects = [
+    public static $extra_dataobjects = [
         NoSlugDataObject::class,
         SlugDataObject::class,
     ];

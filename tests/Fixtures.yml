@@ -16,9 +16,17 @@ SilverStripe\Security\Member:
     FirstName: Default
     Surname: User
     Email: user@dynamicagency.com
+SilverStripe\Assets\Image:
+  header:
+    Title: "Header Image"
+  preview:
+    Title: "Preview Image"
+  logo:
+    Name: Logo
 \Page:
   default:
     Title: "Page One"
+    HeaderImageID: =>SilverStripe\Assets\Image.header
   subpage:
     Title: "Sub Page"
     ParentID: =>\Page.default
@@ -37,13 +45,6 @@ Dynamic\CoreTools\Model\Promo:
 Dynamic\CoreTools\Model\FileObject:
   default:
     Name: "image.jpg"
-SilverStripe\Assets\Image:
-  header:
-    Title: "Header Image"
-  preview:
-    Title: "Preview Image"
-  logo:
-    Name: Logo
 Dynamic\CoreTools\Model\Tag:
   one:
     Title: "Tag One"

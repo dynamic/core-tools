@@ -2,6 +2,7 @@
 
 namespace Dynamic\CoreTools\ORM;
 
+use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\AssetAdmin\Forms\UploadField;
@@ -10,7 +11,6 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Assets\Image;
 use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
 
 /**
  * Class TemplateConfig

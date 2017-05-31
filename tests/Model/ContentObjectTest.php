@@ -2,7 +2,11 @@
 
 namespace Dynamic\CoreTools\Tests\Model;
 
+use Dynamic\CoreTools\Model\ContentObject;
+use Dynamic\CoreTools\Tests\TestOnly\Controller\TestPageController;
+use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\ValidationException;
 
 /**
@@ -11,6 +15,13 @@ use SilverStripe\ORM\ValidationException;
  */
 class ContentObjectTest extends SapphireTest
 {
+    /**
+     * @var array
+     */
+    protected static $extra_dataobjects = array(
+        TestPage::class,
+        TestPageController::class,
+    );
 
     /**
      * @var array
@@ -24,9 +35,9 @@ class ContentObjectTest extends SapphireTest
      */
     public function testGetCMSFields()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $object = $this->objFromFixture(ContentObject::class, 'default');
         $fields = $object->getCMSFields();
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
     }
 
     /**

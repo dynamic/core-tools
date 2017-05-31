@@ -1,5 +1,17 @@
 <?php
 
+namespace Dynamic\CoreTools\ORM;
+
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\TabSet;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DB;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
+
 /**
  * Class GlobalSiteSetting
  */

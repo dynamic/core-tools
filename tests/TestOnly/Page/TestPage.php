@@ -2,6 +2,8 @@
 
 namespace Dynamic\CoreTools\Tests\TestOnly\Page;
 
+use Dynamic\CoreTools\ORM\CoreToolsPageFieldsDataExtension;
+use Dynamic\CoreTools\ORM\PageSectionManager;
 use \Page;
 use SilverStripe\Dev\TestOnly;
 use Dynamic\CoreTools\ORM\PromoManager;
@@ -39,17 +41,7 @@ class TestPage extends Page implements TestOnly
      * @var array
      */
     private static $many_many = array(
-        'Promos' => Promo::class,
         'Tags' => Tag::class,
-    );
-
-    /**
-     * @var array
-     */
-    private static $many_many_extraFields = array(
-        'Promos' => array(
-            'SortOrder' => 'Int',
-        ),
     );
 
     /**
@@ -62,7 +54,10 @@ class TestPage extends Page implements TestOnly
      */
     private static $extensions = [
         PromoManager::class,
+        PageSectionManager::class,
         PreviewExtension::class,
         TagManager::class,
+        HeaderImageDataExtension::class,
+        CoreToolsPageFieldsDataExtension::class,
     ];
 }

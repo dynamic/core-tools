@@ -25,4 +25,8 @@ class SlugDataObject extends DataObject implements TestOnly
      */
     private static $table_name = 'SlugDataObject_Test';
 
+    private static $extensions = [
+
+    ];
+
 }

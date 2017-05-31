@@ -1,5 +1,12 @@
 <?php
 
+namespace Dynamic\CoreTools\Tasks;
+
+use Dynamic\CoreTools\ORM\GlobalSiteSetting;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Dev\BuildTask;
+use SilverStripe\SiteConfig\SiteConfig;
+
 /**
  * Class SettingsToConfigTask
  */

@@ -1,22 +1,26 @@
 ---
 Name: coretoolsconfig
 ---
+Page:
+  extensions:
+    - Dynamic\CoreTools\ORM\PromoRelation
 Dynamic\CoreTools\Model\ContentObject:
   extensions:
     - Dynamic\CoreTools\ORM\Linkable
 SilverStripe\ORM\DataList:
   extensions:
-    - CoreToolsDataListDataExtension
-GlobalSiteSetting:
+    - Dynamic\CoreTools\ORM\CoreToolsDataListDataExtension
+Dynamic\CoreTools\ORM\GlobalSiteSetting:
   extensions:
-    - CompanyConfig
-    - UtilityNavigationManager
-    - FooterNavigationManager
+    - Dynamic\CoreTools\ORM\CompanyConfig
+    - Dynamic\CoreTools\ORM\UtilityNavigationManager
+    - Dynamic\CoreTools\ORM\FooterNavigationManager
+    - Dynamic\CoreTools\ORM\TemplateConfig
 ---
 Only:
   moduleexists: 'Addressable'
 ---
-GlobalSiteSetting:
+Dynamic\CoreTools\ORM\GlobalSiteSetting:
   extensions:
     - Addressable
     - Geocodable

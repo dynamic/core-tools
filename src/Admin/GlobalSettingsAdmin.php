@@ -1,5 +1,17 @@
 <?php
 
+namespace Dyanamic\CoreTools\Admin;
+
+use Dotenv\Exception\ValidationException;
+use Dynamic\CoreTools\ORM\GlobalSiteSetting;
+use SilverStripe\Admin\LeftAndMain;
+use SilverStripe\Control\Director;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\View\ArrayData;
+
 /**
  * Class GlobalSettingsAdmin
  */
@@ -34,7 +46,7 @@ class GlobalSettingsAdmin extends LeftAndMain
     /**
      * @param null $id
      * @param null $fields
-     * @return $this|CMSForm
+     * @return Form
      */
     public function getEditForm($id = null, $fields = null)
     {
@@ -54,10 +66,11 @@ class GlobalSettingsAdmin extends LeftAndMain
             $validator = null;
         }
         $actions = $config->getCMSActions();
-        $form = CMSForm::create(
+
+        $form = Form::create(
             $this, 'EditForm', $fields, $actions, $validator
         )->setHTMLID('Form_EditForm');
-        $form->setResponseNegotiator($this->getResponseNegotiator());
+        //$form->ResponseNegotiator($this->getResponseNegotiator()); \\todo: update from LeftAndMain refactoring
         $form->addExtraClass('cms-content center cms-edit-form');
         $form->setAttribute('data-pjax-fragment', 'CurrentForm');
         if ($form->Fields()->hasTabSet()) {
@@ -66,6 +79,7 @@ class GlobalSettingsAdmin extends LeftAndMain
         $form->setHTMLID('Form_EditForm');
         $form->loadDataFrom($config);
         $form->setTemplate($this->getTemplatesWithSuffix('_EditForm'));
+
         // Use <button> to allow full jQuery UI styling
         $actions = $actions->dataFields();
         if ($actions) {
@@ -80,11 +94,16 @@ class GlobalSettingsAdmin extends LeftAndMain
     /**
      * Used for preview controls, mainly links which switch between different states of the page.
      *
-     * @return ArrayData|HTMLText
+     * @return \SilverStripe\ORM\FieldType\DBHTMLText
      */
     public function getSilverStripeNavigator()
     {
-        return $this->renderWith('CMSSettingsController_SilverStripeNavigator');
+        $page = $this->currentPage();
+        if ($page instanceof CMSPreviewable) {
+            $navigator = new SilverStripeNavigator($page);
+            return $navigator->renderWith($this->getTemplatesWithSuffix('_SilverStripeNavigator'));
+        }
+        return null;
     }
 
     /**

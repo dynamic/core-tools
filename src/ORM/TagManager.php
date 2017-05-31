@@ -16,8 +16,8 @@ class TagManager extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         if ($this->owner->exists()) {
-            if (class_exists('Tag')) {
-                $tagField = (class_exists('TagField'))
+            if (class_exists(Tag::class)) {
+                $tagField = (class_exists(TagField::class))
                     ? TagField::create(
                         'Tags',
                         'Tags',

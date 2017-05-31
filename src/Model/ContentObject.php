@@ -5,6 +5,7 @@ namespace Dynamic\CoreTools\Model;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
+use SilverStripe\Versioned\Versioned;
 
 /**
  * Class ContentObject
@@ -66,6 +67,13 @@ class ContentObject extends DataObject
     );
 
     /**
+     * @var array
+     */
+    private static $extensions = [
+        Versioned::class,
+    ];
+
+    /**
      * @var string
      */
     private static $table_name = 'ContentObject';
@@ -100,7 +108,7 @@ class ContentObject extends DataObject
         $result = parent::validate();
 
         if (!$this->Name) {
-            $result->addError('Name is requied before you can save');
+            $result->addError('Name is required before you can save');
         }
 
         return $result;

@@ -2,10 +2,13 @@
 
 namespace Dynamic\CoreTools\Model;
 
-use SilverStripe\ORM\DataObject,
-    SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor,
-    SilverStripe\Forms\GridField\GridFieldDeleteAction,
-    SilverStripe\Forms\GridField\GridField;
+use Dynamic\CoreTools\ORM\GlobalSiteSetting;
+use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\SiteConfig\SiteConfig;
 
 /**
  * Class NavigationColumn
@@ -29,15 +32,15 @@ class NavigationColumn extends DataObject
      * @var array
      */
     private static $has_one = array(
-        'SiteConfig' => 'SiteConfig',
-        'GlobalConfig' => 'GlobalSiteSetting',
+        'SiteConfig' => SiteConfig::class,
+        'GlobalConfig' => GlobalSiteSetting::class,
     );
 
     /**
      * @var array
      */
     private static $has_many = array(
-        'NavigationGroups' => 'Dynamic\\CoreTools\\Model\\NavigationGroup',
+        'NavigationGroups' => NavigationGroup::class,
     );
 
     /**
@@ -57,7 +60,7 @@ class NavigationColumn extends DataObject
         if ($this->ID) {
             $config = GridFieldConfig_RecordEditor::create();
             if (class_exists('GridFieldSortableRows')) {
-                $config->addComponent(new GridFieldSortableRows('SortOrder'));
+                $config->addComponent(new GridFieldOrderableRows('SortOrder'));
             }
             $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
             $config->removeComponentsByType('GridFieldDeleteAction');
