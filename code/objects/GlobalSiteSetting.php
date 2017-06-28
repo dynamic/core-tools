@@ -3,7 +3,7 @@
 /**
  * Class GlobalSiteSetting
  */
-class GlobalSiteSetting extends DataObject implements PermissionProvider
+class GlobalSiteSetting extends DataObject implements PermissionProvider, TemplateGlobalProvider
 {
 
     /**
@@ -129,7 +129,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider
     public static function get_template_global_variables()
     {
         return array(
-            '$GlobalConfig' => 'current_global_config',
+            'GlobalConfig' => 'current_global_config',
         );
     }
 
