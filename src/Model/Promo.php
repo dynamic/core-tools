@@ -91,7 +91,7 @@ class Promo extends ContentObject implements PermissionProvider
      */
     public function canCreate($member = null, $context = [])
     {
-        return Permission::check('Promo_CREATE');
+        return Permission::check('Promo_CREATE', 'any', $member);
     }
 
     /**
@@ -101,7 +101,7 @@ class Promo extends ContentObject implements PermissionProvider
      */
     public function canEdit($member = null)
     {
-        return Permission::check('Promo_EDIT');
+        return Permission::check('Promo_EDIT', 'any', $member);
     }
 
     /**
@@ -111,7 +111,7 @@ class Promo extends ContentObject implements PermissionProvider
      */
     public function canDelete($member = null)
     {
-        return Permission::check('Promo_DELETE');
+        return Permission::check('Promo_DELETE', 'any', $member);
     }
 
     /**
