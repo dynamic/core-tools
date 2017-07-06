@@ -11,11 +11,12 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
+use SilverStripe\View\TemplateGlobalProvider;
 
 /**
  * Class GlobalSiteSetting
  */
-class GlobalSiteSetting extends DataObject implements PermissionProvider
+class GlobalSiteSetting extends DataObject implements PermissionProvider, TemplateGlobalProvider
 {
 
     /**
@@ -31,7 +32,12 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider
      */
     private static $description = 'Global settings (i.e. footer navigation)';
 
-    /**
+	/**
+	 * @var string
+	 */
+	private static $table_name = 'GlobalSiteSettings';
+
+	/**
      * @return FieldList
      */
     public function getCMSFields()
@@ -126,7 +132,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider
     /**
      * Create {@link GlobalSiteSetting} with defaults from language file.
      *
-     * @return \GlobalSiteSetting
+     * @return GlobalSiteSetting
      */
     public static function make_global_config()
     {
@@ -141,7 +147,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider
     public static function get_template_global_variables()
     {
         return array(
-            '$GlobalConfig' => 'current_global_config',
+            'GlobalConfig' => 'current_global_config',
         );
     }
 

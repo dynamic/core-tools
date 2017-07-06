@@ -43,7 +43,12 @@ class NavigationColumn extends DataObject
         'NavigationGroups' => NavigationGroup::class,
     );
 
-    /**
+	/**
+	 * @var string
+	 */
+	private static $table_name = 'NavigationColumn';
+
+	/**
      * @return \SilverStripe\Forms\FieldList
      */
     public function getCMSFields()
