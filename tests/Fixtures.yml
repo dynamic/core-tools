@@ -1,58 +1,59 @@
-Group:
+SilverStripe\Security\Group:
   administrators:
     Title: Administrators
-Permission:
+SilverStripe\Security\Permission:
   administrators:
     Code: ADMIN
     Type: 1
-    Group: =>Group.administrators
-Member:
+    Group: =>SilverStripe\Security\Group.administrators
+SilverStripe\Security\Member:
   admin:
     FirstName: Default
     Surname: Admin
     Email: admin@dynamicagency.com
-    Groups: =>Group.administrators
+    Groups: =>SilverStripe\Security\Group.administrators
   default:
     FirstName: Default
     Surname: User
     Email: user@dynamicagency.com
-Page:
-  default:
-    Title: "Page One"
-  subpage:
-    Title: "Sub Page"
-    ParentID: =>Page.default
-ContentObject:
-  default:
-    Name: "Content Object"
-    Title: "First Content Object"
-PageSection:
-  default:
-    Name: "Page Section"
-    Title: "First Page Section"
-Promo:
-  default:
-    Name: "Promo"
-    Title: "First Promo"
-FileObject:
-  default:
-    Name: "image.jpg"
-Image:
+SilverStripe\Assets\Image:
   header:
     Title: "Header Image"
   preview:
     Title: "Preview Image"
   logo:
     Name: Logo
-CoreTag:
+\Page:
+  default:
+    Title: "Page One"
+    HeaderImageID: =>SilverStripe\Assets\Image.header
+  subpage:
+    Title: "Sub Page"
+    ParentID: =>\Page.default
+Dynamic\CoreTools\Model\ContentObject:
+  default:
+    Name: "Content Object"
+    Title: "First Content Object"
+Dynamic\CoreTools\Model\PageSection:
+  default:
+    Name: "Page Section"
+    Title: "First Page Section"
+Dynamic\CoreTools\Model\Promo:
+  default:
+    Name: "Promo"
+    Title: "First Promo"
+Dynamic\CoreTools\Model\FileObject:
+  default:
+    Name: "image.jpg"
+Dynamic\CoreTools\Model\Tag:
   one:
     Title: "Tag One"
-EmailRecipient:
+Dynamic\CoreTools\Model\EmailRecipient:
   default:
     Name: "George Constanza"
-NavigationColumn:
+Dynamic\CoreTools\Model\NavigationColumn:
   one:
     Title: "Column One"
-NavigationGroup:
+Dynamic\CoreTools\Model\NavigationGroup:
   one:
     Title: "Group One"

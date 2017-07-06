@@ -1,7 +1,25 @@
 <?php
 
+namespace Dynamic\CoreTools\Tests;
+
+use SilverStripe\Dev\FunctionalTest;
+use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
+use Dynamic\CoreTools\Tests\TestOnly\Controller\TestPageController;
+
+/**
+ * Class CoreToolsTest
+ * @package Dynamic\CoreTools\Tests
+ */
 class CoreToolsTest extends FunctionalTest
 {
+    /**
+     * @var array
+     */
+    protected static $extra_dataobjects = array(
+        TestPage::class,
+        TestPageController::class,
+    );
+
     /**
      * @var string
      */
@@ -19,14 +37,6 @@ class CoreToolsTest extends FunctionalTest
      * @var bool
      */
     protected static $use_draft_site = false;
-
-    /**
-     * @var array
-     */
-    protected $extraDataObjects = array(
-        'TestPage',
-        'TestPage_Controller',
-    );
 
     /**
      *
@@ -50,44 +60,12 @@ class CoreToolsTest extends FunctionalTest
     }
 
     /**
-     * empty test to prevent throwing an error.
+     *
      */
-    public function testCoreTools()
+    public function testBlank()
     {
     }
+
 }
 
-/**
- * Class TestPage.
- */
-class TestPage extends Page implements TestOnly
-{
-    private static $has_many = array(
-        'Sections' => 'PageSection',
-    );
-
-    private static $many_many = array(
-        'Promos' => 'Promo',
-        'Videos' => 'YouTubeVideo',
-        'Tags' => 'CoreTag',
-    );
-
-    private static $many_many_extraFields = array(
-        'Promos' => array(
-            'SortOrder' => 'Int',
-        ),
-        'Videos' => array(
-            'SortOrder' => 'Int',
-        ),
-    );
-}
-
-class TestPage_Controller extends Page_Controller implements TestOnly
-{
-    private static $managed_object = 'ContentObject';
-}
-
-TestPage::add_extension('PromoManager');
-TestPage::add_extension('PreviewExtension');
-TestPage::add_extension('TagManager');
-TestPage_Controller::add_extension('CollectionExtension');
+//TestPage_Controller::add_extension('Dynamic\\CoreTools\\Extension\\CollectionExtension');
