@@ -9,13 +9,7 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Core\Extension;
-use SilverStripe\ORM\DataObject;
-use SilverStripe\ORM\SS_List;
-use SilverStripe\Control\Email\Email;
-use SilverStripe\Core\Config\Config;
-use SilverStripe\View\ArrayData;
-use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Dynamic\CoreTools\Model\EmailRecipient;
 
 /**

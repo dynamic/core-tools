@@ -6,9 +6,8 @@ use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
-use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
-use SilverStripe\GridFieldExtensions\GridFieldAddExistingSearchButton;
-use Dynamic\CoreTools\Model\Promo;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 
 /**
  * Class PromoManager

@@ -2,7 +2,7 @@
 
 namespace Dynamic\CoreTools\ORM;
 
-use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\AssetAdmin\Forms\UploadField;

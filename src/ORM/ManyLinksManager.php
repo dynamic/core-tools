@@ -11,8 +11,8 @@ use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\TextField;
 use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
-use SilverStripe\GridFieldExtensions\GridFieldAddExistingSearchButton;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 
 /**
  * Class ManyLinksManager

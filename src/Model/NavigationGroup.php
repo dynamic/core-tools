@@ -2,8 +2,8 @@
 
 namespace Dynamic\CoreTools\Model;
 
-use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
-use SilverStripe\GridFieldExtensions\GridFieldAddExistingSearchButton;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridField;

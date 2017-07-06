@@ -3,7 +3,7 @@
 namespace Dynamic\CoreTools\Model;
 
 use Dynamic\CoreTools\ORM\GlobalSiteSetting;
-use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
@@ -64,9 +64,7 @@ class NavigationColumn extends DataObject
         // navigation groups
         if ($this->ID) {
             $config = GridFieldConfig_RecordEditor::create();
-            if (class_exists('GridFieldSortableRows')) {
-                $config->addComponent(new GridFieldOrderableRows('SortOrder'));
-            }
+	        $config->addComponent(new GridFieldOrderableRows('SortOrder'));
             $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
             $config->removeComponentsByType('GridFieldDeleteAction');
             $config->addComponent(new GridFieldDeleteAction(false));

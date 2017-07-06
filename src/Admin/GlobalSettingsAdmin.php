@@ -10,7 +10,9 @@ use SilverStripe\Forms\Form;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\CMSPreviewable;
 use SilverStripe\View\ArrayData;
+use SilverStripe\CMS\Controllers\SilverStripeNavigator;
 
 /**
  * Class GlobalSettingsAdmin
@@ -134,7 +136,7 @@ class GlobalSettingsAdmin extends LeftAndMain
      */
     public function Breadcrumbs($unlinked = false)
     {
-        $defaultTitle = self::menu_title_for_class(get_class($this));
+        $defaultTitle = self::menu_title(get_class($this));
         return new ArrayList(array(
             new ArrayData(array(
                 'Title' => _t("{$this->class}.MENUTITLE", $defaultTitle),
