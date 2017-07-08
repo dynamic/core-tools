@@ -22,6 +22,7 @@
     "silverstripe/cms": "^4.0",
     "silverstripe/framework": "^4.0",
     "silverstripe/asset-admin": "^1.0",
+    "dynamic/silverstripe-collection": "^2.0",
     "symbiote/silverstripe-gridfieldextensions": "^3.0"
   },
   "require-dev": {
