@@ -23,6 +23,7 @@
         "silverstripe/framework": "^3.2",
         "dynamic/imageuploadfield": "^1.0",
         "dynamic/silverstripe-collection": "^1.0",
+        "dynamic/silverstripe-additional-formfields": "^1.0",
         "unclecheese/display-logic": "^1.2",
         "silverstripe/tagfield": "^1.3",
         "heyday/silverstripe-optimisedimage": "^2.2",
