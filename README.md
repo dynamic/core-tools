@@ -11,25 +11,23 @@ core tools to build common page types
 
 ## Requirements
 
-- SilverStripe 3.2
+- SilverStripe ^4.0
 
 ## Installation
 
-This is how you install core-tools.
+`composer require dynamic/core-tools 3.0.x-dev`
 
 ## Example usage
-
-You use core-tools like this.
 
 In your project's `Page.php`:
 
 	private static $has_many = array(
-		'Sections' => 'PageSection',
+		'Sections' => PageSection::class,
 	);
 	
 	private static $many_many = array(
-		'Promos' => 'Promo',
-		'Videos' => 'YouTubeVideo',
+		'Promos' => Promo::class,
+		'Videos' => YouTubeVideo::class,
 	);
 	
 	private static $many_many_extraFields = array(
@@ -44,10 +42,8 @@ In your project's `Page.php`:
 To use `Tags`, add the `Tags` relation to the dataobjects and pages desired:
 
 	private static $many_many = array(
-		'Tags' => 'Tag',
+		'Tags' => CoreTag::class,
 	);
-
-note: the relation name `Tags` conflicts with Blog and likely other modules. Therefore we don't recommend applying the ralation to `Page`
 
 ## Upgrading
 
