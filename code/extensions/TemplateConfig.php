@@ -8,7 +8,7 @@ class TemplateConfig extends DataExtension
     private static $db = array(
         'TitleLogo' => "Enum('Logo, Title', 'Title')",
         'Title' => 'Varchar(255)',
-        'Slogan' => 'Varchar(255)',
+        'Tagline' => 'Varchar(255)',
     );
 
     /**
