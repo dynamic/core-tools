@@ -15,7 +15,7 @@ class FooterNavigationManager extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         // footer navigation
-        if ($this->owner->ID) {
+        if ($this->owner->ID && $this->owner->ClassName != 'SiteConfig') {
             $config = GridFieldConfig_RecordEditor::create();
             if (class_exists('GridFieldOrderableRows')) {
                 $config->addComponent(new GridFieldOrderableRows('SortOrder'));
