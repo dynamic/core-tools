@@ -17,8 +17,8 @@ class RecipientManagerTest extends SapphireTest
      * @var string
      */
     protected static $fixture_file = array(
-        'core-tools/tests/CoreToolsTest.yml',
-        'core-tools/tests/Fixtures.yml',
+        'CoreToolsTest.yml',
+        'Fixtures.yml',
     );
 
     /**
