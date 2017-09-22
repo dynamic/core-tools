@@ -38,9 +38,9 @@ matrix:
       env: DB=PGSQL
     - php: 7.0
       env: COVERAGE=1
-    - php: 7.0
-      env: LINT=1
-    - php: 5.6
+#    - php: 7.0
+#      env: LINT=1
+#    - php: 5.6
 
     # js stuff
 #    - php: 7.0
@@ -72,10 +72,10 @@ before_script:
       composer require silverstripe/postgresql 2.0.x-dev
     fi
 
-  - |
-    if [[ $LANG == PHP ]] && [[ $LINT=1 ]]; then
-      pyrus install pear/PHP_CodeSniffer;
-    fi
+#  - |
+#    if [[ $LANG == PHP ]] && [[ $LINT=1 ]]; then
+#      pyrus install pear/PHP_CodeSniffer;
+#    fi
 
 #Execute tests with or without coverage
 script:
