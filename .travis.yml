@@ -7,19 +7,19 @@ addons:
     packages:
       - tidy
 
-before_install:
-  - |
-    if [[ $LANG == JS ]]; then
-      nvm install 6.10
-      nvm use 6.10
-    fi
+#before_install:
+#  - |
+#    if [[ $LANG == JS ]]; then
+#      nvm install 6.10
+#      nvm use 6.10
+#    fi
 
-install:
-  - |
-    if [[ $LANG == JS ]]; then
-      npm install
-      npm install codecov
-    fi
+#install:
+#  - |
+#    if [[ $LANG == JS ]]; then
+#      npm install
+#      npm install codecov
+#    fi
 
 env:
   global:
@@ -43,19 +43,18 @@ matrix:
     - php: 5.6
 
     # js stuff
-    - php: 7.0
-      env:
-        - LANG=JS
-        - COVERAGE=1
-    - php: 7.0
-      env:
-        - LANG=JS
-        - LINT=1
+#    - php: 7.0
+#      env:
+#        - LANG=JS
+#        - COVERAGE=1
+#    - php: 7.0
+#      env:
+#        - LANG=JS
+#        - LINT=1
 
-
-allow_failures:
-  - php: 7.0
-    env: DB=SQLITE
+  allow_failures:
+    - php: 7.0
+      env: DB=SQLITE
 
 before_script:
   - |
