@@ -17,8 +17,8 @@ class LinkableTest extends SapphireTest
      * @var string
      */
     protected static $fixture_file = array(
-        'CoreToolsTest.yml',
-        'Fixtures.yml',
+        'tests/CoreToolsTest.yml',
+        'tests/Fixtures.yml',
     );
 
     /**

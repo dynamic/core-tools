@@ -17,7 +17,7 @@ class CoreToolsPageFieldsDataExtensionTest extends SapphireTest
      * @var array
      */
     protected static $fixture_file = array(
-        'Fixtures.yml',
+        'tests/Fixtures.yml',
     );
 
     /**

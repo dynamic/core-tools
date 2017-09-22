@@ -16,7 +16,7 @@ class UtilityNavigationManagerTest extends SapphireTest
     /**
      * @var string
      */
-    protected static $fixture_file = 'Fixtures.yml';
+    protected static $fixture_file = 'tests/Fixtures.yml';
 
     /**
      * @var array
