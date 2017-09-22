@@ -47,15 +47,15 @@ matrix:
       env:
         - LANG=JS
         - COVERAGE=1
-    -php: 7.0
+    - php: 7.0
       env:
         - LANG=JS
         - LINT=1
 
 
-  allow_failures:
-    - php: 7.0
-      env: DB=SQLITE
+allow_failures:
+  - php: 7.0
+    env: DB=SQLITE
 
 before_script:
   - |
