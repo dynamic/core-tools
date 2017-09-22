@@ -11,7 +11,6 @@ use Dynamic\CoreTools\ORM\PreviewExtension;
 use Dynamic\CoreTools\ORM\TagManager;
 use Dynamic\CoreTools\ORM\HeaderImageDataExtension;
 use Dynamic\CoreTools\Model\PageSection;
-use Dynamic\CoreTools\Model\Promo;
 use Dynamic\CoreTools\Model\Tag;
 
 /**

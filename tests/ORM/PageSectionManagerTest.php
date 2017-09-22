@@ -2,11 +2,13 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
+use Dynamic\CoreTools\Model\PageSection;
 use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
 use Dynamic\CoreTools\ORM\PageSectionManager;
-use \Page;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\ORM\DataList;
 
 /**
  * Class PageSectionManagerTest
@@ -35,7 +37,7 @@ class PageSectionManagerTest extends SapphireTest
     {
         parent::setUp();
 
-        Page::add_extension(PageSectionManager::class);
+        TestPage::add_extension(PageSectionManager::class);
     }
 
     public function testUpdateCMSFields()
@@ -43,14 +45,14 @@ class PageSectionManagerTest extends SapphireTest
         $object = Injector::inst()->create(TestPage::class);
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNull($fields->dataFieldByName('Sections'));
 
         $object = Injector::inst()->create(TestPage::class);
         $object->writeToStage('Stage');
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('Sections'));
     }
 
@@ -59,7 +61,7 @@ class PageSectionManagerTest extends SapphireTest
         $page = Injector::inst()->create(TestPage::class);
         $page->writeToStage('Stage');
         $section = $this->objFromFixture(
-            'Dynamic\\CoreTools\\Model\\PageSection',
+            PageSection::class,
             'default'
         );
 
@@ -67,11 +69,11 @@ class PageSectionManagerTest extends SapphireTest
 
         $page->Sections()->add($section);
         $this->assertInstanceOf(
-            'SilverStripe\\ORM\\DataList',
+            DataList::class,
             $page->getPageSections()
         );
         $this->assertInstanceOf(
-            'Dynamic\\CoreTools\\Model\\PageSection',
+            PageSection::class,
             $page->getPageSections()->first()
         );
     }

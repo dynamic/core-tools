@@ -2,11 +2,11 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
+use Dynamic\CoreTools\Model\Promo;
 use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
-use Dynamic\CoreTools\ORM\PromoManager;
-use Dynamic\CoreTools\ORM\PromoRelation;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class PromoManagerTest
@@ -34,13 +34,13 @@ class PromoManagerTest extends SapphireTest
         $this->setUp();
         $page = Injector::inst()->create(TestPage::class);
         $page->writeToStage('Stage');
-        $promo = $this->objFromFixture('Dynamic\\CoreTools\\Model\\Promo', 'default');
+        $promo = $this->objFromFixture(Promo::class, 'default');
 
         $this->assertTrue($page->getPromoList()->Count() == 0);
 
         $page->Promos()->add($promo);
         $this->assertTrue($page->getPromoList()->Count() > 0);
-        $this->assertInstanceOf('Dynamic\\CoreTools\\Model\\Promo', $page->getPromoList()->first());
+        $this->assertInstanceOf(Promo::class, $page->getPromoList()->first());
     }
 
     /**
@@ -51,14 +51,14 @@ class PromoManagerTest extends SapphireTest
         $object = Injector::inst()->create(TestPage::class);
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNull($fields->dataFieldByName('Promos'));
 
         $object = Injector::inst()->create(TestPage::class);
         $object->writeToStage('Stage');
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('Promos'));
     }
 

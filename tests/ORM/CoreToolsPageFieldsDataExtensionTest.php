@@ -5,6 +5,7 @@ namespace Dynamic\CoreTools\Tests\ORM;
 use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class CoreToolsPageFieldsDataExtensionTest
@@ -34,7 +35,7 @@ class CoreToolsPageFieldsDataExtensionTest extends SapphireTest
         $object = Injector::inst()->create(TestPage::class);
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('SubTitle'));
         $this->assertNotNull($fields->dataFieldByName('PageTitle'));
     }

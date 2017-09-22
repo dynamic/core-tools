@@ -2,6 +2,7 @@
 
 namespace Dynamic\CoreTools\Tests\TestOnly\Controller;
 
+use Dynamic\CoreTools\Model\ContentObject;
 use \PageController;
 use SilverStripe\Dev\TestOnly;
 
@@ -11,5 +12,5 @@ use SilverStripe\Dev\TestOnly;
  */
 class TestPageController extends PageController implements TestOnly
 {
-    private static $managed_object = 'Dynamic\\CoreTools\\Model\\ContentObject';
+    private static $managed_object = ContentObject::class;
 }

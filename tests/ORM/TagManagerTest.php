@@ -2,11 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
-use Dynamic\CoreTools\ORM\TagManager;
 use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Core\Injector\Injector;
-use \Page;
 use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class TagManagerTest
@@ -37,14 +36,14 @@ class TagManagerTest extends SapphireTest
         $object = Injector::inst()->create(TestPage::class);
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNull($fields->dataFieldByName('Tags'));
 
         $object = Injector::inst()->create(TestPage::class);
         $object->writeToStage('Stage');
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('Tags'));
     }
 

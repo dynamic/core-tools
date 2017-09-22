@@ -1,18 +1,20 @@
 <?php
 
-namespace Dyanamic\CoreTools\Admin;
+namespace Dynamic\CoreTools\Admin;
 
 use Dotenv\Exception\ValidationException;
-use Dynamic\CoreTools\ORM\GlobalSiteSetting;
+use Dynamic\CoreTools\Model\GlobalSiteSetting;
 use SilverStripe\Admin\LeftAndMain;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Director;
 use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\ArrayList;
-use SilverStripe\ORM\CMSPreviewable;
+use SilverStripe\ORM\ValidationResult;
 use SilverStripe\View\ArrayData;
-use SilverStripe\CMS\Controllers\SilverStripeNavigator;
+use SilverStripe\View\Requirements;
 
 /**
  * Class GlobalSettingsAdmin
@@ -33,7 +35,7 @@ class GlobalSettingsAdmin extends LeftAndMain
     /**
      * @var int
      */
-    private static $menu_priority = -1;
+    private static $menu_priority = 0;
 
     /**
      * @var string
@@ -41,9 +43,31 @@ class GlobalSettingsAdmin extends LeftAndMain
     private static $menu_title = 'Global Config';
 
     /**
+     * @var string
+     */
+    private static $menu_icon_class = 'font-icon-cog';
+
+    /**
+     * @var string
+     */
+    private static $tree_class = GlobalSiteSetting::class;
+
+
+    /**
      * @var array
      */
     private static $required_permission_codes = ['EDIT_GLOBAL_PERMISSION'];
+
+    /**
+     * Initialises the {@link GlobalSiteSetting} controller.
+     */
+    public function init()
+    {
+        parent::init();
+        if (class_exists(SiteTree::class)) {
+            Requirements::javascript('silverstripe/cms: client/dist/js/bundle.js');
+        }
+    }
 
     /**
      * @param null $id
@@ -54,29 +78,48 @@ class GlobalSettingsAdmin extends LeftAndMain
     {
         $config = GlobalSiteSetting::current_global_config();
         $fields = $config->getCMSFields();
+
         // Tell the CMS what URL the preview should show
         $home = Director::absoluteBaseURL();
         $fields->push(new HiddenField('PreviewURL', 'Preview URL', $home));
+
         // Added in-line to the form, but plucked into different view by LeftAndMain.Preview.js upon load
         $fields->push($navField = new LiteralField('SilverStripeNavigator',
             $this->getSilverStripeNavigator()));
         $navField->setAllowHTML(true);
+
         // Retrieve validator, if one has been setup (e.g. via data extensions).
         if ($config->hasMethod("getCMSValidator")) {
             $validator = $config->getCMSValidator();
         } else {
             $validator = null;
         }
-        $actions = $config->getCMSActions();
 
+        $actions = $config->getCMSActions();
+        $negotiator = $this->getResponseNegotiator();
         $form = Form::create(
-            $this, 'EditForm', $fields, $actions, $validator
+            $this,
+            'EditForm',
+            $fields,
+            $actions,
+            $validator
         )->setHTMLID('Form_EditForm');
-        //$form->ResponseNegotiator($this->getResponseNegotiator()); \\todo: update from LeftAndMain refactoring
-        $form->addExtraClass('cms-content center cms-edit-form');
+        $form->setValidationResponseCallback(function (ValidationResult $errors) use ($negotiator, $form) {
+            $request = $this->getRequest();
+            if ($request->isAjax() && $negotiator) {
+                $result = $form->forTemplate();
+                return $negotiator->respond($request, array(
+                    'CurrentForm' => function () use ($result) {
+                        return $result;
+                    }
+                ));
+            }
+        });
+        $form->addExtraClass('flexbox-area-grow fill-height cms-content cms-edit-form');
         $form->setAttribute('data-pjax-fragment', 'CurrentForm');
+
         if ($form->Fields()->hasTabSet()) {
-            $form->Fields()->findOrMakeTab('Root')->setTemplate('CMSTabSet');
+            $form->Fields()->findOrMakeTab('Root')->setTemplate('SilverStripe\\Forms\\CMSTabSet');
         }
         $form->setHTMLID('Form_EditForm');
         $form->loadDataFrom($config);
@@ -85,27 +128,15 @@ class GlobalSettingsAdmin extends LeftAndMain
         // Use <button> to allow full jQuery UI styling
         $actions = $actions->dataFields();
         if ($actions) {
+            /** @var FormAction $action */
             foreach ($actions as $action) {
                 $action->setUseButtonTag(true);
             }
         }
-        $this->extend('updateEditForm', $form);
-        return $form;
-    }
 
-    /**
-     * Used for preview controls, mainly links which switch between different states of the page.
-     *
-     * @return \SilverStripe\ORM\FieldType\DBHTMLText
-     */
-    public function getSilverStripeNavigator()
-    {
-        $page = $this->currentPage();
-        if ($page instanceof CMSPreviewable) {
-            $navigator = new SilverStripeNavigator($page);
-            return $navigator->renderWith($this->getTemplatesWithSuffix('_SilverStripeNavigator'));
-        }
-        return null;
+        $this->extend('updateEditForm', $form);
+
+        return $form;
     }
 
     /**
@@ -125,8 +156,7 @@ class GlobalSettingsAdmin extends LeftAndMain
             $form->sessionMessage($ex->getResult()->message(), 'bad');
             return $this->getResponseNegotiator()->respond($this->request);
         }
-        $this->response->addHeader('X-Status',
-            rawurlencode(_t('LeftAndMain.SAVEDUP', 'Saved.')));
+        $this->response->addHeader('X-Status', rawurlencode(_t('SilverStripe\\Admin\\LeftAndMain.SAVEDUP', 'Saved.')));
         return $form->forTemplate();
     }
 
@@ -136,10 +166,9 @@ class GlobalSettingsAdmin extends LeftAndMain
      */
     public function Breadcrumbs($unlinked = false)
     {
-        $defaultTitle = self::menu_title(get_class($this));
         return new ArrayList(array(
             new ArrayData(array(
-                'Title' => _t("{$this->class}.MENUTITLE", $defaultTitle),
+                'Title' => static::menu_title(),
                 'Link' => $this->Link()
             ))
         ));

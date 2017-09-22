@@ -2,8 +2,9 @@
 
 namespace Dynamic\CoreTools\Tests\Model;
 
+use Dynamic\CoreTools\Model\FileObject;
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\Assets\File;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class FileObjectTest
@@ -25,11 +26,11 @@ class FileObjectTest extends SapphireTest
     public function testGetCMSFields()
     {
         $object = $this->objFromFixture(
-            'Dynamic\\CoreTools\\Model\\FileObject',
+            FileObject::class,
             'default'
         );
         $fields = $object->getCMSFields();
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
     }
 
     /**

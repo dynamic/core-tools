@@ -2,9 +2,11 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
+use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
+use SilverStripe\Assets\Image;
 use SilverStripe\Dev\SapphireTest;
 use Dynamic\CoreTools\ORM\PreviewExtension;
-use \Page;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class PreviewExtensionTest
@@ -15,7 +17,10 @@ class PreviewExtensionTest extends SapphireTest
     /**
      * @var string
      */
-    protected static $fixture_file = 'core-tools/tests/Fixtures.yml';
+    protected static $fixture_file = array(
+        'core-tools/tests/CoreToolsTest.yml',
+        'core-tools/tests/Fixtures.yml',
+    );
 
     /**
      *
@@ -24,7 +29,7 @@ class PreviewExtensionTest extends SapphireTest
     {
         parent::setUp();
 
-        Page::add_extension(PreviewExtension::class);
+        TestPage::add_extension(PreviewExtension::class);
     }
 
         /**
@@ -32,10 +37,10 @@ class PreviewExtensionTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = $this->objFromFixture('\Page', 'default');
+        $object = $this->objFromFixture(TestPage::class, 'default');
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('PreviewTitle'));
         $this->assertNotNull($fields->dataFieldByName('Abstract'));
         $this->assertNotNull($fields->dataFieldByName('PreviewImage'));
@@ -46,7 +51,7 @@ class PreviewExtensionTest extends SapphireTest
      */
     public function testGetPreviewHeadline()
     {
-        $object = $this->objFromFixture('\Page', 'default');
+        $object = $this->objFromFixture(TestPage::class, 'default');
         $this->assertEquals($object->getPreviewHeadline(), $object->Title);
 
         $object->PreviewTitle = 'Preview';
@@ -58,12 +63,12 @@ class PreviewExtensionTest extends SapphireTest
      */
     public function testGetPreviewThumb()
     {
-        $object = $this->objFromFixture('\Page', 'default');
-        $image = $this->objFromFixture('SilverStripe\\Assets\\Image', 'preview');
+        $object = $this->objFromFixture(TestPage::class, 'default');
+        $image = $this->objFromFixture(Image::class, 'preview');
         $this->assertFalse($object->getPreviewThumb());
 
         $object->PreviewImageID = $image->ID;
-        $this->assertInstanceOf('SilverStripe\\Assets\\Image', $object->getPreviewThumb());
+        $this->assertInstanceOf(Image::class, $object->getPreviewThumb());
     }
 
     /**
@@ -71,7 +76,7 @@ class PreviewExtensionTest extends SapphireTest
      */
     public function testGetPreviewAbstract()
     {
-        $object = $this->objFromFixture('\Page', 'default');
+        $object = $this->objFromFixture(TestPage::class, 'default');
         $this->assertEquals($object->getPreviewAbstract(), $object->obj('Content')->FirstParagraph());
 
         $object->Abstract = 'Preview';

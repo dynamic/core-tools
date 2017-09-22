@@ -3,9 +3,10 @@
 namespace Dynamic\CoreTools\Tests\ORM;
 
 use Dynamic\CoreTools\ORM\ManyLinksManager;
+use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
-use \Page;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class ManyLinksManagerTest
@@ -27,7 +28,7 @@ class ManyLinksManagerTest extends SapphireTest
     {
         parent::setUp();
 
-        Page::add_extension(ManyLinksManager::class);
+        TestPage::add_extension(ManyLinksManager::class);
     }
 
     /**
@@ -35,9 +36,9 @@ class ManyLinksManagerTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = Injector::inst()->create('\\Page');
+        $object = Injector::inst()->create(TestPage::class);
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
     }
 }

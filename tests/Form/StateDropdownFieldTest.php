@@ -1,15 +1,16 @@
 <?php
 
-namespace Dynamic\CoreTools\Tests\Forms;
+namespace Dynamic\CoreTools\Tests\Form;
 
-use Dynamic\CoreTools\Tests\CoreToolsTest;
 use Dynamic\CoreTools\Form\StateDropdownField;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 
 /**
  * Class StateDropdownFieldTest
  * @package Dynamic\CoreTools\Tests
  */
-class StateDropdownFieldTest extends CoreToolsTest
+class StateDropdownFieldTest extends SapphireTest
 {
 
     /**
@@ -18,7 +19,7 @@ class StateDropdownFieldTest extends CoreToolsTest
     public function testField()
     {
         $field = StateDropdownField::create('State');
-        $this->assertInstanceOf('SilverStripe\\ORM\\FieldType\\DBHTMLText', $field->Field());
+        $this->assertInstanceOf(DBHTMLText::class, $field->Field());
     }
 
 }

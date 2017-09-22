@@ -10,7 +10,7 @@ Dynamic\CoreTools\Model\ContentObject:
 SilverStripe\ORM\DataList:
   extensions:
     - Dynamic\CoreTools\ORM\CoreToolsDataListDataExtension
-Dynamic\CoreTools\ORM\GlobalSiteSetting:
+Dynamic\CoreTools\Model\GlobalSiteSetting:
   extensions:
     - Dynamic\CoreTools\ORM\CompanyConfig
     - Dynamic\CoreTools\ORM\UtilityNavigationManager

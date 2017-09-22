@@ -2,26 +2,46 @@
 
 namespace Dynamic\CoreTools\Tests\Model;
 
-use Dynamic\CoreTools\Tests\CoreToolsTest;
 use Dynamic\CoreTools\Model\Promo;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Security\IdentityStore;
 use SilverStripe\Security\Member;
 
 /**
  * Class PromoTest
  * @package Dynamic\CoreTools\Tests\Model
  */
-class PromoTest extends CoreToolsTest
+class PromoTest extends SapphireTest
 {
+
+    /**
+     * @var string
+     */
+    protected static $fixture_file = array(
+        'core-tools/tests/CoreToolsTest.yml',
+        'core-tools/tests/Fixtures.yml',
+    );
+
+    /**
+     * Log out the current user
+     */
+    public function logOut()
+    {
+        /** @var IdentityStore $store */
+        $store = Injector::inst()->get(IdentityStore::class);
+        $store->logOut();
+    }
 
     /**
      *
      */
     public function testGetCMSFields()
     {
-        $object = Injector::inst()->create('Dynamic\\CoreTools\\Model\\Promo');
+        $object = Injector::inst()->create(Promo::class);
         $fields = $object->getCMSFields();
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
     }
 
     /**
@@ -29,7 +49,7 @@ class PromoTest extends CoreToolsTest
      */
     public function testCanView()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\Promo', 'default');
+        $object = $this->objFromFixture(Promo::class, 'default');
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canView());
         $this->logOut();
@@ -45,7 +65,7 @@ class PromoTest extends CoreToolsTest
      */
     public function testCanEdit()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\Promo', 'default');
+        $object = $this->objFromFixture(Promo::class, 'default');
         $object->write();
         $objectID = $object->ID;
         $this->logInWithPermission('ADMIN');
@@ -64,7 +84,7 @@ class PromoTest extends CoreToolsTest
      */
     public function testCanDelete()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\Promo', 'default');
+        $object = $this->objFromFixture(Promo::class, 'default');
         $object->write();
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canDelete());
@@ -78,7 +98,7 @@ class PromoTest extends CoreToolsTest
      */
     public function testCanCreate()
     {
-        $object = Injector::inst()->create('Dynamic\\CoreTools\\Model\\Promo');
+        $object = Injector::inst()->create(Promo::class);
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canCreate());
         $this->logOut();
@@ -93,7 +113,7 @@ class PromoTest extends CoreToolsTest
      */
     public function testProvidePermissions()
     {
-        $object = Injector::inst()->create('Dynamic\\CoreTools\\Model\\Promo');
+        $object = Injector::inst()->create(Promo::class);
         $expected = array(
             'Promo_EDIT' => 'Promo Edit',
             'Promo_DELETE' => 'Promo Delete',
