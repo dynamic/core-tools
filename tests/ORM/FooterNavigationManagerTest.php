@@ -5,6 +5,7 @@ namespace Dynamic\CoreTools\Tests\ORM;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
 use Dynamic\CoreTools\Tests\TestOnly\Object\FooterSiteConfig;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class FooterNavigationManagerTest
@@ -29,14 +30,14 @@ class FooterNavigationManagerTest extends SapphireTest
      */
     public function testGetCMSFields()
     {
-        $object = Injector::inst()->create('Dynamic\\CoreTools\\Tests\\TestOnly\\Object\\FooterSiteConfig');
+        $object = Injector::inst()->create(FooterSiteConfig::class);
         $fields = $object->getCMSFields();
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNull($fields->dataFieldByName('NavigationColumns'));
 
         $object->write();
         $fields = $object->getCMSFields();
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('NavigationColumns'));
     }
 }

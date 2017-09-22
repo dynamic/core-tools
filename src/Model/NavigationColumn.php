@@ -2,7 +2,6 @@
 
 namespace Dynamic\CoreTools\Model;
 
-use Dynamic\CoreTools\ORM\GlobalSiteSetting;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;

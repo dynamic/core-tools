@@ -5,6 +5,7 @@ namespace Dynamic\CoreTools\Tests\ORM;
 use SilverStripe\Dev\SapphireTest;
 use Dynamic\CoreTools\Tests\TestOnly\Object\NoSlugDataObject;
 use Dynamic\CoreTools\Tests\TestOnly\Object\SlugDataObject;
+use SilverStripe\ORM\DataObject;
 
 /**
  * Class CoreToolsDataListDataExtensionTest
@@ -37,7 +38,7 @@ class CoreToolsDataListDataExtensionTest extends SapphireTest
 
         //$this->assertFalse(NoSlugDataObject::get()->byUrlSegment('some-url-segment'));
         $this->assertInstanceOf(
-            'SilverStripe\\ORM\\DataObject',
+            DataObject::class,
             SlugDataObject::get()->byUrlSegment('i-has-url-segment')
         );
     }
