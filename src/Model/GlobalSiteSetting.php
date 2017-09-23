@@ -2,7 +2,7 @@
 
 namespace Dynamic\CoreTools\Model;
 
-use Dyanamic\CoreTools\Admin\GlobalSettingsAdmin;
+use Dynamic\CoreTools\Admin\GlobalSettingsAdmin;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
