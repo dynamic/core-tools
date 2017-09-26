@@ -25,7 +25,7 @@ class TemplateConfig extends DataExtension
      * @var array
      */
     private static $db = array(
-        'TitleLogo' => "Enum('Logo, Title', 'Title')",
+        'TitleLogo' => "Enum(array('Logo', 'Title'))",
     );
 
     /**
@@ -33,22 +33,6 @@ class TemplateConfig extends DataExtension
      */
     private static $has_one = array(
         'Logo' => Image::class,
-    );
-
-    /**
-     * @var array
-     */
-    private static $many_many = array(
-        'FooterLinks' => SiteTree::class,
-    );
-
-    /**
-     * @var array
-     */
-    private static $many_many_extraFields = array(
-        'FooterLinks' => array(
-            'SortOrder' => 'Int'
-        )
     );
 
     /**
@@ -83,20 +67,6 @@ class TemplateConfig extends DataExtension
             $ImageField
         ));
 
-        $config = GridFieldConfig_RelationEditor::create()
-            ->addComponent(new GridFieldOrderableRows("SortOrder"));
-
-        $FooterGridField = GridField::create(
-            "FooterLinks",
-            "Footer Links",
-            $this->owner->FooterLinks()->sort('SortOrder'),
-            $config
-        );
-
-        // add FlexSlider, width and height
-        $fields->addFieldsToTab("Root.Footer", array(
-            $FooterGridField
-        ));
     }
 
     /**
@@ -104,7 +74,7 @@ class TemplateConfig extends DataExtension
      */
     public function getSiteLogo()
     {
-        return ($this->owner->Logo()) ? $this->owner->Logo() : false;
+        return ($this->owner->Logo()) ?? false;
     }
 
     /**

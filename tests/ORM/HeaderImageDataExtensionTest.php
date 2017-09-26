@@ -3,11 +3,10 @@
 namespace Dynamic\CoreTools\Tests\ORM;
 
 use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
-use SilverStripe\Dev\Debug;
+use SilverStripe\Assets\Image;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
-use Dynamic\CoreTools\ORM\HeaderImageDataExtension;
-use \Page;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class HeaderImageDataExtensionTest
@@ -19,7 +18,7 @@ class HeaderImageDataExtensionTest extends SapphireTest
      * @var array
      */
     protected static $fixture_file = array(
-        'core-tools/tests/Fixtures.yml',
+        'tests/Fixtures.yml',
     );
 
     /**
@@ -34,10 +33,10 @@ class HeaderImageDataExtensionTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = Injector::inst()->create('Dynamic\\CoreTools\\Tests\\TestOnly\\Page\\TestPage');
+        $object = Injector::inst()->create(TestPage::class);
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('HeaderImage'));
     }
 
@@ -49,19 +48,19 @@ class HeaderImageDataExtensionTest extends SapphireTest
         $page = new TestPage();
         $subpage = new TestPage();
         $subpage->ParentID = $page->ID;
-        $image = $this->objFromFixture('SilverStripe\\Assets\\Image', 'header');
+        $image = $this->objFromFixture(Image::class, 'header');
 
         $this->assertNull($subpage->getPageHeaderImage());
 
         $page->HeaderImageID = $image->ID;
         $page->write();
 
-        $this->assertInstanceOf('SilverStripe\\Assets\\Image', $page->getPageHeaderImage());
-        //$this->assertInstanceOf('SilverStripe\\Assets\\Image', $subpage->getPageHeaderImage());
+        $this->assertInstanceOf(Image::class, $page->getPageHeaderImage());
+        //$this->assertInstanceOf(Image::class, $subpage->getPageHeaderImage());
 
         $subpage->HeaderImageID = $image->ID;
         $subpage->write();
-        $this->assertInstanceOf('SilverStripe\\Assets\\Image', $subpage->getPageHeaderImage());
+        $this->assertInstanceOf(Image::class, $subpage->getPageHeaderImage());
     }
 
 }

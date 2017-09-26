@@ -2,10 +2,11 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
+use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
 use Dynamic\CoreTools\ORM\MultiLinksManager;
-use \Page;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class MultiLinksManagerTest
@@ -14,10 +15,11 @@ use \Page;
 class MultiLinksManagerTest extends SapphireTest
 {
     /**
-     * @var array
+     * @var string
      */
     protected static $fixture_file = array(
-      'core-tools/tests/Fixtures.yml',
+        'tests/CoreToolsTest.yml',
+        'tests/Fixtures.yml',
     );
 
     /**
@@ -27,7 +29,7 @@ class MultiLinksManagerTest extends SapphireTest
     {
         parent::setUp();
 
-        Page::add_extension(MultiLinksManager::class);
+        TestPage::add_extension(MultiLinksManager::class);
     }
 
         /**
@@ -35,16 +37,16 @@ class MultiLinksManagerTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = Injector::inst()->get('\\Page');
+        $object = Injector::inst()->get(TestPage::class);
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNull($fields->dataFieldByName('ContentLinks'));
 
-        $object = $this->objFromFixture('\\Page', 'default');
+        $object = $this->objFromFixture(TestPage::class, 'default');
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         //$this->assertNotNull($fields->dataFieldByName('ContentLinks'));
     }
 }

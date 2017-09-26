@@ -2,9 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
+use Dynamic\CoreTools\Model\ContentObject;
+use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Dev\SapphireTest;
 use Dynamic\CoreTools\ORM\Linkable;
-use \Page;
 
 /**
  * Class LinkableTest
@@ -13,10 +14,11 @@ use \Page;
 class LinkableTest extends SapphireTest
 {
     /**
-     * @var array
+     * @var string
      */
     protected static $fixture_file = array(
-        'core-tools/tests/Fixtures.yml',
+        'tests/CoreToolsTest.yml',
+        'tests/Fixtures.yml',
     );
 
     /**
@@ -26,7 +28,7 @@ class LinkableTest extends SapphireTest
     {
         parent::setUp();
 
-        Page::add_extension(Linkable::class);
+        TestPage::add_extension(Linkable::class);
     }
 
         /**
@@ -34,13 +36,13 @@ class LinkableTest extends SapphireTest
      */
     public function testGetLinkStatus()
     {
-        $page = $this->objFromFixture('\\Page', 'default');
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $page = $this->objFromFixture(TestPage::class, 'default');
+        $object = $this->objFromFixture(ContentObject::class, 'default');
         $object->LinkType = 'Internal';
         $object->PageLinkID = $page->ID;
         $this->assertEquals($object->getLinkStatus(), 'internal');
 
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $object = $this->objFromFixture(ContentObject::class, 'default');
         $object->LinkType = 'External';
         $object->ExternalLink = 'http://www.dynamicagency.com';
         $this->assertEquals($object->getLinkStatus(), 'external');
@@ -51,7 +53,7 @@ class LinkableTest extends SapphireTest
      */
     public function testLinkStatus()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $object = $this->objFromFixture(ContentObject::class, 'default');
         $this->assertEquals($object->LinkStatus(), $object->getLinkStatus());
     }
 

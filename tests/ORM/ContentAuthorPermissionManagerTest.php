@@ -4,6 +4,7 @@ namespace Dynamic\CoreTools\Tests\ORM;
 
 use SilverStripe\Dev\SapphireTest;
 use Dynamic\CoreTools\Tests\TestOnly\Object\TestContentAuthorObject;
+use SilverStripe\Security\Member;
 
 /**
  * Class ContentAuthorPermissionManagerTest
@@ -15,7 +16,7 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
      * @var array
      */
     protected static $fixture_file = array(
-        'core-tools/tests/Fixtures.yml',
+        'tests/Fixtures.yml',
     );
 
     /**
@@ -33,13 +34,13 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
         $object = new TestContentAuthorObject();
 
         $admin = $this->objFromFixture(
-            'SilverStripe\\Security\\Member',
+            Member::class,
             'admin'
         );
         $this->assertTrue($object->canView($admin));
 
         $member = $this->objFromFixture(
-            'SilverStripe\\Security\\Member',
+            Member::class,
             'default'
         );
         $this->assertTrue($object->canView($member));
@@ -53,13 +54,13 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
         $object = new TestContentAuthorObject();
 
         $admin = $this->objFromFixture(
-            'SilverStripe\\Security\\Member',
+            Member::class,
             'admin'
         );
         $this->assertTrue($object->canEdit($admin));
 
         $member = $this->objFromFixture(
-            'SilverStripe\\Security\\Member',
+            Member::class,
             'default'
         );
         $this->assertTrue($object->canEdit($member));
@@ -73,13 +74,13 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
         $object = new TestContentAuthorObject();
 
         $admin = $this->objFromFixture(
-            'SilverStripe\\Security\\Member',
+            Member::class,
             'admin'
         );
         $this->assertTrue($object->canDelete($admin));
 
         $member = $this->objFromFixture(
-            'SilverStripe\\Security\\Member',
+            Member::class,
             'default'
         );
         $this->assertTrue($object->canDelete($member));
@@ -93,13 +94,13 @@ class ContentAuthorPermissionManagerTest extends SapphireTest
         $object = new TestContentAuthorObject();
 
         $admin = $this->objFromFixture(
-            'SilverStripe\\Security\\Member',
+            Member::class,
             'admin'
         );
         $this->assertTrue($object->canCreate($admin));
 
         $member = $this->objFromFixture(
-            'SilverStripe\\Security\\Member',
+            Member::class,
             'default'
         );
         $this->assertTrue($object->canCreate($member));

@@ -2,8 +2,9 @@
 
 namespace Dynamic\CoreTools\Tests\Model;
 
-use Dynamic\CoreTools\Tests\CoreToolsTest;
 use Dynamic\CoreTools\Model\Tag;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Security\IdentityStore;
 use SilverStripe\Security\Member;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\ValidationException;
@@ -12,15 +13,33 @@ use SilverStripe\ORM\ValidationException;
  * Class TagTest
  * @package Dynamic\CoreTools\Tests\Model
  */
-class TagTest extends CoreToolsTest
+class TagTest extends SapphireTest
 {
+
+    /**
+     * @var string
+     */
+    protected static $fixture_file = array(
+        'tests/CoreToolsTest.yml',
+        'tests/Fixtures.yml',
+    );
+
+    /**
+     * Log out the current user
+     */
+    public function logOut()
+    {
+        /** @var IdentityStore $store */
+        $store = Injector::inst()->get(IdentityStore::class);
+        $store->logOut();
+    }
 
     /**
      *
      */
     public function testValidateTitle()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\Tag', 'one');
+        $object = $this->objFromFixture(Tag::class, 'one');
         $object->Title = '';
         $this->setExpectedException(ValidationException::class);
         $object->write();
@@ -31,7 +50,7 @@ class TagTest extends CoreToolsTest
      */
     public function testCanView()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\Tag', 'one');
+        $object = $this->objFromFixture(Tag::class, 'one');
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canView());
         $this->logOut();
@@ -47,7 +66,7 @@ class TagTest extends CoreToolsTest
      */
     public function testCanEdit()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\Tag', 'one');
+        $object = $this->objFromFixture(Tag::class, 'one');
         $object->write();
         $objectID = $object->ID;
         $this->logInWithPermission('ADMIN');
@@ -66,7 +85,7 @@ class TagTest extends CoreToolsTest
      */
     public function testCanDelete()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\Tag', 'one');
+        $object = $this->objFromFixture(Tag::class, 'one');
         $object->write();
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canDelete());
@@ -80,7 +99,7 @@ class TagTest extends CoreToolsTest
      */
     public function testCanCreate()
     {
-        $object = Injector::inst()->create('Dynamic\\CoreTools\\Model\\Tag');
+        $object = Injector::inst()->create(Tag::class);
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canCreate());
         $this->logOut();

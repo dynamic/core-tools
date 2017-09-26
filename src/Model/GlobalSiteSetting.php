@@ -1,7 +1,8 @@
 <?php
 
-namespace Dynamic\CoreTools\ORM;
+namespace Dynamic\CoreTools\Model;
 
+use Dynamic\CoreTools\Admin\GlobalSettingsAdmin;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
@@ -9,9 +10,11 @@ use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
+use SilverStripe\ORM\ValidationException;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
 use SilverStripe\View\TemplateGlobalProvider;
+use SilverStripe\Security\Security;
 
 /**
  * Class GlobalSiteSetting
@@ -32,19 +35,27 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
      */
     private static $description = 'Global settings (i.e. footer navigation)';
 
-	/**
-	 * @var string
-	 */
-	private static $table_name = 'GlobalSiteSettings';
+    /**
+     * @var string
+     */
+    private static $table_name = 'GlobalSiteSettings';
 
-	/**
+    /**
+     * Default permission to check for 'LoggedInUsers' to create or edit pages
+     *
+     * @var array
+     * @config
+     */
+    private static $required_permission = array('CMS_ACCESS_CMSMain', 'CMS_ACCESS_LeftAndMain');
+
+    /**
      * @return FieldList
      */
     public function getCMSFields()
     {
-        $fields = new FieldList(
-            new TabSet("Root",
-                $tabMain = new Tab(
+        $fields = FieldList::create(
+            TabSet::create("Root",
+                $tabMain = Tab::create(
                     'Main'
                 )
             ),
@@ -52,6 +63,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
         );
         $tabMain->setTitle('Global Site Settings');
         $this->extend('updateCMSFields', $fields);
+
         return $fields;
     }
 
@@ -66,12 +78,13 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
         if (Permission::check('ADMIN') || Permission::check('EDIT_GLOBAL_PERMISSION')) {
             $actions = new FieldList(
                 FormAction::create('save_globalconfig', _t('CoreToolsConfig.SAVE', 'Save'))
-                    ->addExtraClass('ss-ui-action-constructive')->setAttribute('data-icon', 'accept')
+                    ->addExtraClass('btn-primary font-icon-save')
             );
         } else {
-            $actions = new FieldList();
+            $actions = FieldList::create();
         }
         $this->extend('updateCMSActions', $actions);
+
         return $actions;
     }
 
@@ -83,7 +96,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     {
         parent::requireDefaultRecords();
         $config = GlobalSiteSetting::current_global_config();
-        if (!$config) {
+        if ( ! $config) {
             self::make_global_config();
             DB::alteration_message("Added default global config", "created");
         }
@@ -94,7 +107,26 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
      */
     public function CMSEditLink()
     {
-        return singleton('CMSSettingsController')->Link();
+        return GlobalSettingsAdmin::singleton()->Link();
+    }
+
+    /**
+     * @param null $member
+     *
+     * @return bool|int|null
+     */
+    public function canEdit($member = null)
+    {
+        if ( ! $member) {
+            $member = Security::getCurrentUser();
+        }
+
+        $extended = $this->extendedCan('canEdit', $member);
+        if ($extended !== null) {
+            return $extended;
+        }
+
+        return Permission::checkMember($member, "EDIT_GLOBAL_PERMISSION");
     }
 
     /**
@@ -126,6 +158,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
         if ($config = GlobalSiteSetting::get()->first()) {
             return $config;
         }
+
         return self::make_global_config();
     }
 
@@ -138,6 +171,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     {
         $config = GlobalSiteSetting::create();
         $config->write();
+
         return $config;
     }
 

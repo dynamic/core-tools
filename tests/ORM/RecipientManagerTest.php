@@ -2,9 +2,10 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
+use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Dev\SapphireTest;
 use Dynamic\CoreTools\ORM\RecipientManager;
-use \Page;
+use SilverStripe\Forms\FieldList;
 
 /**
  * Class RecipientManagerTest
@@ -13,11 +14,19 @@ use \Page;
 class RecipientManagerTest extends SapphireTest
 {
     /**
-     * @var array
+     * @var string
      */
     protected static $fixture_file = array(
-        'core-tools/tests/Fixtures.yml',
+        'tests/CoreToolsTest.yml',
+        'tests/Fixtures.yml',
     );
+
+    /**
+     * @var array
+     */
+    protected static $extra_dataobjects = [
+        TestPage::class
+    ];
 
     /**
      *
@@ -26,7 +35,7 @@ class RecipientManagerTest extends SapphireTest
     {
         parent::setUp();
 
-        Page::add_extension(RecipientManager::class);
+        TestPage::add_extension(RecipientManager::class);
     }
 
     /**
@@ -34,10 +43,10 @@ class RecipientManagerTest extends SapphireTest
      */
     public function testUpdateCMSFields()
     {
-        $object = $this->objFromFixture('\Page', 'default');
+        $object = $this->objFromFixture(TestPage::class, 'default');
         $fields = $object->getCMSFields();
 
-        $this->assertInstanceOf('SilverStripe\\Forms\\FieldList', $fields);
+        $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('Recipients'));
         $this->assertNotNull($fields->dataFieldByName('EmailSubject'));
         $this->assertNotNull($fields->dataFieldByName('ThankYouMessage'));
