@@ -13,14 +13,7 @@ SilverStripe\ORM\DataList:
 Dynamic\CoreTools\Model\GlobalSiteSetting:
   extensions:
     - Dynamic\CoreTools\ORM\CompanyConfig
+    - Dynamic\SilverStripeGeocoder\AddressDataExtension
+    - Dynamic\CoreTools\ORM\TemplateConfig
     - Dynamic\CoreTools\ORM\UtilityNavigationManager
     - Dynamic\CoreTools\ORM\FooterNavigationManager
-    - Dynamic\CoreTools\ORM\TemplateConfig
----
-Only:
-  moduleexists: 'Addressable'
----
-Dynamic\CoreTools\ORM\GlobalSiteSetting:
-  extensions:
-    - Addressable
-    - Geocodable

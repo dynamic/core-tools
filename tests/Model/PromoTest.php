@@ -20,8 +20,8 @@ class PromoTest extends SapphireTest
      * @var string
      */
     protected static $fixture_file = array(
-        'tests/CoreToolsTest.yml',
-        'tests/Fixtures.yml',
+        '../CoreToolsTest.yml',
+        '../Fixtures.yml',
     );
 
     /**

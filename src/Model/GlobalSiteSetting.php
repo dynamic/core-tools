@@ -3,6 +3,8 @@
 namespace Dynamic\CoreTools\Model;
 
 use Dynamic\CoreTools\Admin\GlobalSettingsAdmin;
+use Dynamic\SilverStripeGeocoder\AddressDataExtension;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
@@ -53,6 +55,8 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
      */
     public function getCMSFields()
     {
+        Config::modify()->set(AddressDataExtension::class, 'address_tab_name', 'Company.Address');
+
         $fields = FieldList::create(
             TabSet::create("Root",
                 $tabMain = Tab::create(
