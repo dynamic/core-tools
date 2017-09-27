@@ -19,7 +19,7 @@ class TemplateConfigTest extends SapphireTest
      * @var array
      */
     protected static $fixture_file = array(
-        'tests/Fixtures.yml',
+        '../Fixtures.yml',
     );
 
     /**

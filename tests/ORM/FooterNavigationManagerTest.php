@@ -16,7 +16,7 @@ class FooterNavigationManagerTest extends SapphireTest
     /**
      * @var string
      */
-    protected static $fixture_file = 'tests/Fixtures.yml';
+    protected static $fixture_file = '../Fixtures.yml';
 
     /**
      * @var array

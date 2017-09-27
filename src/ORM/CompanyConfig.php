@@ -2,6 +2,9 @@
 
 namespace Dynamic\CoreTools\ORM;
 
+use Dynamic\SilverStripeGeocoder\Form\GoogleMapField;
+use Dynamic\SilverStripeGeocoder\GoogleGeocoder;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
@@ -38,7 +41,7 @@ class CompanyConfig extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->addFieldsToTab('Root.Address', array(
+        $fields->addFieldsToTab('Root.Company.Info', array(
             HeaderField::create('CompanyInfo', 'Company Information'),
             LiteralField::create(
                 'EnterInfo',
@@ -51,11 +54,25 @@ class CompanyConfig extends DataExtension
         ));
 
         $fields->addFieldToTab(
-            'Root.Address',
+            'Root.Company.Address',
             CheckboxField::create(
                 'ShowDirections',
                 'Show Map and Driving Directions'
             )
         );
+
+        /*
+        if ($this->owner->hasAddress()) {
+            $key = Config::inst()->get(GoogleGeocoder::class, 'geocoder_api_key');
+
+            $field = GoogleMapField::create('LocationMap', [
+                "height" => "300px",
+                "lng" => $this->owner->Lat,
+                "lat" => $this->owner->Lng,
+            ]);
+
+            $fields->insertAfter(LiteralField::create('LocationMap', $field), 'ShowDirections');
+        }
+        */
     }
 }
