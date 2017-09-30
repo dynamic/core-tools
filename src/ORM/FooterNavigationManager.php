@@ -2,6 +2,9 @@
 
 namespace Dynamic\CoreTools\ORM;
 
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
@@ -32,15 +35,21 @@ class FooterNavigationManager extends DataExtension
         if ($this->owner->ID) {
             $config = GridFieldConfig_RecordEditor::create();
             $config->addComponent(new GridFieldOrderableRows('SortOrder'));
-            $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-            $config->removeComponentsByType('GridFieldDeleteAction');
+            $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
+            $config->removeComponentsByType(GridFieldDeleteAction::class);
             $config->addComponent(new GridFieldDeleteAction(false));
-            $footerLinks = GridField::create('NavigationColumns',
-              'Navigation Columns',
-              $this->owner->NavigationColumns()->sort('SortOrder'), $config);
+            $footerLinks = GridField::create(
+                'NavigationColumns',
+                '',
+                $this->owner->NavigationColumns()->sort('SortOrder'), $config);
 
-            $fields->addFieldsToTab('Root.Footer', array(
-              $footerLinks,
+            $fields->addFieldsToTab('Root.Template.Footer', array(
+                HeaderField::create('FooterHD', 'Footer', 1),
+                LiteralField::create('FooterDescrip', '<p>Adjust the settings of the Footer area of your theme.</p>'),
+                HeaderField::create('FooterColumnsHD', 'Columns'),
+                $footerLinks
+                    ->setDescription('Add a column to the layout of the footer of your theme')
+                ,
             ));
         }
     }

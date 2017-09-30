@@ -20,6 +20,16 @@ use SilverStripe\SiteConfig\SiteConfig;
 class NavigationColumn extends DataObject
 {
     /**
+     * @var string
+     */
+    private static $singular_name = 'Column';
+
+    /**
+     * @var string
+     */
+    private static $plural_name = 'Columns';
+
+    /**
      * @var array
      */
     private static $db = array(
@@ -31,7 +41,6 @@ class NavigationColumn extends DataObject
      * @var array
      */
     private static $has_one = array(
-        'SiteConfig' => SiteConfig::class,
         'GlobalConfig' => GlobalSiteSetting::class,
     );
 
@@ -41,6 +50,54 @@ class NavigationColumn extends DataObject
     private static $has_many = array(
         'NavigationGroups' => NavigationGroup::class,
     );
+
+    /**
+     * @var array
+     */
+    private static $summary_fields = [
+        'Title' => 'Title',
+        'GroupList' => 'Groups',
+        'LinkList' => 'Links'
+    ];
+
+    /**
+     * @var array
+     */
+    private static $searchable_fields = [
+        'Title',
+    ];
+
+    /**
+     * @return string
+     */
+    public function GroupList()
+    {
+        if ($this->NavigationGroups()) {
+            $i = 0;
+            foreach ($this->NavigationGroups()->sort('SortOrder') as $link) {
+                ++$i;
+            }
+        }
+        return $i;
+    }
+
+    /**
+     * @return string
+     */
+    public function LinkList()
+    {
+        $i = 0;
+
+        if ($this->NavigationGroups()) {
+            foreach($this->NavigationGroups() as $group) {
+                foreach ($group->NavigationLinks() as $link) {
+                    ++$i;
+                }
+            }
+        }
+
+        return $i;
+    }
 
 	/**
 	 * @var string
@@ -55,10 +112,13 @@ class NavigationColumn extends DataObject
         $fields = parent::getCMSFields();
 
         $fields->removeByName(array(
-            'SiteConfigID',
+            'GlobalConfigID',
             'SortOrder',
             'NavigationGroups',
         ));
+
+        $fields->dataFieldByName('Title')
+            ->setDescription('For internal reference only');
 
         // navigation groups
         if ($this->ID) {
@@ -67,10 +127,11 @@ class NavigationColumn extends DataObject
             $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
             $config->removeComponentsByType('GridFieldDeleteAction');
             $config->addComponent(new GridFieldDeleteAction(false));
-            $footerLinks = GridField::create('NavigationGroups', 'Navigation Groups', $this->NavigationGroups()->sort('SortOrder'), $config);
+            $footerLinks = GridField::create('NavigationGroups', 'Link Groups', $this->NavigationGroups()->sort('SortOrder'), $config);
 
             $fields->addFieldsToTab('Root.Main', array(
-                $footerLinks,
+                $footerLinks
+                    ->setDescription('Add a group of links to the footer navigation area'),
             ));
         }
 
@@ -109,7 +170,7 @@ class NavigationColumn extends DataObject
      *
      * @return bool
      */
-    public function canView($member = null)
+    public function canView($member = null, $context = [])
     {
         return true;
     }
@@ -119,7 +180,7 @@ class NavigationColumn extends DataObject
      *
      * @return bool
      */
-    public function canEdit($member = null)
+    public function canEdit($member = null, $context = [])
     {
         return true;
     }
@@ -129,7 +190,7 @@ class NavigationColumn extends DataObject
      *
      * @return bool
      */
-    public function canDelete($member = null)
+    public function canDelete($member = null, $context = [])
     {
         return true;
     }

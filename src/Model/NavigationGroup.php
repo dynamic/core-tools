@@ -2,6 +2,8 @@
 
 namespace Dynamic\CoreTools\Model;
 
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 use SilverStripe\ORM\DataObject;
@@ -19,6 +21,16 @@ use SilverStripe\CMS\Model\SiteTree;
  */
 class NavigationGroup extends DataObject
 {
+    /**
+     * @var string
+     */
+    private static $singular_name = 'Link Group';
+
+    /**
+     * @var string
+     */
+    private static $plural_name = 'Link Groups';
+
     /**
      * @var array
      */
@@ -56,6 +68,35 @@ class NavigationGroup extends DataObject
     private static $table_name = 'NavigationGroup';
 
     /**
+     * @var array
+     */
+    private static $summary_fields = [
+        'Title' => 'Title',
+        'LinkList' => 'Links'
+    ];
+
+    /**
+     * @var array
+     */
+    private static $searchable_fields = [
+        'Title',
+    ];
+
+    /**
+     * @return string
+     */
+    public function LinkList()
+    {
+        if ($this->NavigationLinks()) {
+            $i = 0;
+            foreach ($this->NavigationLinks()->sort('SortOrder') as $link) {
+                ++$i;
+            }
+        }
+        return $i;
+    }
+
+    /**
      * @return \SilverStripe\Forms\FieldList
      */
     public function getCMSFields()
@@ -68,18 +109,22 @@ class NavigationGroup extends DataObject
           'NavigationLinks',
         ));
 
+        $fields->dataFieldByName('Title')
+            ->setDescription('Group Name');
+
         if ($this->ID) {
             $config = GridFieldConfig_RelationEditor::create()
               ->addComponent(new GridFieldOrderableRows('SortOrder'))
-              ->removeComponentsByType('GridFieldAddExistingAutocompleter')
+              ->removeComponentsByType(GridFieldAddExistingAutocompleter::class)
               ->addComponent(new GridFieldAddExistingSearchButton())
-              ->removeComponentsByType('GridFieldAddNewButton');
+              ->removeComponentsByType(GridFieldAddNewButton::class);
             $promos = $this->NavigationLinks()->sort('SortOrder');
             $linksField = GridField::create('NavigationLinks',
               'Navigation Links', $promos, $config);
 
             $fields->addFieldsToTab('Root.Main', array(
-              $linksField,
+              $linksField
+                  ->setDescription('Add a link to the group'),
             ));
         }
 

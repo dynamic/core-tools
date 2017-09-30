@@ -2,7 +2,7 @@
 
 namespace Dynamic\CoreTools\Tests\TestOnly\Object;
 
-use SilverStripe\SiteConfig\SiteConfig;
+use Dynamic\CoreTools\Model\GlobalSiteSetting;
 use SilverStripe\Dev\TestOnly;
 use Dynamic\CoreTools\ORM\FooterNavigationManager;
 
@@ -10,8 +10,11 @@ use Dynamic\CoreTools\ORM\FooterNavigationManager;
  * Class FooterSiteConfig
  * @package Dynamic\CoreTools\Tests\TestOnly\Object
  */
-class FooterSiteConfig extends SiteConfig implements TestOnly
+class FooterSiteConfig extends GlobalSiteSetting implements TestOnly
 {
+    /**
+     * @var array
+     */
     private static $extensions = [FooterNavigationManager::class];
 
     /**
