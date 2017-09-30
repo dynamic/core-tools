@@ -65,7 +65,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
             ),
             HiddenField::create('ID')
         );
-        $tabMain->setTitle('Global Site Settings');
+        $tabMain->setTitle('Settings');
         $this->extend('updateCMSFields', $fields);
 
         return $fields;

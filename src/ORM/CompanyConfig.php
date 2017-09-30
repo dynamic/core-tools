@@ -32,7 +32,6 @@ class CompanyConfig extends DataExtension
         'CompanyName' => 'Varchar(200)',
         'Phone' => 'Varchar(20)',
         'Email' => 'Varchar(100)',
-        'ShowDirections' => 'Boolean',
         'Hours' => 'Text',
     );
 
@@ -41,25 +40,18 @@ class CompanyConfig extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->addFieldsToTab('Root.Company.Info', array(
-            HeaderField::create('CompanyInfo', 'Company Information'),
+        $fields->addFieldsToTab('Root.Company.Contact', array(
+            HeaderField::create('CompanyHD', 'Company', 1),
+            HeaderField::create('CompanyInfo', 'Company Information', 2),
             LiteralField::create(
                 'EnterInfo',
-                '<p>Enter your company contact information, which will be used throughout your website</p>'
+                '<p>Enter your company contact information, which will be available throughout your website</p>'
             ),
             TextField::create('CompanyName', 'Company Name'),
             TextField::create('Phone', 'Phone'),
             TextField::create('Email', 'Email'),
             TextareaField::create('Hours')
         ));
-
-        $fields->addFieldToTab(
-            'Root.Company.Address',
-            CheckboxField::create(
-                'ShowDirections',
-                'Show Map and Driving Directions'
-            )
-        );
 
         /*
         if ($this->owner->hasAddress()) {

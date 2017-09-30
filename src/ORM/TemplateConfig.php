@@ -2,6 +2,8 @@
 
 namespace Dynamic\CoreTools\ORM;
 
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\LiteralField;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
@@ -58,11 +60,14 @@ class TemplateConfig extends DataExtension
 
         // options for logo or title display
         $logoOptions = array(
-            'Title' => 'Display Site Title and Slogan',
-            'Logo' => 'Display Logo'
+            'Logo' => 'Display Logo',
+            'Title' => 'Display Site Title and Slogan'
         );
 
-        $fields->addFieldsToTab('Root.Header', array(
+        $fields->addFieldsToTab('Root.Template.Header', array(
+            HeaderField::create('HeaderHD', 'Header', 1),
+            LiteralField::create('HeaderDescrip', '<p>Adjust the settings of your theme header.</p>'),
+            HeaderField::create('BrandingHD', 'Branding', 2),
             OptionsetField::create('TitleLogo', 'Branding', $logoOptions),
             $ImageField
         ));
