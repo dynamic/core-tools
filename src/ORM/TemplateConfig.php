@@ -71,7 +71,6 @@ class TemplateConfig extends DataExtension
             OptionsetField::create('TitleLogo', 'Branding', $logoOptions),
             $ImageField
         ));
-
     }
 
     /**
@@ -91,5 +90,4 @@ class TemplateConfig extends DataExtension
             ->exists()) ? $this->owner->FooterLinks()
             ->sort('SortOrder') : false;
     }
-
 }

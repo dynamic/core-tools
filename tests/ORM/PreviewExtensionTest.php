@@ -9,8 +9,7 @@ use Dynamic\CoreTools\ORM\PreviewExtension;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class PreviewExtensionTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class PreviewExtensionTest.
  */
 class PreviewExtensionTest extends SapphireTest
 {
@@ -32,7 +31,7 @@ class PreviewExtensionTest extends SapphireTest
         TestPage::add_extension(PreviewExtension::class);
     }
 
-        /**
+    /**
      *
      */
     public function testUpdateCMSFields()
@@ -82,5 +81,4 @@ class PreviewExtensionTest extends SapphireTest
         $object->Abstract = 'Preview';
         $this->assertEquals($object->getPreviewAbstract(), $object->Abstract);
     }
-
 }

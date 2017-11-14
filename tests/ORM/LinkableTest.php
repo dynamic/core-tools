@@ -8,8 +8,7 @@ use SilverStripe\Dev\SapphireTest;
 use Dynamic\CoreTools\ORM\Linkable;
 
 /**
- * Class LinkableTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class LinkableTest.
  */
 class LinkableTest extends SapphireTest
 {
@@ -22,6 +21,13 @@ class LinkableTest extends SapphireTest
     );
 
     /**
+     * @var array
+     */
+    protected static $extra_dataobjects = [
+        TestPage::class,
+    ];
+
+    /**
      *
      */
     public function setUp()
@@ -29,9 +35,10 @@ class LinkableTest extends SapphireTest
         parent::setUp();
 
         TestPage::add_extension(Linkable::class);
+        ContentObject::add_extension(Linkable::class);
     }
 
-        /**
+    /**
      *
      */
     public function testGetLinkStatus()
@@ -56,5 +63,4 @@ class LinkableTest extends SapphireTest
         $object = $this->objFromFixture(ContentObject::class, 'default');
         $this->assertEquals($object->LinkStatus(), $object->getLinkStatus());
     }
-
 }

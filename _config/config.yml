@@ -1,19 +1,4 @@
 ---
 Name: coretoolsconfig
 ---
-Page:
-  extensions:
-    - Dynamic\CoreTools\ORM\PromoRelation
-Dynamic\CoreTools\Model\ContentObject:
-  extensions:
-    - Dynamic\CoreTools\ORM\Linkable
-SilverStripe\ORM\DataList:
-  extensions:
-    - Dynamic\CoreTools\ORM\CoreToolsDataListDataExtension
-Dynamic\CoreTools\Model\GlobalSiteSetting:
-  extensions:
-    - Dynamic\CoreTools\ORM\CompanyConfig
-    - Dynamic\SilverStripeGeocoder\AddressDataExtension
-    - Dynamic\CoreTools\ORM\TemplateConfig
-    - Dynamic\CoreTools\ORM\UtilityNavigationManager
-    - Dynamic\CoreTools\ORM\FooterNavigationManager
+

@@ -11,11 +11,9 @@ use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\CheckboxField;
 
 /**
- * Class CompanyConfig
- * @package Dynamic\CoreTools\Extensions
+ * Class CompanyConfig.
  *
  * @property string $CompanyName
  * @property string $Phone
@@ -50,7 +48,7 @@ class CompanyConfig extends DataExtension
             TextField::create('CompanyName', 'Company Name'),
             TextField::create('Phone', 'Phone'),
             TextField::create('Email', 'Email'),
-            TextareaField::create('Hours')
+            TextareaField::create('Hours'),
         ));
 
         /*

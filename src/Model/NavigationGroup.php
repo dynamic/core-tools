@@ -12,8 +12,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\CMS\Model\SiteTree;
 
 /**
- * Class NavigationGroup
- * @package Dynamic\CoreTools\Model
+ * Class NavigationGroup.
  *
  * @property string $Title
  * @property int $SortOrder
@@ -72,7 +71,7 @@ class NavigationGroup extends DataObject
      */
     private static $summary_fields = [
         'Title' => 'Title',
-        'LinkList' => 'Links'
+        'LinkList' => 'Links',
     ];
 
     /**
@@ -93,6 +92,7 @@ class NavigationGroup extends DataObject
                 ++$i;
             }
         }
+
         return $i;
     }
 
@@ -119,8 +119,12 @@ class NavigationGroup extends DataObject
               ->addComponent(new GridFieldAddExistingSearchButton())
               ->removeComponentsByType(GridFieldAddNewButton::class);
             $promos = $this->NavigationLinks()->sort('SortOrder');
-            $linksField = GridField::create('NavigationLinks',
-              'Navigation Links', $promos, $config);
+            $linksField = GridField::create(
+                'NavigationLinks',
+                'Navigation Links',
+                $promos,
+                $config
+            );
 
             $fields->addFieldsToTab('Root.Main', array(
               $linksField
@@ -149,8 +153,9 @@ class NavigationGroup extends DataObject
      * Set permissions, allow all users to access by default.
      * Override in descendant classes, or use PermissionProvider.
      *
-     * @param null $member
+     * @param null  $member
      * @param array $context
+     *
      * @return bool
      */
     public function canCreate($member = null, $context = [])
@@ -187,5 +192,4 @@ class NavigationGroup extends DataObject
     {
         return true;
     }
-
 }

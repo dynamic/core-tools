@@ -7,16 +7,15 @@ use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\DataObject;
 
 /**
- * Class CoreToolsDataListDataExtension
- * @package Dynamic\CoreTools\Extensions
+ * Class CoreToolsDataListDataExtension.
  */
 class CoreToolsDataListDataExtension extends DataExtension
 {
-
     /**
-     * chainable method for DataObject::get()
+     * chainable method for DataObject::get().
      *
      * @param null $slug
+     *
      * @return bool
      */
     public function byUrlSegment($slug = null)
@@ -26,7 +25,7 @@ class CoreToolsDataListDataExtension extends DataExtension
         if ($slug === null || !($object instanceof DataObject) || !$object->hasDatabaseField('URLSegment')) {
             return false;
         }
+
         return $this->owner->filter('URLSegment', $slug)->first();
     }
-
 }

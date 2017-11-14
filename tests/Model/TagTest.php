@@ -10,12 +10,10 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\ValidationException;
 
 /**
- * Class TagTest
- * @package Dynamic\CoreTools\Tests\Model
+ * Class TagTest.
  */
 class TagTest extends SapphireTest
 {
-
     /**
      * @var string
      */
@@ -25,7 +23,7 @@ class TagTest extends SapphireTest
     );
 
     /**
-     * Log out the current user
+     * Log out the current user.
      */
     public function logOut()
     {
@@ -108,5 +106,4 @@ class TagTest extends SapphireTest
         $this->assertTrue($object->canCreate($nullMember));
         $nullMember->delete();
     }
-
 }

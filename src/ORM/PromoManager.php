@@ -10,8 +10,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 
 /**
- * Class PromoManager
- * @package Dynamic\CoreTools\Extensions
+ * Class PromoManager.
  */
 class PromoManager extends DataExtension
 {

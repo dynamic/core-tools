@@ -7,13 +7,11 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\Assets\File;
 
 /**
- * Class FileObject
- * @package Dynamic\CoreTools\Model
- *
- * Base class for simple file attachments. Intended not be used directly, but extended in projects.
+ * Class FileObject.
  *
  * @property string $FileLink
  * @property int $DownloadID
+ *
  * @method File $Download
  */
 class FileObject extends ContentObject
@@ -86,7 +84,7 @@ class FileObject extends ContentObject
         if ($this->FileLink) {
             return $this->FileLink;
         }
+
         return false;
     }
-
 }

@@ -7,30 +7,26 @@ use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 
 /**
- * Class SingleSortGroupedList
- * @package Dynamic\CoreTools\ORM
- *
- * A list decorator that allows a list to be grouped into sub-lists by common
- * values of a field.
+ * Class SingleSortGroupedList.
  */
 class SingleSortGroupedList extends GroupedList
 {
-
     /**
      * Similar to {@link groupBy()}, but returns
      * the data in a format which is suitable for usage in templates.
      *
-     * @param  string $index
-     * @param  string $children Name of the control under which children can be iterated on
-     * @param  string $sort The field to sort the Children on
-     * @param  string $direction The sort direction
+     * @param string $index
+     * @param string $children  Name of the control under which children can be iterated on
+     * @param string $sort      The field to sort the Children on
+     * @param string $direction The sort direction
+     *
      * @return ArrayList
      */
     public function GroupedBy(
-      $index,
-      $children = 'Children',
-      $sort = null,
-      $direction = 'ASC'
+        $index,
+        $children = 'Children',
+        $sort = null,
+        $direction = 'ASC'
     ) {
         $grouped = $this->groupBy($index);
         $result = new ArrayList();
@@ -43,11 +39,10 @@ class SingleSortGroupedList extends GroupedList
             }
             $result->push(new ArrayData(array(
               $index => $indVal,
-              $children => $list
+              $children => $list,
             )));
         }
 
         return $result;
     }
-
 }

@@ -10,8 +10,7 @@ use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\CMS\Model\SiteTree;
 
 /**
- * Class Linkable
- * @package Dynamic\CoreTools\Extensions
+ * Class Linkable.
  *
  * @property string $LinkType
  * @property string $ExternalLink
@@ -23,7 +22,7 @@ class Linkable extends DataExtension
      * @var array
      */
     private static $db = array(
-      'LinkType' => 'Enum("None, Internal, External", "None")',
+      'LinkType' => 'Enum("None, Internal, External")',
       'ExternalLink' => 'Varchar(255)',
       'LinkLabel' => 'Varchar(255)',
     );
@@ -80,7 +79,7 @@ class Linkable extends DataExtension
 
         $tree = (class_exists('DisplayLogicWrapper'))
           ? DisplayLogicWrapper::create(
-            TreeDropdownField::create('PageLinkID', 'Link to Page', SiteTree::class)
+              TreeDropdownField::create('PageLinkID', 'Link to Page', SiteTree::class)
           )->displayIf('LinkType')->isEqualTo('Internal')->end()
           : TreeDropdownField::create('PageLinkID', 'Link to Page', SiteTree::class);
 
@@ -100,12 +99,14 @@ class Linkable extends DataExtension
           : TextField::create('ExternalLink', 'External URL');
 
         $fields->addFieldsToTab('Root.Link', array(
-          OptionSetField::create('LinkType', 'Link',
-            singleton($this->owner->ClassName)->dbObject('LinkType')->enumValues()),
-          $label
-          ,
-          $tree,
-          $external,
+            OptionSetField::create(
+                'LinkType',
+                'Link',
+                singleton($this->owner->ClassName)->dbObject('LinkType')->enumValues()
+            ),
+            $label,
+            $tree,
+            $external,
         ));
     }
 }

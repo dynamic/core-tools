@@ -3,16 +3,10 @@
 namespace Dynamic\CoreTools\Model;
 
 use SilverStripe\Security\PermissionProvider;
-use SilverStripe\Forms\GridField\GridFieldConfig_RecordViewer;
-use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Forms\HeaderField;
 use SilverStripe\Security\Permission;
-use SilverStripe\Core\Injector\Injector;
-use Page;
 
 /**
- * Class Promo
- * @package Dynamic\CoreTools\Model
+ * Class Promo.
  */
 class Promo extends ContentObject implements PermissionProvider
 {
@@ -27,13 +21,6 @@ class Promo extends ContentObject implements PermissionProvider
     private static $plural_name = 'Promos';
 
     /**
-     * @var array
-     */
-    private static $belongs_many_many = array(
-      'Pages' => Page::class,
-    );
-
-    /**
      * @var string
      */
     private static $table_name = 'Promo';
@@ -45,28 +32,8 @@ class Promo extends ContentObject implements PermissionProvider
     {
         $fields = parent::getCMSFields();
 
-        $fields->removeByName(array(
-          'Pages',
-        ));
-
         // override folder name
         $fields->dataFieldByName('Image')->setFolderName('Uploads/Promos');
-
-        // pages
-        if (Injector::inst()
-          ->create('Page')
-          ->hasExtension('CoreToolsPageDataExtension')
-        ) {
-            $config = GridFieldConfig_RecordViewer::create();
-            $config->removeComponent($config->getComponentByType('GridFieldViewButton'));
-            $pages = $this->Pages()->sort('Title');
-            $pageField = new GridField('Pages', 'Pages', $pages, $config);
-
-            $fields->addFieldsToTab('Root.Pages', array(
-              HeaderField::create('PagesHD', 'Used on the following pages', 3),
-              $pageField,
-            ));
-        }
 
         return $fields;
     }
@@ -84,7 +51,7 @@ class Promo extends ContentObject implements PermissionProvider
     }
 
     /**
-     * @param null $member
+     * @param null  $member
      * @param array $context
      *
      * @return bool|int
@@ -123,5 +90,4 @@ class Promo extends ContentObject implements PermissionProvider
     {
         return true;
     }
-
 }

@@ -11,8 +11,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataList;
 
 /**
- * Class PageSectionManagerTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class PageSectionManagerTest.
  */
 class PageSectionManagerTest extends SapphireTest
 {
@@ -77,5 +76,4 @@ class PageSectionManagerTest extends SapphireTest
             $page->getPageSections()->first()
         );
     }
-
 }

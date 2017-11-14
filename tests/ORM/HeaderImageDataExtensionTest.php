@@ -9,8 +9,7 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class HeaderImageDataExtensionTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class HeaderImageDataExtensionTest.
  */
 class HeaderImageDataExtensionTest extends SapphireTest
 {
@@ -25,7 +24,7 @@ class HeaderImageDataExtensionTest extends SapphireTest
      * @var array
      */
     protected static $extra_dataobjects = [
-        TestPage::class
+        TestPage::class,
     ];
 
     /**
@@ -62,5 +61,4 @@ class HeaderImageDataExtensionTest extends SapphireTest
         $subpage->write();
         $this->assertInstanceOf(Image::class, $subpage->getPageHeaderImage());
     }
-
 }

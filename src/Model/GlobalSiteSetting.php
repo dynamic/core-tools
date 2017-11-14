@@ -19,11 +19,10 @@ use SilverStripe\View\TemplateGlobalProvider;
 use SilverStripe\Security\Security;
 
 /**
- * Class GlobalSiteSetting
+ * Class GlobalSiteSetting.
  */
 class GlobalSiteSetting extends DataObject implements PermissionProvider, TemplateGlobalProvider
 {
-
     /**
      * @var string
      */
@@ -43,7 +42,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     private static $table_name = 'GlobalSiteSettings';
 
     /**
-     * Default permission to check for 'LoggedInUsers' to create or edit pages
+     * Default permission to check for 'LoggedInUsers' to create or edit pages.
      *
      * @var array
      * @config
@@ -58,7 +57,8 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
         Config::modify()->set(AddressDataExtension::class, 'address_tab_name', 'Company.Address');
 
         $fields = FieldList::create(
-            TabSet::create("Root",
+            TabSet::create(
+                'Root',
                 $tabMain = Tab::create(
                     'Main'
                 )
@@ -73,7 +73,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
 
     /**
      * Get the actions that are sent to the CMS. In
-     * your extensions: updateEditFormActions($actions)
+     * your extensions: updateEditFormActions($actions).
      *
      * @return FieldList
      */
@@ -99,10 +99,10 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     public function requireDefaultRecords()
     {
         parent::requireDefaultRecords();
-        $config = GlobalSiteSetting::current_global_config();
-        if ( ! $config) {
+        $config = self::current_global_config();
+        if (!$config) {
             self::make_global_config();
-            DB::alteration_message("Added default global config", "created");
+            DB::alteration_message('Added default global config', 'created');
         }
     }
 
@@ -121,7 +121,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
      */
     public function canEdit($member = null)
     {
-        if ( ! $member) {
+        if (!$member) {
             $member = Security::getCurrentUser();
         }
 
@@ -130,7 +130,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
             return $extended;
         }
 
-        return Permission::checkMember($member, "EDIT_GLOBAL_PERMISSION");
+        return Permission::checkMember($member, 'EDIT_GLOBAL_PERMISSION');
     }
 
     /**
@@ -140,14 +140,20 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     {
         return array(
             'EDIT_GLOBAL_PERMISSION' => array(
-                'name' => _t('CoreToolsConfig.EDIT_GLOBAL_PERMISSION',
-                    'Manage Global Site configuration'),
-                'category' => _t('Permissions.PERMISSIONS_GLOBAL_PERMISSION',
-                    'Roles and access permissions'),
-                'help' => _t('CoreToolsConfig.EDIT_PERMISSION_GLOBAL_PERMISSION',
-                    'Ability to edit global access settings/top-level page permissions.'),
-                'sort' => 400
-            )
+                'name' => _t(
+                    'CoreToolsConfig.EDIT_GLOBAL_PERMISSION',
+                    'Manage Global Site configuration'
+                ),
+                'category' => _t(
+                    'Permissions.PERMISSIONS_GLOBAL_PERMISSION',
+                    'Roles and access permissions'
+                ),
+                'help' => _t(
+                    'CoreToolsConfig.EDIT_PERMISSION_GLOBAL_PERMISSION',
+                    'Ability to edit global access settings/top-level page permissions.'
+                ),
+                'sort' => 400,
+            ),
         );
     }
 
@@ -159,7 +165,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
      */
     public static function current_global_config()
     {
-        if ($config = GlobalSiteSetting::get()->first()) {
+        if ($config = self::get()->first()) {
             return $config;
         }
 
@@ -173,14 +179,14 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
      */
     public static function make_global_config()
     {
-        $config = GlobalSiteSetting::create();
+        $config = self::create();
         $config->write();
 
         return $config;
     }
 
     /**
-     * Add $GlobalConfig to all SSViewers
+     * Add $GlobalConfig to all SSViewers.
      */
     public static function get_template_global_variables()
     {
@@ -188,5 +194,4 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
             'GlobalConfig' => 'current_global_config',
         );
     }
-
 }

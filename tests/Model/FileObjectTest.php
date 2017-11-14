@@ -7,12 +7,10 @@ use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class FileObjectTest
- * @package Dynamic\CoreTools\Tests\Model
+ * Class FileObjectTest.
  */
 class FileObjectTest extends SapphireTest
 {
-
     /**
      * @var array
      */
@@ -34,7 +32,7 @@ class FileObjectTest extends SapphireTest
     }
 
     /**
-     * Test {@link FileObject::getFileLinkURL()} returns proper value
+     * Test {@link FileObject::getFileLinkURL()} returns proper value.
      */
     public function testFileLinkURL()
     {
@@ -61,5 +59,4 @@ class FileObjectTest extends SapphireTest
             'http://somedomain.com/file.pdf'
         );*/
     }
-
 }

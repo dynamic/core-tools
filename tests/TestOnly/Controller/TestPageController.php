@@ -3,12 +3,11 @@
 namespace Dynamic\CoreTools\Tests\TestOnly\Controller;
 
 use Dynamic\CoreTools\Model\ContentObject;
-use \PageController;
+use PageController;
 use SilverStripe\Dev\TestOnly;
 
 /**
- * Class TestPageController
- * @package Dynamic\CoreTools\Tests\TestOnly\Controller
+ * Class TestPageController.
  */
 class TestPageController extends PageController implements TestOnly
 {

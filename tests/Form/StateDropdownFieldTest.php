@@ -7,12 +7,10 @@ use SilverStripe\Dev\SapphireTest;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 
 /**
- * Class StateDropdownFieldTest
- * @package Dynamic\CoreTools\Tests
+ * Class StateDropdownFieldTest.
  */
 class StateDropdownFieldTest extends SapphireTest
 {
-
     /**
      *
      */
@@ -21,5 +19,4 @@ class StateDropdownFieldTest extends SapphireTest
         $field = StateDropdownField::create('State');
         $this->assertInstanceOf(DBHTMLText::class, $field->Field());
     }
-
 }

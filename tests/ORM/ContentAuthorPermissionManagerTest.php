@@ -7,8 +7,7 @@ use Dynamic\CoreTools\Tests\TestOnly\Object\TestContentAuthorObject;
 use SilverStripe\Security\Member;
 
 /**
- * Class ContentAuthorPermissionManagerTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class ContentAuthorPermissionManagerTest.
  */
 class ContentAuthorPermissionManagerTest extends SapphireTest
 {

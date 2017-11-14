@@ -6,12 +6,10 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\Dev\TestOnly;
 
 /**
- * Class SlugDataObject
- * @package Dynamic\CoreTools\Tests\TestOnly\Object
+ * Class SlugDataObject.
  */
 class SlugDataObject extends DataObject implements TestOnly
 {
-
     /**
      * @var array
      */
@@ -28,5 +26,4 @@ class SlugDataObject extends DataObject implements TestOnly
     private static $extensions = [
 
     ];
-
 }

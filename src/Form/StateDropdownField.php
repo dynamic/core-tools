@@ -5,12 +5,10 @@ namespace Dynamic\CoreTools\Form;
 use SilverStripe\Forms\DropdownField;
 
 /**
- * Class StateDropdownField
- * @package Dynamic\CoreTools\Forms
+ * Class StateDropdownField.
  */
 class StateDropdownField extends DropdownField
 {
-
     public static $stateSource = array(
         'AL' => 'Alabama',
         'AK' => 'Alaska',
@@ -80,9 +78,10 @@ class StateDropdownField extends DropdownField
 
     /**
      * StateDropdownField constructor.
+     *
      * @param string $name
-     * @param null $title
-     * @param null $source
+     * @param null   $title
+     * @param null   $source
      * @param string $value
      */
     public function __construct($name, $title = null, $source = null, $value = '')
@@ -97,6 +96,7 @@ class StateDropdownField extends DropdownField
 
     /**
      * @param array $properties
+     *
      * @return string
      */
     public function Field($properties = array())
@@ -109,5 +109,4 @@ class StateDropdownField extends DropdownField
 
         return parent::Field();
     }
-
 }

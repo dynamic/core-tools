@@ -11,8 +11,7 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 
 /**
- * Class PreviewExtension
- * @package Dynamic\CoreTools\Extensions
+ * Class PreviewExtension.
  *
  * @property string $PreviewTitle
  * @property string $Abstract
@@ -92,6 +91,7 @@ class PreviewExtension extends DataExtension
         } elseif ($this->owner->Title) {
             return $this->owner->Title;
         }
+
         return false;
     }
 
@@ -105,6 +105,7 @@ class PreviewExtension extends DataExtension
         } elseif ($this->owner->ImageID) {
             return $this->owner->Image();
         }
+
         return false;
     }
 
@@ -123,7 +124,7 @@ class PreviewExtension extends DataExtension
 
             return $content->FirstParagraph();
         }
+
         return false;
     }
-
 }

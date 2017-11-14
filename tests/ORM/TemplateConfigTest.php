@@ -10,8 +10,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\SiteConfig\SiteConfig;
 
 /**
- * Class TemplateConfigTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class TemplateConfigTest.
  */
 class TemplateConfigTest extends SapphireTest
 {
@@ -32,7 +31,7 @@ class TemplateConfigTest extends SapphireTest
         SiteConfig::add_extension(TemplateConfig::class);
     }
 
-        /**
+    /**
      *
      */
     public function testUpdateCMSFields()
@@ -54,5 +53,4 @@ class TemplateConfigTest extends SapphireTest
         $object->LogoID = $logo->ID;
         $this->assertInstanceOf(Image::class, $object->getSiteLogo());
     }
-
 }

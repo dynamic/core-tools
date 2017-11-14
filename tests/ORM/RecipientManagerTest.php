@@ -8,8 +8,7 @@ use Dynamic\CoreTools\ORM\RecipientManager;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class RecipientManagerTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class RecipientManagerTest.
  */
 class RecipientManagerTest extends SapphireTest
 {
@@ -25,7 +24,7 @@ class RecipientManagerTest extends SapphireTest
      * @var array
      */
     protected static $extra_dataobjects = [
-        TestPage::class
+        TestPage::class,
     ];
 
     /**

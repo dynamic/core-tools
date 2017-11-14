@@ -8,8 +8,7 @@ use SilverStripe\Forms\FieldList;
 use Dynamic\CoreTools\Model\Tag;
 
 /**
- * Class TagManager
- * @package Dynamic\CoreTools\Extensions
+ * Class TagManager.
  */
 class TagManager extends DataExtension
 {

@@ -8,8 +8,7 @@ use SilverStripe\Assets\Image;
 use SilverStripe\Versioned\Versioned;
 
 /**
- * Class ContentObject
- * @package Dynamic\CoreTools\Model
+ * Class ContentObject.
  *
  * @property string $Name
  * @property string $Title
@@ -118,8 +117,9 @@ class ContentObject extends DataObject
      * Set permissions, allow all users to access by default.
      * Override in descendant classes, or use PermissionProvider.
      *
-     * @param null $member
+     * @param null  $member
      * @param array $context
+     *
      * @return bool
      */
     public function canCreate($member = null, $context = [])
@@ -156,5 +156,4 @@ class ContentObject extends DataObject
     {
         return true;
     }
-
 }

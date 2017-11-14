@@ -14,8 +14,7 @@ use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use Dynamic\CoreTools\Model\NavigationColumn;
 
 /**
- * Class FooterNavigationManager
- * @package Dynamic\CoreTools\Extensions
+ * Class FooterNavigationManager.
  */
 class FooterNavigationManager extends DataExtension
 {
@@ -41,15 +40,16 @@ class FooterNavigationManager extends DataExtension
             $footerLinks = GridField::create(
                 'NavigationColumns',
                 '',
-                $this->owner->NavigationColumns()->sort('SortOrder'), $config);
+                $this->owner->NavigationColumns()->sort('SortOrder'),
+                $config
+            );
 
             $fields->addFieldsToTab('Root.Template.Footer', array(
                 HeaderField::create('FooterHD', 'Footer', 1),
                 LiteralField::create('FooterDescrip', '<p>Adjust the settings of the Footer area of your theme.</p>'),
                 HeaderField::create('FooterColumnsHD', 'Columns'),
                 $footerLinks
-                    ->setDescription('Add a column to the layout of the footer of your theme')
-                ,
+                    ->setDescription('Add a column to the layout of the footer of your theme'),
             ));
         }
     }

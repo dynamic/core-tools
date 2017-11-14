@@ -6,11 +6,7 @@ use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\FormField;
 
 /**
- * Class CancelFormAction
- * @package Dynamic\CoreTools\Form
- *
- * Action that takes the user back to a given link rather than submitting
- * the form.
+ * Class CancelFormAction.
  */
 class CancelFormAction extends FormAction
 {
@@ -21,18 +17,19 @@ class CancelFormAction extends FormAction
 
     /**
      * CancelFormAction constructor.
+     *
      * @param string $link
      * @param string $title
-     * @param null $form
-     * @param null $extraData
+     * @param null   $form
+     * @param null   $extraData
      * @param string $extraClass
      */
     public function __construct(
-      $link = "",
-      $title = "",
-      $form = null,
-      $extraData = null,
-      $extraClass = ''
+        $link = '',
+        $title = '',
+        $form = null,
+        $extraData = null,
+        $extraClass = ''
     ) {
         if (!$title) {
             $title = _t('CancelFormAction.CANCEL', 'Cancel');
@@ -40,8 +37,13 @@ class CancelFormAction extends FormAction
 
         $this->setLink($link);
 
-        parent::__construct('CancelFormAction', $title, $form, $extraData,
-          $extraClass);
+        parent::__construct(
+            'CancelFormAction',
+            $title,
+            $form,
+            $extraData,
+            $extraClass
+        );
     }
 
     /**
@@ -62,26 +64,27 @@ class CancelFormAction extends FormAction
 
     /**
      * @param array $properties
+     *
      * @return string
      */
     public function Field($properties = array())
     {
         $attributes = array(
-          'class' => 'cancel btn ' . ($this->extraClass() ? $this->extraClass() : ''),
-          'id' => $this->id(),
-          'name' => $this->action,
-          'href' => $this->getLink()
+            'class' => 'cancel btn '.($this->extraClass() ? $this->extraClass() : ''),
+            'id' => $this->id(),
+            'name' => $this->action,
+            'href' => $this->getLink(),
         );
 
         if ($this->isReadonly()) {
             $attributes['disabled'] = 'disabled';
-            $attributes['class'] = $attributes['class'] . ' disabled';
+            $attributes['class'] = $attributes['class'].' disabled';
         }
 
         return FormField::create_tag(
-          'a',
-          $attributes,
-          $this->buttonContent ? $this->buttonContent : $this->Title()
+            'a',
+            $attributes,
+            $this->buttonContent ? $this->buttonContent : $this->Title()
         );
     }
 }

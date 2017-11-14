@@ -15,8 +15,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 
 /**
- * Class ManyLinksManager
- * @package Dynamic\CoreTools\Extensions
+ * Class ManyLinksManager.
  */
 class ManyLinksManager extends DataExtension
 {

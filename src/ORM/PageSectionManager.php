@@ -8,11 +8,9 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
-use Dynamic\CoreTools\Model\PageSection;
 
 /**
- * Class PageSectionManager
- * @package Dynamic\CoreTools\Extensions
+ * Class PageSectionManager.
  */
 class PageSectionManager extends DataExtension
 {
@@ -37,19 +35,11 @@ class PageSectionManager extends DataExtension
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getPageSections()
     {
         return $this->owner->Sections()->sort('SortOrder');
     }
-}
-
-/**
- * Class PageSectionRelation
- * @package Dynamic\CoreTools\Extensions
- */
-class PageSectionRelation extends DataExtension
-{
-    private static $has_many = array(
-        'Sections' => PageSection::class,
-    );
 }

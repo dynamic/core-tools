@@ -8,12 +8,10 @@ use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class TagManagerTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class TagManagerTest.
  */
 class TagManagerTest extends SapphireTest
 {
-
     /**
      * @var array
      */
@@ -25,7 +23,7 @@ class TagManagerTest extends SapphireTest
      * @var array
      */
     protected static $extra_dataobjects = [
-        TestPage::class
+        TestPage::class,
     ];
 
     /**
@@ -46,5 +44,4 @@ class TagManagerTest extends SapphireTest
         $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('Tags'));
     }
-
 }

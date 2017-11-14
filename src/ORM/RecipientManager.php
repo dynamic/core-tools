@@ -13,8 +13,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Dynamic\CoreTools\Model\EmailRecipient;
 
 /**
- * Class RecipientManager
- * @package Dynamic\CoreTools\Extensions
+ * Class RecipientManager.
  *
  * @property string $EmailSubject
  * @property string $ThankYouMessage
@@ -48,19 +47,19 @@ class RecipientManager extends DataExtension
               ->addComponent(new GridFieldOrderableRows('SortOrder'));
             $columns = $this->owner->Recipients()->sort('SortOrder');
             $tableField = GridField::create(
-              'Recipients',
-              _t('RecipientManager.Settings', 'Email Recipients'),
-              $columns,
-              $config
+                'Recipients',
+                _t('RecipientManager.Settings', 'Email Recipients'),
+                $columns,
+                $config
             );
             $tableField->setDescription(
-              'Designate people to receive email notifications when someone completes the contact form.'
+                'Designate people to receive email notifications when someone completes the contact form.'
             );
             $fields->addFieldsToTab('Root.ContactForm', array(
-              HeaderField::create('EmailRecipientHD', 'Email Notifications', 3),
-              $tableField,
-              TextField::create('EmailSubject'),
-              HTMLEditorField::create('ThankYouMessage'),
+                HeaderField::create('EmailRecipientHD', 'Email Notifications', 3),
+                $tableField,
+                TextField::create('EmailSubject'),
+                HTMLEditorField::create('ThankYouMessage'),
             ));
         }
     }
