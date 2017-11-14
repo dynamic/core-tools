@@ -5,7 +5,6 @@ namespace Dynamic\CoreTools\Model;
 use SilverStripe\Security\PermissionProvider;
 use SilverStripe\Security\Permission;
 use Page;
-use SilverStripe\Versioned\Versioned;
 
 class PageSection extends ContentObject implements PermissionProvider
 {
@@ -101,7 +100,7 @@ class PageSection extends ContentObject implements PermissionProvider
     }
 
     /**
-     * @param null $member
+     * @param null  $member
      * @param array $context
      *
      * @return bool|int

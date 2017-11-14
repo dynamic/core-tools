@@ -8,8 +8,7 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class CoreToolsPageFieldsDataExtensionTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class CoreToolsPageFieldsDataExtensionTest.
  */
 class CoreToolsPageFieldsDataExtensionTest extends SapphireTest
 {
@@ -39,5 +38,4 @@ class CoreToolsPageFieldsDataExtensionTest extends SapphireTest
         $this->assertNotNull($fields->dataFieldByName('SubTitle'));
         $this->assertNotNull($fields->dataFieldByName('PageTitle'));
     }
-
 }

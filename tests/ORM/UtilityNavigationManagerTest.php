@@ -8,8 +8,7 @@ use Dynamic\CoreTools\Tests\TestOnly\UtilitySiteConfig;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class UtilityNavigationManagerTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class UtilityNavigationManagerTest.
  */
 class UtilityNavigationManagerTest extends SapphireTest
 {
@@ -41,5 +40,4 @@ class UtilityNavigationManagerTest extends SapphireTest
         $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('UtilityLinks'));
     }
-
 }

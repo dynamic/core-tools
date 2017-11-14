@@ -15,8 +15,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
 
 /**
- * Class UtilityNavigationManager
- * @package Dynamic\CoreTools\Extensions
+ * Class UtilityNavigationManager.
  */
 class UtilityNavigationManager extends DataExtension
 {
@@ -57,12 +56,14 @@ class UtilityNavigationManager extends DataExtension
 
             $fields->addFieldsToTab('Root.Template.Utility', array(
                 HeaderField::create('UtilityHD', 'Utility Navigation', 1),
-                LiteralField::create('UtilityDescrip', '<p>Adjust the settings of the Utility Navigation area of your theme.</p>'),
+                LiteralField::create(
+                    'UtilityDescrip',
+                    '<p>Adjust the settings of the Utility Navigation area of your theme.</p>'
+                ),
                 HeaderField::create('UtilityNavHD', 'Links', 2),
                 $linksField
                     ->setDescription('Add links to the utility navigation area'),
             ));
         }
     }
-
 }

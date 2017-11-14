@@ -10,14 +10,11 @@ use SilverStripe\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\GridFieldExtensions\GridFieldAddExistingSearchButton;
 
 /**
- * Class MultiLinksManager
- * @package Dynamic\CoreTools\ORM
- *
- * todo re-enable as sheadawson/silverstripe-linkable becomes SS4 compatible
+ * Class MultiLinksManager.
  */
 class MultiLinksManager extends DataExtension
 {
-    /**
+    /*
      * @var array
      */
     /*private static $many_many = [
@@ -30,7 +27,7 @@ class MultiLinksManager extends DataExtension
       ],
     ];*/
 
-    /**
+    /*
      * @param FieldList $fields
      */
     /*public function updateCMSFields(FieldList $fields)

@@ -10,12 +10,10 @@ use SilverStripe\ORM\ValidationException;
 use SilverStripe\Security\Member;
 
 /**
- * Class NavigationColumnTest
- * @package Dynamic\CoreTools\Tests\Model
+ * Class NavigationColumnTest.
  */
 class NavigationColumnTest extends SapphireTest
 {
-
     /**
      * @var string
      */
@@ -105,5 +103,4 @@ class NavigationColumnTest extends SapphireTest
         $member = $this->objFromFixture(Member::class, 'default');
         $this->assertTrue($object->canCreate($member));
     }
-
 }

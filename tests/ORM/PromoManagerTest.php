@@ -9,8 +9,7 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class PromoManagerTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class PromoManagerTest.
  */
 class PromoManagerTest extends SapphireTest
 {
@@ -26,7 +25,7 @@ class PromoManagerTest extends SapphireTest
         TestPage::class,
     ];
 
-        /**
+    /**
      *
      */
     public function testGetPromoList()
@@ -61,5 +60,4 @@ class PromoManagerTest extends SapphireTest
         $this->assertInstanceOf(FieldList::class, $fields);
         $this->assertNotNull($fields->dataFieldByName('Promos'));
     }
-
 }

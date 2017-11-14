@@ -7,11 +7,9 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\SiteConfig\SiteConfig;
 
 /**
- * Class NavigationColumn
- * @package Dynamic\CoreTools\Model
+ * Class NavigationColumn.
  *
  * @property string $Title
  * @property int $SortOrder
@@ -57,7 +55,7 @@ class NavigationColumn extends DataObject
     private static $summary_fields = [
         'Title' => 'Title',
         'GroupList' => 'Groups',
-        'LinkList' => 'Links'
+        'LinkList' => 'Links',
     ];
 
     /**
@@ -78,6 +76,7 @@ class NavigationColumn extends DataObject
                 ++$i;
             }
         }
+
         return $i;
     }
 
@@ -89,7 +88,7 @@ class NavigationColumn extends DataObject
         $i = 0;
 
         if ($this->NavigationGroups()) {
-            foreach($this->NavigationGroups() as $group) {
+            foreach ($this->NavigationGroups() as $group) {
                 foreach ($group->NavigationLinks() as $link) {
                     ++$i;
                 }
@@ -99,12 +98,12 @@ class NavigationColumn extends DataObject
         return $i;
     }
 
-	/**
-	 * @var string
-	 */
-	private static $table_name = 'NavigationColumn';
+    /**
+     * @var string
+     */
+    private static $table_name = 'NavigationColumn';
 
-	/**
+    /**
      * @return \SilverStripe\Forms\FieldList
      */
     public function getCMSFields()
@@ -123,11 +122,16 @@ class NavigationColumn extends DataObject
         // navigation groups
         if ($this->ID) {
             $config = GridFieldConfig_RecordEditor::create();
-	        $config->addComponent(new GridFieldOrderableRows('SortOrder'));
+            $config->addComponent(new GridFieldOrderableRows('SortOrder'));
             $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
             $config->removeComponentsByType('GridFieldDeleteAction');
             $config->addComponent(new GridFieldDeleteAction(false));
-            $footerLinks = GridField::create('NavigationGroups', 'Link Groups', $this->NavigationGroups()->sort('SortOrder'), $config);
+            $footerLinks = GridField::create(
+                'NavigationGroups',
+                'Link Groups',
+                $this->NavigationGroups()->sort('SortOrder'),
+                $config
+            );
 
             $fields->addFieldsToTab('Root.Main', array(
                 $footerLinks
@@ -156,8 +160,9 @@ class NavigationColumn extends DataObject
      * Set permissions, allow all users to access by default.
      * Override in descendant classes, or use PermissionProvider.
      *
-     * @param null $member
+     * @param null  $member
      * @param array $context
+     *
      * @return bool
      */
     public function canCreate($member = null, $context = [])

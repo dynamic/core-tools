@@ -8,12 +8,10 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Security\Member;
 
 /**
- * Class PageSectionTest
- * @package Dynamic\CoreTools\Tests\Model
+ * Class PageSectionTest.
  */
 class PageSectionTest extends SapphireTest
 {
-
     /**
      * @var array
      */
@@ -101,5 +99,4 @@ class PageSectionTest extends SapphireTest
         );
         $this->assertEquals($expected, $object->providePermissions());
     }
-
 }

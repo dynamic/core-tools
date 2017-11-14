@@ -8,17 +8,15 @@ use SilverStripe\Dev\BuildTask;
 use SilverStripe\SiteConfig\SiteConfig;
 
 /**
- * Class SettingsToConfigTask
+ * Class SettingsToConfigTask.
  */
 class SettingsToConfigTask extends BuildTask
 {
-
     /**
      * @param $reuqest
      */
     public function run($reuqest)
     {
-
         $siteConfig = SiteConfig::current_site_config();
         $config = GlobalSiteSetting::current_global_config();
 
@@ -63,7 +61,5 @@ class SettingsToConfigTask extends BuildTask
                 $configLinks->add($link);
             }
         }
-
     }
-
 }

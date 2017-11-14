@@ -9,8 +9,7 @@ use Dynamic\CoreTools\ORM\MultiLinksManager;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class MultiLinksManagerTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class MultiLinksManagerTest.
  */
 class MultiLinksManagerTest extends SapphireTest
 {
@@ -32,7 +31,7 @@ class MultiLinksManagerTest extends SapphireTest
         TestPage::add_extension(MultiLinksManager::class);
     }
 
-        /**
+    /**
      *
      */
     public function testUpdateCMSFields()

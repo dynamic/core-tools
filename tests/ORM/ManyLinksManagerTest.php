@@ -9,8 +9,7 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class ManyLinksManagerTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class ManyLinksManagerTest.
  */
 class ManyLinksManagerTest extends SapphireTest
 {

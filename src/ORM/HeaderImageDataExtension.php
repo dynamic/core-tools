@@ -8,8 +8,7 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 
 /**
- * Class HeaderImageDataExtension
- * @package Dynamic\CoreTools\Extensions
+ * Class HeaderImageDataExtension.
  *
  * @property int $HeaderImageID
  */
@@ -34,7 +33,7 @@ class HeaderImageDataExtension extends DataExtension
             'jpg',
             'jpeg',
             'gif',
-            'png'
+            'png',
         );
         $ImageField->getValidator()
             ->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);

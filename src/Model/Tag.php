@@ -6,8 +6,7 @@ use SilverStripe\ORM\DataObject;
 use Page;
 
 /**
- * Class Tag
- * @package Dynamic\CoreTools\Model
+ * Class Tag.
  *
  * @property string $Title
  */
@@ -47,7 +46,7 @@ class Tag extends DataObject
     }
 
     /**
-     * @param null $member
+     * @param null  $member
      * @param array $context
      *
      * @return bool
@@ -86,5 +85,4 @@ class Tag extends DataObject
     {
         return true;
     }
-
 }

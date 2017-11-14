@@ -10,8 +10,7 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\View\ArrayData;
 
 /**
- * Class RecipientManagerExtension
- * @package Dynamic\CoreTools\Extensions
+ * Class RecipientManagerExtension.
  */
 class RecipientManagerExtension extends Extension
 {
@@ -19,13 +18,13 @@ class RecipientManagerExtension extends Extension
      * @param DataObject $submission
      * @param $template
      * @param SS_List $recipients
-     * @param string $subject
+     * @param string  $subject
      */
     public function sendFormEmail(
-      DataObject $submission,
-      $template,
-      SS_List $recipients,
-      $subject = 'New Form Submission'
+        DataObject $submission,
+        $template,
+        SS_List $recipients,
+        $subject = 'New Form Submission'
     ) {
         $email = new Email();
         $from = Config::inst()->get('Email', 'admin_email');

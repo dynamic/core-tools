@@ -7,8 +7,7 @@ use SilverStripe\Dev\TestOnly;
 use Dynamic\CoreTools\ORM\ContentAuthorPermissionManager;
 
 /**
- * Class TestContentAuthorObject
- * @package Dynamic\CoreTools\Tests\TestOnlyObjects
+ * Class TestContentAuthorObject.
  */
 class TestContentAuthorObject extends DataObject implements TestOnly
 {

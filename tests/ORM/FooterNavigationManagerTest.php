@@ -8,8 +8,7 @@ use Dynamic\CoreTools\Tests\TestOnly\Object\FooterSiteConfig;
 use SilverStripe\Forms\FieldList;
 
 /**
- * Class FooterNavigationManagerTest
- * @package Dynamic\CoreTools\Tests\ORM
+ * Class FooterNavigationManagerTest.
  */
 class FooterNavigationManagerTest extends SapphireTest
 {
@@ -41,4 +40,3 @@ class FooterNavigationManagerTest extends SapphireTest
         $this->assertNotNull($fields->dataFieldByName('NavigationColumns'));
     }
 }
-

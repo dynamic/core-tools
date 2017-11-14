@@ -10,8 +10,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\ValidationException;
 
 /**
- * Class ContentObjectTest
- * @package Dynamic\CoreTools\Tests\Model
+ * Class ContentObjectTest.
  */
 class ContentObjectTest extends SapphireTest
 {
@@ -107,5 +106,4 @@ class ContentObjectTest extends SapphireTest
         $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
         $this->assertTrue($object->canCreate($member));
     }
-
 }

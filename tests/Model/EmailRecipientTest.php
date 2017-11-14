@@ -6,12 +6,10 @@ use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Core\Injector\Injector;
 
 /**
- * Class EmailRecipientTest
- * @package Dynamic\CoreTools\Tests\Model
+ * Class EmailRecipientTest.
  */
 class EmailRecipientTest extends SapphireTest
 {
-
     /**
      * @var array
      */
@@ -84,5 +82,4 @@ class EmailRecipientTest extends SapphireTest
         $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
         $this->assertTrue($object->canCreate($member));
     }
-
 }

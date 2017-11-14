@@ -7,12 +7,10 @@ use SilverStripe\ORM\Queries\SQLDelete;
 use Psr\Log\InvalidArgumentException;
 
 /**
- * Class DynamicManyManyList
- * @package Dynamic\CoreTools\ORM
+ * Class DynamicManyManyList.
  */
 class DynamicManyManyList extends ManyManyList
 {
-
     /**
      * Remove the given item from this list.
      *
@@ -24,26 +22,35 @@ class DynamicManyManyList extends ManyManyList
     public function removeByID($itemID)
     {
         if (!is_numeric($itemID)) {
-            throw new InvalidArgumentException("ManyManyList::removeById() expecting an ID");
+            throw new InvalidArgumentException('ManyManyList::removeById() expecting an ID');
         }
 
         $query = new SQLDelete("\"{$this->joinTable}\"");
         $foreignID = $this->getForeignID();
 
-        $this->extend('onBeforeRemoveByID', $itemID, $this->joinTable,
-          $foreignID);
+        $this->extend(
+            'onBeforeRemoveByID',
+            $itemID,
+            $this->joinTable,
+            $foreignID
+        );
         if ($filter = $this->foreignIDWriteFilter($foreignID)) {
             $query->setWhere($filter);
         } else {
-            user_error("Can't call ManyManyList::remove() until a foreign ID is set",
-              E_USER_WARNING);
+            user_error(
+                "Can't call ManyManyList::remove() until a foreign ID is set",
+                E_USER_WARNING
+            );
         }
 
         $query->addWhere(array("\"{$this->localKey}\"" => $itemID));
         $query->execute();
 
-        $this->extend('onAfterRemoveByID', $itemID, $this->joinTable,
-          $foreignID);
+        $this->extend(
+            'onAfterRemoveByID',
+            $itemID,
+            $this->joinTable,
+            $foreignID
+        );
     }
-
 }

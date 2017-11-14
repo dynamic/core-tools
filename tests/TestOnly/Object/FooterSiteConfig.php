@@ -7,8 +7,7 @@ use SilverStripe\Dev\TestOnly;
 use Dynamic\CoreTools\ORM\FooterNavigationManager;
 
 /**
- * Class FooterSiteConfig
- * @package Dynamic\CoreTools\Tests\TestOnly\Object
+ * Class FooterSiteConfig.
  */
 class FooterSiteConfig extends GlobalSiteSetting implements TestOnly
 {

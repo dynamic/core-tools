@@ -6,8 +6,7 @@ use Dynamic\CoreTools\Model\Promo;
 use SilverStripe\ORM\DataExtension;
 
 /**
- * Class PromoRelation
- * @package Dynamic\CoreTools\Extensions
+ * Class PromoRelation.
  */
 class PromoRelation extends DataExtension
 {

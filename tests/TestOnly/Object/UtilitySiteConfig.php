@@ -7,8 +7,7 @@ use SilverStripe\Dev\TestOnly;
 use Dynamic\CoreTools\ORM\UtilityNavigationManager;
 
 /**
- * Class UtilitySiteConfig
- * @package Dynamic\CoreTools\Tests\TestOnly
+ * Class UtilitySiteConfig.
  */
 class UtilitySiteConfig extends SiteConfig implements TestOnly
 {

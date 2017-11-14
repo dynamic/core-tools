@@ -6,8 +6,7 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\CMS\Model\SiteTree;
 
 /**
- * Class EmailRecipient
- * @package Dynamic\CoreTools\Model
+ * Class EmailRecipient.
  *
  * @property string $FirstName
  * @property string $LastName
@@ -67,8 +66,9 @@ class EmailRecipient extends DataObject
      * Set permissions, allow all users to access by default.
      * Override in descendant classes, or use PermissionProvider.
      *
-     * @param null $member
+     * @param null  $member
      * @param array $context
+     *
      * @return bool
      */
     public function canCreate($member = null, $context = [])

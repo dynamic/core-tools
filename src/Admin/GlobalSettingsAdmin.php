@@ -17,11 +17,10 @@ use SilverStripe\View\ArrayData;
 use SilverStripe\View\Requirements;
 
 /**
- * Class GlobalSettingsAdmin
+ * Class GlobalSettingsAdmin.
  */
 class GlobalSettingsAdmin extends LeftAndMain
 {
-
     /**
      * @var string
      */
@@ -52,7 +51,6 @@ class GlobalSettingsAdmin extends LeftAndMain
      */
     private static $tree_class = GlobalSiteSetting::class;
 
-
     /**
      * @var array
      */
@@ -72,6 +70,7 @@ class GlobalSettingsAdmin extends LeftAndMain
     /**
      * @param null $id
      * @param null $fields
+     *
      * @return Form
      */
     public function getEditForm($id = null, $fields = null)
@@ -84,12 +83,14 @@ class GlobalSettingsAdmin extends LeftAndMain
         $fields->push(new HiddenField('PreviewURL', 'Preview URL', $home));
 
         // Added in-line to the form, but plucked into different view by LeftAndMain.Preview.js upon load
-        $fields->push($navField = new LiteralField('SilverStripeNavigator',
-            $this->getSilverStripeNavigator()));
+        $fields->push($navField = new LiteralField(
+            'SilverStripeNavigator',
+            $this->getSilverStripeNavigator()
+        ));
         $navField->setAllowHTML(true);
 
         // Retrieve validator, if one has been setup (e.g. via data extensions).
-        if ($config->hasMethod("getCMSValidator")) {
+        if ($config->hasMethod('getCMSValidator')) {
             $validator = $config->getCMSValidator();
         } else {
             $validator = null;
@@ -108,10 +109,11 @@ class GlobalSettingsAdmin extends LeftAndMain
             $request = $this->getRequest();
             if ($request->isAjax() && $negotiator) {
                 $result = $form->forTemplate();
+
                 return $negotiator->respond($request, array(
                     'CurrentForm' => function () use ($result) {
                         return $result;
-                    }
+                    },
                 ));
             }
         });
@@ -143,8 +145,9 @@ class GlobalSettingsAdmin extends LeftAndMain
      * Save the current sites {@link GlobalSiteSetting} into the database.
      *
      * @param array $data
-     * @param Form $form
-     * @return String
+     * @param Form  $form
+     *
+     * @return string
      */
     public function save_globalconfig($data, $form)
     {
@@ -154,14 +157,17 @@ class GlobalSettingsAdmin extends LeftAndMain
             $config->write();
         } catch (ValidationException $ex) {
             $form->sessionMessage($ex->getResult()->message(), 'bad');
+
             return $this->getResponseNegotiator()->respond($this->request);
         }
         $this->response->addHeader('X-Status', rawurlencode(_t('SilverStripe\\Admin\\LeftAndMain.SAVEDUP', 'Saved.')));
+
         return $form->forTemplate();
     }
 
     /**
      * @param bool $unlinked
+     *
      * @return ArrayList
      */
     public function Breadcrumbs($unlinked = false)
@@ -169,9 +175,8 @@ class GlobalSettingsAdmin extends LeftAndMain
         return new ArrayList(array(
             new ArrayData(array(
                 'Title' => static::menu_title(),
-                'Link' => $this->Link()
-            ))
+                'Link' => $this->Link(),
+            )),
         ));
     }
-
 }

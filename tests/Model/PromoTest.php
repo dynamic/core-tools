@@ -10,12 +10,10 @@ use SilverStripe\Security\IdentityStore;
 use SilverStripe\Security\Member;
 
 /**
- * Class PromoTest
- * @package Dynamic\CoreTools\Tests\Model
+ * Class PromoTest.
  */
 class PromoTest extends SapphireTest
 {
-
     /**
      * @var string
      */
@@ -25,7 +23,7 @@ class PromoTest extends SapphireTest
     );
 
     /**
-     * Log out the current user
+     * Log out the current user.
      */
     public function logOut()
     {
@@ -121,5 +119,4 @@ class PromoTest extends SapphireTest
         );
         $this->assertEquals($expected, $object->providePermissions());
     }
-
 }

@@ -7,8 +7,7 @@ use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use Dynamic\CoreTools\Tests\TestOnly\Controller\TestPageController;
 
 /**
- * Class CoreToolsTest
- * @package Dynamic\CoreTools\Tests
+ * Class CoreToolsTest.
  */
 class CoreToolsTest extends FunctionalTest
 {
@@ -65,7 +64,6 @@ class CoreToolsTest extends FunctionalTest
     public function testBlank()
     {
     }
-
 }
 
 //TestPage_Controller::add_extension('Dynamic\\CoreTools\\Extension\\CollectionExtension');
