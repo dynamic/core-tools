@@ -15,7 +15,11 @@ class CoreToolsPageFieldsDataExtension extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->insertAfter(TextField::create('SubTitle', 'Sub Title'), 'MenuTitle');
+        $after = 'Title';
+        if ($fields->hasField('MenuTitle')) {
+            $after = 'MenuTitle';
+        }
+        $fields->insertAfter(TextField::create('SubTitle', 'Sub Title'), $after);
 
         $fields->removeByName('Metadata');
         $meta = ToggleCompositeField::create('Metadata', _t('SiteTree.MetadataToggle', 'Metadata'),
