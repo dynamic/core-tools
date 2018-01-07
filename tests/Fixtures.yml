@@ -57,3 +57,13 @@ Dynamic\CoreTools\Model\NavigationColumn:
 Dynamic\CoreTools\Model\NavigationGroup:
   one:
     Title: "Group One"
+SilverStripe\Blog\Model\Blog:
+  default:
+    Title: "Blog"
+SilverStripe\Blog\Model\BlogPost:
+  one:
+    Title: "Blog Post One"
+    ParentID: =>SilverStripe\Blog\Model\Blog.default
+  two:
+    Title: "Blog Post Two"
+    ParentID: =>SilverStripe\Blog\Model\Blog.default
