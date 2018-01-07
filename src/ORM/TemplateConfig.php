@@ -4,19 +4,14 @@ namespace Dynamic\CoreTools\ORM;
 
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\LiteralField;
-use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
-use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Assets\Image;
-use SilverStripe\CMS\Model\SiteTree;
 
 /**
- * Class TemplateConfig
- * @package Dynamic\CoreTools\Extensions
+ * Class TemplateConfig.
  *
  * @property string $TitleLogo
  * @property int $LogoID
@@ -41,7 +36,7 @@ class TemplateConfig extends DataExtension
      * @var array
      */
     private static $defaults = array(
-        'TitleLogo' => 'Title'
+        'TitleLogo' => 'Title',
     );
 
     /**
@@ -53,7 +48,7 @@ class TemplateConfig extends DataExtension
         $ImageField->getValidator()->allowedExtensions = array(
             'jpg',
             'gif',
-            'png'
+            'png',
         );
         $ImageField->setFolderName('Uploads/Logo');
         $ImageField->setIsMultiUpload(false);
@@ -61,7 +56,7 @@ class TemplateConfig extends DataExtension
         // options for logo or title display
         $logoOptions = array(
             'Logo' => 'Display Logo',
-            'Title' => 'Display Site Title and Slogan'
+            'Title' => 'Display Site Title and Slogan',
         );
 
         $fields->addFieldsToTab('Root.Template.Header', array(
@@ -69,7 +64,7 @@ class TemplateConfig extends DataExtension
             LiteralField::create('HeaderDescrip', '<p>Adjust the settings of your theme header.</p>'),
             HeaderField::create('BrandingHD', 'Branding', 2),
             OptionsetField::create('TitleLogo', 'Branding', $logoOptions),
-            $ImageField
+            $ImageField,
         ));
     }
 
