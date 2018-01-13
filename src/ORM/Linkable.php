@@ -78,10 +78,10 @@ class Linkable extends DataExtension
         $fields->removeByName('PageLinkID');
 
         $tree = (class_exists('DisplayLogicWrapper'))
-          ? DisplayLogicWrapper::create(
-              TreeDropdownField::create('PageLinkID', 'Link to Page', SiteTree::class)
-          )->displayIf('LinkType')->isEqualTo('Internal')->end()
-          : TreeDropdownField::create('PageLinkID', 'Link to Page', SiteTree::class);
+            ? DisplayLogicWrapper::create(
+                TreeDropdownField::create('PageLinkID', 'Link to Page', SiteTree::class)
+            )->displayIf('LinkType')->isEqualTo('Internal')->end()
+            : TreeDropdownField::create('PageLinkID', 'Link to Page', SiteTree::class);
 
         $label = (class_exists('DisplayLogicWrapper'))
           ? TextField::create('LinkLabel', 'Link Label')

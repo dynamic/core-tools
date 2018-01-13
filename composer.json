@@ -10,7 +10,7 @@
   "keywords": [
     "silverstripe"
   ],
-  "type": "silverstripe-module",
+  "type": "silverstripe-vendormodule",
   "license": "BSD-3-Clause",
   "repositories": [
     {
@@ -19,9 +19,10 @@
     }
   ],
   "require": {
-    "silverstripe/recipe-cms": "^1.0",
-    "dynamic/silverstripe-geocoder": "^1.0",
-    "symbiote/silverstripe-gridfieldextensions": "^3.0"
+    "silverstripe/recipe-cms": "^1.0@dev",
+    "silverstripe/vendor-plugin": "^1.0@dev",
+    "dynamic/silverstripe-geocoder": "^1.0@dev",
+    "symbiote/silverstripe-gridfieldextensions": "^3.0@dev"
   },
   "require-dev": {
     "phpunit/PHPUnit": "^5.7",
