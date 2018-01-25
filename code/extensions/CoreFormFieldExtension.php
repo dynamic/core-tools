@@ -18,12 +18,20 @@ class CoreFormFieldExtension extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->addFieldToTab('Root.FormOptions',
+        $fields->addFieldToTab('Root.Main',
             DropdownField::create(
                 'FieldWidth',
-                'Width of Fields',
+                'Width of Field',
                 $this->owner->dbObject('FieldWidth')->enumValues()
-            )
+            ), 'ExtraClass'
         );
+    }
+
+    /**
+     * @param FormField $field
+     */
+    public function afterUpdateFormField(FormField $field)
+    {
+        $field->addExtraClass($this->owner->FieldWidth);
     }
 }
