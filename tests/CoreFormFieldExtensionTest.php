@@ -24,4 +24,21 @@ class CoreFormFieldExtensionTest extends SapphireTest
 
         $this->assertInstanceOf(FieldList::class, $fields);
     }
+
+    /**
+     * Tests afterUpdateFormField()
+     */
+    public function testAfterUpdateFormField()
+    {
+        /** @var FormField $field */
+        $field = Injector::inst()->createWithArgs(FormField::class, ['test']);
+        /** @var CoreFormFieldExtensionTest_Object $obj */
+        $obj = Injector::inst()->create(CoreFormFieldExtensionTest_Object::class);
+        $obj->FieldWidth = 'full';
+
+        $this->assertNotContains('full', $field->extraClass());
+
+        $obj->afterUpdateFormField($field);
+        $this->assertContains('full', $field->extraClass());
+    }
 }
