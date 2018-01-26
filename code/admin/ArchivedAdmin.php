@@ -57,6 +57,8 @@ class ArchivedAdmin extends ModelAdmin
             $config->addComponent(new GridFieldUnArchiveAction());
         }
 
+        $this->extend('updateArchivedAdminForm', $form);
+
         return $form;
     }
 
