@@ -1,17 +1,29 @@
 SilverStripe\Security\Group:
   administrators:
     Title: Administrators
+  site-owners:
+    Title: "Site Owners"
 SilverStripe\Security\Permission:
   administrators:
     Code: ADMIN
     Type: 1
     Group: =>SilverStripe\Security\Group.administrators
+  social:
+    Code: Social_CRUD
+    Type: 1
+    Group: =>SilverStripe\Security\Group.site-owners
 SilverStripe\Security\Member:
   admin:
     FirstName: Default
     Surname: Admin
     Email: admin@dynamicagency.com
     Groups: =>SilverStripe\Security\Group.administrators
+  site-owner:
+    FirstName: "Site"
+    Surname: "Owner"
+    Email: "owner"
+    Password: "owner"
+    Groups: =>SilverStripe\Security\Group.site-owners
   default:
     FirstName: Default
     Surname: User
@@ -57,3 +69,18 @@ Dynamic\CoreTools\Model\NavigationColumn:
 Dynamic\CoreTools\Model\NavigationGroup:
   one:
     Title: "Group One"
+Dynamic\CoreTools\Model\SocialLink:
+   facebook:
+     Title: "Facebook"
+     Link: "example.com"
+     SortOrder: 1
+   twitter:
+     Title: "Twitter"
+     Link: "example.com"
+     SortOrder: 3
+   linked:
+     Title: "LinkedIn"
+     Link: "example.com"
+     SortOrder: 2
+Dynamic\CoreTools\Model\GlobalSiteSetting:
+  settings:
