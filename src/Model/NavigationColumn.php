@@ -2,6 +2,7 @@
 
 namespace Dynamic\CoreTools\Model;
 
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
@@ -123,8 +124,8 @@ class NavigationColumn extends DataObject
         if ($this->ID) {
             $config = GridFieldConfig_RecordEditor::create();
             $config->addComponent(new GridFieldOrderableRows('SortOrder'));
-            $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-            $config->removeComponentsByType('GridFieldDeleteAction');
+            $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
+            $config->removeComponentsByType(GridFieldDeleteAction::class);
             $config->addComponent(new GridFieldDeleteAction(false));
             $footerLinks = GridField::create(
                 'NavigationGroups',
