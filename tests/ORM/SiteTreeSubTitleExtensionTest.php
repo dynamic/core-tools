@@ -10,7 +10,7 @@ use SilverStripe\Forms\FieldList;
 /**
  * Class CoreToolsPageFieldsDataExtensionTest.
  */
-class CoreToolsPageFieldsDataExtensionTest extends SapphireTest
+class SiteTreeSubTitleExtensionTest extends SapphireTest
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class CoreToolsPageFieldsDataExtensionTest extends SapphireTest
         $fields = $object->getCMSFields();
 
         $this->assertInstanceOf(FieldList::class, $fields);
-        $this->assertNotNull($fields->dataFieldByName('PageTitle'));
+        $this->assertNotNull($fields->dataFieldByName('SubTitle'));
     }
 }
