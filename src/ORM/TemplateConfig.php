@@ -73,7 +73,7 @@ class TemplateConfig extends DataExtension
      */
     public function getSiteLogo()
     {
-        return ($this->owner->Logo()) ?? false;
+        return ($this->owner->Logo()) ? $this->owner->Logo() : false;
     }
 
     /**
