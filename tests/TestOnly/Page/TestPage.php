@@ -8,6 +8,7 @@ use Dynamic\CoreTools\ORM\PageSectionManager;
 use Dynamic\CoreTools\ORM\PageSectionRelation;
 use Dynamic\CoreTools\ORM\PromoRelation;
 use Dynamic\CoreTools\ORM\RecipientManager;
+use Dynamic\CoreTools\ORM\SiteTreeSubTitleExtension;
 use Page;
 use SilverStripe\Dev\TestOnly;
 use Dynamic\CoreTools\ORM\PromoManager;
@@ -62,6 +63,7 @@ class TestPage extends Page implements TestOnly
         TagManager::class,
         HeaderImageDataExtension::class,
         CoreToolsPageFieldsDataExtension::class,
+        SiteTreeSubTitleExtension::class,
         Linkable::class,
         RecipientManager::class,
     ];
