@@ -35,7 +35,7 @@ class PreviewExtension extends DataExtension
     );
 
     /**
-     * @var array 
+     * @var array
      */
     private static $owns = [
         'PreviewImage',
