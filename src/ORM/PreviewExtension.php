@@ -35,6 +35,13 @@ class PreviewExtension extends DataExtension
     );
 
     /**
+     * @var array
+     */
+    private static $owns = [
+        'PreviewImage',
+    ];
+
+    /**
      * @param FieldList $fields
      */
     public function updateCMSFields(FieldList $fields)
