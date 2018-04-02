@@ -20,7 +20,6 @@ class CoreToolsPageFieldsDataExtension extends DataExtension
      * @var array
      */
     private static $db = array(
-      'SubTitle' => 'Varchar(255)',
       'PageTitle' => 'Varchar(255)',
     );
 
@@ -29,11 +28,6 @@ class CoreToolsPageFieldsDataExtension extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->insertAfter(
-            TextField::create('SubTitle', 'Sub Title'),
-            'MenuTitle'
-        );
-
         $fields->removeByName('Metadata');
 
         $meta = ToggleCompositeField::create(
