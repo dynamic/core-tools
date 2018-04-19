@@ -7,15 +7,15 @@ tools:
   php_code_sniffer:
     config:
       standard: PSR2
-    php_cs_fixer:
-      extensions:
-        # Default:
-        - php
-      fixers: []
-      enabled: false
-      filter:
-        paths: [tests/*,code/*]
-        excluded_paths: []
+  php_cs_fixer:
+    extensions:
+      # Default:
+      - php
+    fixers: []
+    enabled: false
+    filter:
+      paths: [tests/*,code/*]
+      excluded_paths: []
 coding_style:
   php:
     indentation:
