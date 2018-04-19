@@ -56,14 +56,6 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     private static $required_permission = array('CMS_ACCESS_CMSMain', 'CMS_ACCESS_LeftAndMain');
 
     /**
-     * @var array
-     */
-    private static $db = [
-        "Title" => "Varchar(255)",
-        "Tagline" => "Varchar(255)",
-    ];
-
-    /**
      * @return FieldList
      */
     public function getCMSFields()
@@ -80,11 +72,6 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
             HiddenField::create('ID')
         );
         $tabMain->setTitle('Settings');
-
-        $fields->addFieldsToTab('Root.Main', [
-            new TextField("Title", _t(SiteConfig::class . '.SITETITLE', "Site title")),
-            new TextField("Tagline", _t(SiteConfig::class . '.SITETAGLINE', "Site Tagline/Slogan")),
-        ]);
 
         $this->extend('updateCMSFields', $fields);
 
