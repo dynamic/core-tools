@@ -10,16 +10,22 @@ use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\Tab;
 use SilverStripe\Forms\TabSet;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\TemplateGlobalProvider;
 use SilverStripe\Security\Security;
 
 /**
- * Class GlobalSiteSetting.
+ * Class GlobalSiteSetting
+ * @package Dynamic\CoreTools\Model
+ *
+ * @property string Title
+ * @property string Tagline
  */
 class GlobalSiteSetting extends DataObject implements PermissionProvider, TemplateGlobalProvider
 {
@@ -50,6 +56,14 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     private static $required_permission = array('CMS_ACCESS_CMSMain', 'CMS_ACCESS_LeftAndMain');
 
     /**
+     * @var array
+     */
+    private static $db = [
+        "Title" => "Varchar(255)",
+        "Tagline" => "Varchar(255)",
+    ];
+
+    /**
      * @return FieldList
      */
     public function getCMSFields()
@@ -66,6 +80,12 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
             HiddenField::create('ID')
         );
         $tabMain->setTitle('Settings');
+
+        $fields->addFieldsToTab('Root.Main', [
+            new TextField("Title", _t(SiteConfig::class . '.SITETITLE', "Site title")),
+            new TextField("Tagline", _t(SiteConfig::class . '.SITETAGLINE', "Site Tagline/Slogan")),
+        ]);
+
         $this->extend('updateCMSFields', $fields);
 
         return $fields;
@@ -131,6 +151,20 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
         }
 
         return Permission::checkMember($member, 'EDIT_GLOBAL_PERMISSION');
+    }
+
+    /**
+     * To duplicate into the site config (so stuff that relies on site config still works)
+     */
+    public function onBeforeWrite()
+    {
+        /** @var SiteConfig $siteconfig */
+        $siteconfig = SiteConfig::current_site_config();
+        $siteconfig->Title = $this->Title;
+        $siteconfig->Tagline = $this->Tagline;
+        $siteconfig->write();
+
+        parent::onBeforeWrite();
     }
 
     /**
