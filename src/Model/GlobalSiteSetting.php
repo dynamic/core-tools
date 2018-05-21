@@ -5,6 +5,7 @@ namespace Dynamic\CoreTools\Model;
 use Dynamic\CoreTools\Admin\GlobalSettingsAdmin;
 use Dynamic\SilverStripeGeocoder\AddressDataExtension;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
@@ -24,8 +25,7 @@ use SilverStripe\Security\Security;
  * Class GlobalSiteSetting
  * @package Dynamic\CoreTools\Model
  *
- * @property string Title
- * @property string Tagline
+ * @property bool $ReviewContent
  */
 class GlobalSiteSetting extends DataObject implements PermissionProvider, TemplateGlobalProvider
 {
@@ -43,9 +43,23 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     private static $description = 'Global settings (i.e. footer navigation)';
 
     /**
+     * @var array
+     */
+    private static $db = [
+        'ReviewContent' => 'Boolean',
+    ];
+
+    /**
      * @var string
      */
     private static $table_name = 'GlobalSiteSettings';
+
+    /**
+     * @var array
+     */
+    private static $defaults = [
+        'ReviewContent' => false,
+    ];
 
     /**
      * Default permission to check for 'LoggedInUsers' to create or edit pages.
@@ -53,7 +67,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
      * @var array
      * @config
      */
-    private static $required_permission = array('CMS_ACCESS_CMSMain', 'CMS_ACCESS_LeftAndMain');
+    private static $required_permission = ['CMS_ACCESS_CMSMain', 'CMS_ACCESS_LeftAndMain'];
 
     /**
      * @return FieldList
@@ -71,6 +85,13 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
             ),
             HiddenField::create('ID')
         );
+
+        $fields->addFieldToTab(
+            'Root.Main',
+            CheckboxField::create('ReviewContent')
+                ->setTitle('Show Review Content')
+        );
+
         $tabMain->setTitle('Settings');
 
         $this->extend('updateCMSFields', $fields);
@@ -159,8 +180,8 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
      */
     public function providePermissions()
     {
-        return array(
-            'EDIT_GLOBAL_PERMISSION' => array(
+        return [
+            'EDIT_GLOBAL_PERMISSION' => [
                 'name' => _t(
                     'CoreToolsConfig.EDIT_GLOBAL_PERMISSION',
                     'Manage Global Site configuration'
@@ -174,8 +195,8 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
                     'Ability to edit global access settings/top-level page permissions.'
                 ),
                 'sort' => 400,
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -183,6 +204,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
      * through {@link make_global_config()} if none is found.
      *
      * @return GlobalSiteSetting|DataObject
+     * @throws ValidationException
      */
     public static function current_global_config()
     {
@@ -196,7 +218,8 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     /**
      * Create {@link GlobalSiteSetting} with defaults from language file.
      *
-     * @return GlobalSiteSetting
+     * @return static
+     * @throws ValidationException
      */
     public static function make_global_config()
     {
@@ -207,12 +230,23 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     }
 
     /**
+     * @return bool
+     * @throws ValidationException
+     */
+    public static function review_content()
+    {
+        $config = GlobalSiteSetting::current_global_config();
+        return $config->ReviewContent;
+    }
+
+    /**
      * Add $GlobalConfig to all SSViewers.
      */
     public static function get_template_global_variables()
     {
-        return array(
+        return [
             'GlobalConfig' => 'current_global_config',
-        );
+            'ReviewContent' => ['method' => 'review_content'],
+        ];
     }
 }
