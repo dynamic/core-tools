@@ -73,6 +73,11 @@ class ContentObject extends DataObject
     ];
 
     /**
+     * @var bool
+     */
+    private static $versioned_gridfield_extensions = true;
+
+    /**
      * @var string
      */
     private static $table_name = 'ContentObject';

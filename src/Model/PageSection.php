@@ -6,6 +6,10 @@ use SilverStripe\Security\PermissionProvider;
 use SilverStripe\Security\Permission;
 use Page;
 
+/**
+ * Class PageSection
+ * @package Dynamic\CoreTools\Model
+ */
 class PageSection extends ContentObject implements PermissionProvider
 {
     /**
@@ -36,6 +40,11 @@ class PageSection extends ContentObject implements PermissionProvider
      * @var string
      */
     private static $table_name = 'PageSection';
+
+    /**
+     * @var bool
+     */
+    private static $versioned_gridfield_extensions = true;
 
     /**
      * @return \SilverStripe\Forms\FieldList

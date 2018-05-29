@@ -2,6 +2,7 @@
 
 namespace Dynamic\CoreTools\ORM;
 
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
@@ -10,7 +11,8 @@ use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
 /**
- * Class PageSectionManager.
+ * Class PageSectionManager
+ * @package Dynamic\CoreTools\ORM
  */
 class PageSectionManager extends DataExtension
 {
@@ -20,8 +22,8 @@ class PageSectionManager extends DataExtension
             // Sections
             $config = GridFieldConfig_RecordEditor::create()
                 ->addComponent(new GridFieldOrderableRows('SortOrder'))
-                ->removeComponentsByType('GridFieldAddExistingAutocompleter')
-                ->removeComponentsByType('GridFieldDeleteAction')
+                ->removeComponentsByType(GridFieldAddExistingAutocompleter::class)
+                ->removeComponentsByType(GridFieldDeleteAction::class)
                 ->addComponent(new GridFieldDeleteAction(false));
             $sectionsField = GridField::create(
                 'Sections',
