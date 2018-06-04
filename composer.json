@@ -1,49 +1,50 @@
 {
-  "name": "dynamic/core-tools",
-  "description": "core tools to build common page types",
-  "authors": [
-    {
-      "name": "Dynamic",
-      "email": "dev@dynamicagency.com"
-    }
-  ],
-  "keywords": [
-    "silverstripe"
-  ],
-  "type": "silverstripe-vendormodule",
-  "license": "BSD-3-Clause",
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://dynamicinc:I68blegDd@toran.dynamicagency.com/repo/private/"
-    }
-  ],
-  "require": {
-    "silverstripe/recipe-cms": "^1.0@dev",
-    "silverstripe/vendor-plugin": "^1.0@dev",
-    "dynamic/silverstripe-geocoder": "^1.0@dev",
-    "symbiote/silverstripe-gridfieldextensions": "^3.0@dev",
-    "unclecheese/display-logic": "^2.0"
-  },
-  "require-dev": {
-    "phpunit/PHPUnit": "^5.7",
-    "squizlabs/php_codesniffer": "*"
-  },
-  "config": {
-    "process-timeout": 600
-  },
-  "autoload": {
-    "psr-4": {
-      "Dynamic\\CoreTools\\": "src/",
-      "Dynamic\\CoreTools\\Tests\\": "tests/"
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "extra": {
-    "installer-name": "core-tools",
-    "branch-alias": {
-      "dev-master": "4.0.x-dev"
-    }
-  }
+	"name": "dynamic/core-tools",
+	"description": "core tools to build common page types",
+	"authors": [
+		{
+			"name": "Dynamic",
+			"email": "dev@dynamicagency.com"
+		}
+	],
+	"keywords": [
+		"silverstripe"
+	],
+	"type": "silverstripe-vendormodule",
+	"license": "BSD-3-Clause",
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://dynamicinc:I68blegDd@toran.dynamicagency.com/repo/private/"
+		}
+	],
+	"require": {
+		"silverstripe/recipe-cms": "^1.0@dev",
+		"silverstripe/vendor-plugin": "^1.0@dev",
+		"dynamic/silverstripe-geocoder": "^1.0@dev",
+		"symbiote/silverstripe-gridfieldextensions": "^3.0@dev",
+		"unclecheese/display-logic": "^2.0",
+		"dnadesign/silverstripe-elemental": "^2.0@dev"
+	},
+	"require-dev": {
+		"phpunit/PHPUnit": "^5.7",
+		"squizlabs/php_codesniffer": "*"
+	},
+	"config": {
+		"process-timeout": 600
+	},
+	"autoload": {
+		"psr-4": {
+			"Dynamic\\CoreTools\\": "src/",
+			"Dynamic\\CoreTools\\Tests\\": "tests/"
+		}
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"extra": {
+		"installer-name": "core-tools",
+		"branch-alias": {
+			"dev-master": "4.0.x-dev"
+		}
+	}
 }

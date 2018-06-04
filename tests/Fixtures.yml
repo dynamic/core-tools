@@ -44,19 +44,16 @@ SilverStripe\Assets\Image:
     ParentID: =>\Page.default
 Dynamic\CoreTools\Model\ContentObject:
   default:
-    Name: "Content Object"
     Title: "First Content Object"
 Dynamic\CoreTools\Model\PageSection:
   default:
-    Name: "Page Section"
     Title: "First Page Section"
 Dynamic\CoreTools\Model\Promo:
   default:
-    Name: "Promo"
     Title: "First Promo"
 Dynamic\CoreTools\Model\FileObject:
   default:
-    Name: "image.jpg"
+    Title: "image.jpg"
 Dynamic\CoreTools\Model\Tag:
   one:
     Title: "Tag One"

@@ -8,6 +8,7 @@ use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\ValidationException;
+use SilverStripe\Security\Member;
 
 /**
  * Class ContentObjectTest.
@@ -45,8 +46,8 @@ class ContentObjectTest extends SapphireTest
     public function testValidateName()
     {
         //$this->markTestSkipped('Skipped');
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
-        $object->Name = '';
+        $object = $this->objFromFixture(ContentObject::class, 'default');
+        $object->Title = '';
         $this->setExpectedException(ValidationException::class);
         $object->write();
     }
@@ -56,12 +57,12 @@ class ContentObjectTest extends SapphireTest
      */
     public function testCanView()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $object = $this->objFromFixture(ContentObject::class, 'default');
 
-        $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canView($admin));
 
-        $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertTrue($object->canView($member));
     }
 
@@ -70,12 +71,12 @@ class ContentObjectTest extends SapphireTest
      */
     public function testCanEdit()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $object = $this->objFromFixture(ContentObject::class, 'default');
 
-        $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canEdit($admin));
 
-        $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertTrue($object->canEdit($member));
     }
 
@@ -84,12 +85,12 @@ class ContentObjectTest extends SapphireTest
      */
     public function testCanDelete()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $object = $this->objFromFixture(ContentObject::class, 'default');
 
-        $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canDelete($admin));
 
-        $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertTrue($object->canDelete($member));
     }
 
@@ -98,12 +99,12 @@ class ContentObjectTest extends SapphireTest
      */
     public function testCanCreate()
     {
-        $object = $this->objFromFixture('Dynamic\\CoreTools\\Model\\ContentObject', 'default');
+        $object = $this->objFromFixture(ContentObject::class, 'default');
 
-        $admin = $this->objFromFixture('SilverStripe\\Security\\Member', 'admin');
+        $admin = $this->objFromFixture(Member::class, 'admin');
         $this->assertTrue($object->canCreate($admin));
 
-        $member = $this->objFromFixture('SilverStripe\\Security\\Member', 'default');
+        $member = $this->objFromFixture(Member::class, 'default');
         $this->assertTrue($object->canCreate($member));
     }
 }

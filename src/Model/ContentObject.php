@@ -2,6 +2,10 @@
 
 namespace Dynamic\CoreTools\Model;
 
+use DNADesign\Elemental\Forms\TextCheckboxGroupField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
@@ -30,40 +34,38 @@ class ContentObject extends DataObject
     /**
      * @var array
      */
-    private static $db = array(
-      'Name' => 'Varchar(255)',
-      'Title' => 'Varchar(255)',
-      'Content' => 'HTMLText',
-    );
+    private static $db = [
+        'Title' => 'Varchar(255)',
+        'ShowTitle' => 'Boolean',
+        'Content' => 'HTMLText',
+    ];
 
     /**
      * @var array
      */
-    private static $has_one = array(
-      'Image' => Image::class,
-    );
+    private static $has_one = [
+        'Image' => Image::class,
+    ];
 
     /**
      * @var string
      */
-    private static $default_sort = 'Name ASC';
+    private static $default_sort = 'Title ASC';
 
     /**
      * @var array
      */
-    private static $summary_fields = array(
-      'Image.CMSThumbnail' => 'Image',
-      'Name' => 'Name',
-      'Title' => 'Title',
-    );
+    private static $summary_fields = [
+        'Image.CMSThumbnail' => 'Image',
+        'Title' => 'Title',
+    ];
 
     /**
      * @var array
      */
-    private static $searchable_fields = array(
-      'Name' => 'Name',
-      'Title' => 'Title',
-    );
+    private static $searchable_fields = [
+        'Title' => 'Title',
+    ];
 
     /**
      * @var array
@@ -87,21 +89,29 @@ class ContentObject extends DataObject
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            // Add a combined field for "Title" and "Displayed" checkbox in a Bootstrap input group
+            $fields->removeByName('ShowTitle');
+            $fields->replaceField(
+                'Title',
+                TextCheckboxGroupField::create(
+                    TextField::create('Title', _t(__CLASS__ . '.TitleLabel', 'Title (displayed if checked)')),
+                    CheckboxField::create('ShowTitle', _t(__CLASS__ . '.ShowTitleLabel', 'Displayed'))
+                )
+                    ->setName('TitleAndDisplayed')
+            );
 
-        $fields->dataFieldByName('Name')
-          ->setDescription('For internal reference only');
+            $ImageField = UploadField::create('Image', 'Image')
+                ->setFolderName('Uploads/ContentObjects')
+                ->setIsMultiUpload(false)
+                ->setAllowedFileCategories('image');
+            $ImageField->getValidator()
+                ->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
 
-        $ImageField = UploadField::create('Image', 'Image')
-          ->setFolderName('Uploads/ContentObjects')
-          ->setIsMultiUpload(false)
-          ->setAllowedFileCategories('image');
-        $ImageField->getValidator()
-          ->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
+            $fields->insertBefore($ImageField, 'Content');
+        });
 
-        $fields->insertBefore($ImageField, 'Content');
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     /**
@@ -111,8 +121,8 @@ class ContentObject extends DataObject
     {
         $result = parent::validate();
 
-        if (!$this->Name) {
-            $result->addError('Name is required before you can save');
+        if (!$this->Title) {
+            $result->addError('Title is required before you can save');
         }
 
         return $result;
@@ -122,7 +132,7 @@ class ContentObject extends DataObject
      * Set permissions, allow all users to access by default.
      * Override in descendant classes, or use PermissionProvider.
      *
-     * @param null  $member
+     * @param null $member
      * @param array $context
      *
      * @return bool
