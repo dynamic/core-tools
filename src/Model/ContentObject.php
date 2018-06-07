@@ -75,6 +75,13 @@ class ContentObject extends DataObject
     ];
 
     /**
+     * @var array 
+     */
+    private static $owns = [
+        'Image',
+    ];
+
+    /**
      * @var bool
      */
     private static $versioned_gridfield_extensions = true;
