@@ -75,7 +75,7 @@ class ContentObject extends DataObject
     ];
 
     /**
-     * @var array 
+     * @var array
      */
     private static $owns = [
         'Image',
