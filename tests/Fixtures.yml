@@ -3,6 +3,7 @@ SilverStripe\Security\Group:
     Title: Administrators
   site-owners:
     Title: "Site Owners"
+
 SilverStripe\Security\Permission:
   administrators:
     Code: ADMIN
@@ -12,6 +13,7 @@ SilverStripe\Security\Permission:
     Code: Social_CRUD
     Type: 1
     Group: =>SilverStripe\Security\Group.site-owners
+
 SilverStripe\Security\Member:
   admin:
     FirstName: Default
@@ -28,13 +30,15 @@ SilverStripe\Security\Member:
     FirstName: Default
     Surname: User
     Email: user@dynamicagency.com
+
 SilverStripe\Assets\Image:
   header:
     Title: "Header Image"
   preview:
     Title: "Preview Image"
   logo:
-    Name: Logo
+    Name: "Logo"
+
 \Page:
   default:
     Title: "Page One"
@@ -42,42 +46,30 @@ SilverStripe\Assets\Image:
   subpage:
     Title: "Sub Page"
     ParentID: =>\Page.default
+
 Dynamic\CoreTools\Model\ContentObject:
   default:
     Title: "First Content Object"
+
 Dynamic\CoreTools\Model\PageSection:
   default:
     Title: "First Page Section"
+
 Dynamic\CoreTools\Model\Promo:
   default:
     Title: "First Promo"
+
 Dynamic\CoreTools\Model\FileObject:
   default:
     Title: "image.jpg"
+
 Dynamic\CoreTools\Model\Tag:
   one:
     Title: "Tag One"
+
 Dynamic\CoreTools\Model\EmailRecipient:
   default:
     Name: "George Constanza"
-Dynamic\CoreTools\Model\NavigationColumn:
-  one:
-    Title: "Column One"
-Dynamic\CoreTools\Model\NavigationGroup:
-  one:
-    Title: "Group One"
-Dynamic\CoreTools\Model\SocialLink:
-   facebook:
-     Title: "Facebook"
-     Link: "example.com"
-     SortOrder: 1
-   twitter:
-     Title: "Twitter"
-     Link: "example.com"
-     SortOrder: 3
-   linked:
-     Title: "LinkedIn"
-     Link: "example.com"
-     SortOrder: 2
+
 Dynamic\CoreTools\Model\GlobalSiteSetting:
   settings:
