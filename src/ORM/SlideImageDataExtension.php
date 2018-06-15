@@ -19,7 +19,7 @@ class SlideImageDataExtension extends DataExtension
     /**
      * @param FieldList $fields
      */
-    public function updateCMSFields(FieldList $fields)
+    public function updateSlideImageFields(FieldList $fields)
     {
         $fields->removeByName([
             'PageID',
