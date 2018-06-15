@@ -2,6 +2,14 @@
 
 namespace Dynamic\CoreTools\ORM;
 
+use Dynamic\CoreTools\Model\HeaderImage;
+use SilverShop\HasOneField\HasOneButtonField;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\LabelField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\AssetAdmin\Forms\UploadField;
@@ -18,7 +26,7 @@ class HeaderImageDataExtension extends DataExtension
      * @var array
      */
     private static $has_one = array(
-        'HeaderImage' => Image::class,
+        'HeaderImage' => HeaderImage::class,
     );
 
     /**
@@ -26,20 +34,23 @@ class HeaderImageDataExtension extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $ImageField = UploadField::create('HeaderImage', 'Header Image')
-            ->setFolderName('Uploads/HeaderImages')
-            ->setIsMultiUpload(false);
-        $ImageField->getValidator()->allowedExtensions = array(
-            'jpg',
-            'jpeg',
-            'gif',
-            'png',
+        $fields->removeByName("HeaderImageID");
+
+        if ($this->owner->HeaderImage()->exists()) {
+            $img_field = LiteralField::create("img", $this->owner->HeaderImage()->Image()->ScaleHeight(100));
+        } else {
+            $img_field = HiddenField::create('img');
+        }
+
+        $header_field = FieldGroup::create(
+            $img_field,
+            HasOneButtonField::create("HeaderImage", "", $this->owner)
+        )->setTitle('Header Image');
+
+        $fields->insertAfter(
+            'Title',
+            $header_field
         );
-        $ImageField->getValidator()
-            ->setAllowedMaxFileSize(CORE_TOOLS_IMAGE_SIZE_LIMIT);
-        $fields->addFieldsToTab('Root.Images', array(
-            $ImageField,
-        ));
     }
 
     /**

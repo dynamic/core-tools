@@ -1,0 +1,125 @@
+<?php
+
+namespace Dynamic\CoreTools\Model;
+
+use Sheadawson\Linkable\Forms\LinkField;
+use Sheadawson\Linkable\Models\Link;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Security;
+
+class HeaderImage extends DataObject
+{
+    /**
+     * @var array
+     */
+    private static $db = [
+        'Title' => 'Varchar(255)',
+        'Content' => 'HTMLText',
+    ];
+
+    /**
+     * @var array
+     */
+    private static $has_one = [
+        'Page' => SiteTree::class,
+        'HeaderLink' => Link::class,
+        'Image' => Image::class,
+    ];
+
+    /**
+     * @var array
+     */
+    private static $owns = [
+        'Image',
+    ];
+
+    /**
+     * @return \SilverStripe\Forms\FieldList
+     */
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+
+        $fields->removeByName([
+            'HeaderLinkID',
+            'Image',
+        ]);
+
+        $fields->insertAfter(
+            'Content',
+            LinkField::create('HeaderLinkID', 'Link')
+        );
+
+        $image_field = UploadField::create('Image', 'Header Image')
+            ->setFolderName('Uploads/HeaderImages')
+            ->setIsMultiUpload(false);
+        $image_field->getValidator()->allowedExtensions = array(
+            'jpg',
+            'jpeg',
+            'gif',
+            'png',
+        );
+
+        $fields->insertBefore(
+            'Title',
+            $image_field
+        );
+
+        return $fields;
+    }
+
+    /**
+     * @param null $member
+     * @param array $context
+     * @return bool
+     */
+    public function canCreate($member = null, $context = [])
+    {
+        if (!$member) {
+            $member = Security::getCurrentUser();
+        }
+
+        if ($this->Page()) {
+            return $this->Page()->canCreate($member, $context);
+        }
+
+        return parent::canCreate($member);
+    }
+
+    /**
+     * @param null $member
+     * @return bool
+     */
+    public function canEdit($member = null)
+    {
+        if (!$member) {
+            $member = Security::getCurrentUser();
+        }
+
+        if ($this->Page()) {
+            return $this->Page()->canEdit($member);
+        }
+
+        return parent::canEdit($member);
+    }
+
+    /**
+     * @param null $member
+     * @return bool
+     */
+    public function canDelete($member = null)
+    {
+        if (!$member) {
+            $member = Security::getCurrentUser();
+        }
+
+        if ($this->Page()) {
+            return $this->Page()->canDelete($member);
+        }
+
+        return parent::canDelete($member);
+    }
+}
