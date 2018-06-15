@@ -32,17 +32,19 @@ SilverStripe\Security\Member:
     Email: user@dynamicagency.com
 
 SilverStripe\Assets\Image:
-  header:
-    Title: "Header Image"
   preview:
     Title: "Preview Image"
   logo:
     Name: "Logo"
 
+Dynamic\CoreTools\Model\HeaderImage:
+  header:
+    Title: "Header Image"
+
 \Page:
   default:
     Title: "Page One"
-    HeaderImageID: =>SilverStripe\Assets\Image.header
+    HeaderImageID: =>Dynamic\CoreTools\Model\HeaderImage.header
   subpage:
     Title: "Sub Page"
     ParentID: =>\Page.default

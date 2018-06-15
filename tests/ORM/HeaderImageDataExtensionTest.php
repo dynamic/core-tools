@@ -2,6 +2,7 @@
 
 namespace Dynamic\CoreTools\Tests\ORM;
 
+use Dynamic\CoreTools\Model\HeaderImage;
 use Dynamic\CoreTools\Tests\TestOnly\Page\TestPage;
 use SilverStripe\Assets\Image;
 use SilverStripe\Dev\SapphireTest;
@@ -47,18 +48,18 @@ class HeaderImageDataExtensionTest extends SapphireTest
         $page = new TestPage();
         $subpage = new TestPage();
         $subpage->ParentID = $page->ID;
-        $image = $this->objFromFixture(Image::class, 'header');
+        $image = $this->objFromFixture(HeaderImage::class, 'header');
 
         $this->assertNull($subpage->getPageHeaderImage());
 
         $page->HeaderImageID = $image->ID;
         $page->write();
 
-        $this->assertInstanceOf(Image::class, $page->getPageHeaderImage());
+        $this->assertInstanceOf(HeaderImage::class, $page->getPageHeaderImage());
         //$this->assertInstanceOf(Image::class, $subpage->getPageHeaderImage());
 
         $subpage->HeaderImageID = $image->ID;
         $subpage->write();
-        $this->assertInstanceOf(Image::class, $subpage->getPageHeaderImage());
+        $this->assertInstanceOf(HeaderImage::class, $subpage->getPageHeaderImage());
     }
 }
