@@ -37,6 +37,11 @@ class HeaderImage extends DataObject
     ];
 
     /**
+     * @var string
+     */
+    private static $table_name = 'HeaderImage';
+
+    /**
      * @return \SilverStripe\Forms\FieldList
      */
     public function getCMSFields()
