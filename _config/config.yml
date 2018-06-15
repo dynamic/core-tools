@@ -2,3 +2,6 @@
 Name: coretoolsconfig
 ---
 
+DNADesign\Elemental\ElementalEditor:
+  extensions:
+    - Dynamic\CoreTools\ORM\ElementalEditorExtension
