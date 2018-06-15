@@ -50,7 +50,6 @@ class HeaderImageDataExtension extends DataExtension
         $fields->insertAfter(
             'Title',
             $header_field
-
         );
     }
 
