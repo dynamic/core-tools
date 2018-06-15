@@ -33,8 +33,15 @@ class ElementListLayoutExtension extends DataExtension
             DropdownField::create(
                 'Columns',
                 'Columns',
-                [3 => 'One Quarter', 4 => 'One Third', 6 => 'Half', 8 => 'Two Thirds',
-                 9 => 'Three Quarters', 10 => '10 Columns Centered', 12 => 'Full']
+                [
+                    3 => 'One Quarter',
+                    4 => 'One Third',
+                    6 => 'Half',
+                    8 => 'Two Thirds',
+                    9 => 'Three Quarters',
+                    10 => '10 Columns Centered',
+                    12 => 'Full'
+                ]
             )
         );
     }
