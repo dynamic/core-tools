@@ -51,6 +51,7 @@ class HeaderImage extends DataObject
         $fields->removeByName([
             'HeaderLinkID',
             'Image',
+            'PageID',
         ]);
 
         $fields->insertAfter(
@@ -88,10 +89,10 @@ class HeaderImage extends DataObject
         }
 
         if ($this->Page()) {
-            return $this->Page()->canCreate($member, $context);
+            return $this->Page()->canEdit($member, $context);
         }
 
-        return parent::canCreate($member);
+        return parent::canEdit($member);
     }
 
     /**
