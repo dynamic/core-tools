@@ -34,37 +34,46 @@ class NavigationGroup extends DataObject
     );
 
     /**
+     * @var string
+     */
+    private static $default_sort = 'SortOrder';
+
+    /**
      * @return FieldList
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-
-        $fields->removeByName(array(
-            'SortOrder',
-            'NavigationColumnID',
-            'NavigationLinks',
-        ));
-
-        if ($this->ID) {
-            $config = GridFieldConfig_RelationEditor::create();
-            if (class_exists('GridFieldSortableRows')) {
-                $config->addComponent(new GridFieldSortableRows('SortOrder'));
-            }
-            if (class_exists('GridFieldAddExistingSearchButton')) {
-                $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-                $config->addComponent(new GridFieldAddExistingSearchButton());
-            }
-            $config->removeComponentsByType($config->getComponentByType('GridFieldAddNewButton'));
-            $promos = $this->NavigationLinks()->sort('SortOrder');
-            $linksField = GridField::create('NavigationLinks', 'Navigation Links', $promos, $config);
-
-            $fields->addFieldsToTab('Root.Main', array(
-                $linksField,
+        $this->beforeUpdateCMSFields(function($fields) {
+            /** @var \FieldList $fields */
+            $fields->removeByName(array(
+                'SortOrder',
+                'NavigationColumnID',
+                'NavigationLinks',
             ));
-        }
 
-        return $fields;
+            if ($this->ID) {
+                $config = GridFieldConfig_RelationEditor::create();
+                $config->removeComponentsByType(GridFieldAddNewButton::class)
+                    ->removeComponentsByType(GridFieldSortableHeader::class)
+                    ->addComponents(new GridFieldTitleHeader());
+
+                if (class_exists('GridFieldOrderableRows')) {
+                    $config->addComponent(new GridFieldOrderableRows('SortOrder'));
+                }
+                if (class_exists('GridFieldAddExistingSearchButton')) {
+                    $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
+                    $config->addComponent(new GridFieldAddExistingSearchButton());
+                }
+                $promos = $this->NavigationLinks()->sort('SortOrder');
+                $linksField = GridField::create('NavigationLinks', 'Navigation Links', $promos, $config);
+
+                $fields->addFieldsToTab('Root.Main', array(
+                    $linksField,
+                ));
+            }
+        });
+
+        return parent::getCMSFields();
     }
 
     /**

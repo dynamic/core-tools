@@ -26,35 +26,47 @@ class NavigationColumn extends DataObject
     );
 
     /**
+     * @var string
+     */
+    private static $default_sort = 'SortOrder';
+
+    /**
      * @return FieldList
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-
-        $fields->removeByName(array(
-            'SiteConfigID',
-            'SortOrder',
-            'NavigationGroups',
-        ));
-
-        // navigation groups
-        if ($this->ID) {
-            $config = GridFieldConfig_RecordEditor::create();
-            if (class_exists('GridFieldSortableRows')) {
-                $config->addComponent(new GridFieldSortableRows('SortOrder'));
-            }
-            $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-            $config->removeComponentsByType('GridFieldDeleteAction');
-            $config->addComponent(new GridFieldDeleteAction(false));
-            $footerLinks = GridField::create('NavigationGroups', 'Navigation Groups', $this->NavigationGroups()->sort('SortOrder'), $config);
-
-            $fields->addFieldsToTab('Root.Main', array(
-                $footerLinks,
+        $this->beforeUpdateCMSFields(function($fields) {
+            /** @var \FieldList $fields */
+            $fields->removeByName(array(
+                'SiteConfigID',
+                'GlobalConfigID',
+                'SortOrder',
+                'NavigationGroups',
             ));
-        }
 
-        return $fields;
+            // navigation groups
+            if ($this->ID) {
+                $config = GridFieldConfig_RecordEditor::create();
+                $config->removeComponentsByType(GridFieldSortableHeader::class)
+                    ->removeComponentsByType(GridFieldAddExistingAutocompleter::class)
+                    ->removeComponentsByType(GridFieldDeleteAction::class)
+                    ->addComponents(
+                        new GridFieldDeleteAction(false),
+                        new GridFieldTitleHeader()
+                    );
+
+                if (class_exists('GridFieldOrderableRows')) {
+                    $config->addComponent(new GridFieldOrderableRows('SortOrder'));
+                }
+
+                $footerLinks = GridField::create('NavigationGroups', 'Navigation Groups', $this->NavigationGroups()->sort('SortOrder'), $config);
+
+                $fields->addFieldsToTab('Root.Main', array(
+                    $footerLinks,
+                ));
+            }
+        });
+        return parent::getCMSFields();
     }
 
     /**
