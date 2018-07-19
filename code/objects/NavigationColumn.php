@@ -47,14 +47,14 @@ class NavigationColumn extends DataObject
             // navigation groups
             if ($this->ID) {
                 $config = GridFieldConfig_RecordEditor::create();
-                $config->removeComponentsByType(GridFieldSortableHeader::class)
-                    ->removeComponentsByType(GridFieldAddExistingAutocompleter::class)
+                $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class)
                     ->removeComponentsByType(GridFieldDeleteAction::class)
-                    ->addComponents(
-                        new GridFieldDeleteAction(false),
-                        new GridFieldTitleHeader()
-                    );
+                    ->addComponents(new GridFieldDeleteAction(false));
 
+                if (class_exists('GridFieldTitleHeader')) {
+                    $config->removeComponentsByType(GridFieldSortableHeader::class)
+                        ->addComponent(new GridFieldTitleHeader());
+                }
                 if (class_exists('GridFieldOrderableRows')) {
                     $config->addComponent(new GridFieldOrderableRows('SortOrder'));
                 }

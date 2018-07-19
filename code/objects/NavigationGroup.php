@@ -53,12 +53,14 @@ class NavigationGroup extends DataObject
 
             if ($this->ID) {
                 $config = GridFieldConfig_RelationEditor::create();
-                $config->removeComponentsByType(GridFieldAddNewButton::class)
-                    ->removeComponentsByType(GridFieldSortableHeader::class)
-                    ->addComponents(new GridFieldTitleHeader());
+                $config->removeComponentsByType(GridFieldAddNewButton::class);
 
                 if (class_exists('GridFieldOrderableRows')) {
                     $config->addComponent(new GridFieldOrderableRows('SortOrder'));
+                }
+                if (class_exists('GridFieldTitleHeader')) {
+                    $config->removeComponentsByType(GridFieldSortableHeader::class)
+                        ->addComponent(new GridFieldTitleHeader());
                 }
                 if (class_exists('GridFieldAddExistingSearchButton')) {
                     $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
