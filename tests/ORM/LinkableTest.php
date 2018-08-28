@@ -60,7 +60,7 @@ class LinkableTest extends SapphireTest
      */
     public function testLinkStatus()
     {
-        $object = $this->objFromFixture(ContentObject::class, 'default');
+        $object = $this->objFromFixture(TestPage::class, 'default');
         $this->assertEquals($object->LinkStatus(), $object->getLinkStatus());
     }
 }
