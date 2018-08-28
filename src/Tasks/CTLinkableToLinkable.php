@@ -166,7 +166,9 @@ class CTLinkableToLinkable extends BuildTask
     {
         $newLink = Link::create();
 
-        if ($object->LinkLabel) $newLink->Title = $object->LinkLabel;
+        if ($object->LinkLabel) {
+            $newLink->Title = $object->LinkLabel;
+        }
 
         switch ($object->LinkType) {
             case 'Internal':
@@ -197,16 +199,19 @@ class CTLinkableToLinkable extends BuildTask
 
             if (isset($versioned)) {
                 $object->writeToStage(Versioned::DRAFT);
-                static::write_line("{$object->ClassName} with ID {$object->ID} associated with link record {$newLink->ID}\n");
+                static::write_line(
+                    "{$object->ClassName} with ID {$object->ID} associated with link record {$newLink->ID}\n"
+                );
                 if ($publishState) {
                     $object->publishRecursively();
                     static::write_line("\t{$object->ClassName} with ID {$object->ID} published\n");
                 }
             } else {
                 $object->write();
-                static::write_line("{$object->ClassName} with ID {$object->ID} associated with link record {$newLink->ID}\n");
+                static::write_line(
+                    "{$object->ClassName} with ID {$object->ID} associated with link record {$newLink->ID}\n"
+                );
             }
-
         }
     }
 
