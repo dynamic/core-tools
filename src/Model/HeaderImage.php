@@ -79,6 +79,23 @@ class HeaderImage extends DataObject
 
     /**
      * @param null $member
+     * @return bool
+     */
+    public function canView($member = null)
+    {
+        if (!$member) {
+            $member = Security::getCurrentUser();
+        }
+
+        if ($this->Page()) {
+            return $this->Page()->canEdit($member);
+        }
+
+        return parent::canEdit($member);
+    }
+
+    /**
+     * @param null $member
      * @param array $context
      * @return bool
      */
@@ -89,7 +106,7 @@ class HeaderImage extends DataObject
         }
 
         if ($this->Page()) {
-            return $this->Page()->canEdit($member, $context);
+            return $this->Page()->canEdit($member);
         }
 
         return parent::canEdit($member);
