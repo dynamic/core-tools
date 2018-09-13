@@ -26,13 +26,14 @@ class DynamicPageSeoExtension extends DataExtension
                 DropdownField::create('FacebookPageType', 'Type', FacebookMetaGenerator::getValidTypes()),
                 TextField::create(
                     'FacebookPageTitle',
-                    'Title')->setAttribute('placeholder',
-                    $this->getOwner()->Title
+                    'Title'
                 )
+                    ->setAttribute('placeholder', $this->getOwner()->Title)
                     ->setRightTitle('If blank, inherits default page title')
                     ->setTargetLength(45, 25, 70),
                 UploadField::create(
-                    'FacebookPageImage', 'Image'
+                    'FacebookPageImage',
+                    'Image'
                 )
                     ->setRightTitle('Facebook recommends images to be 1200 x 630 pixels. If no image is 
                         provided, facebook will choose the first image that appears on the page which usually 
@@ -52,12 +53,14 @@ class DynamicPageSeoExtension extends DataExtension
             ]),
             ToggleCompositeField::create(null, 'Twitter SEO', [
                 TextField::create(
-                    'TwitterPageTitle', 'Title'
+                    'TwitterPageTitle',
+                    'Title'
                 )
                     ->setAttribute('placeholder', $this->getOwner()->Title)
                     ->setRightTitle('If blank, inherits default page title')->setTargetLength(45, 25, 70),
                 UploadField::create(
-                    'TwitterPageImage', 'Image'
+                    'TwitterPageImage',
+                    'Image'
                 )
                     ->setRightTitle('Must be at least 280x150 pixels')
                     ->setFolderName('seo'),
