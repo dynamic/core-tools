@@ -37,8 +37,7 @@ class DynamicPageSeoExtension extends DataExtension
                 )
                     ->setRightTitle('Facebook recommends images to be 1200 x 630 pixels. If no image is 
                         provided, facebook will choose the first image that appears on the page which usually 
-                        has bad results'
-                    )
+                        has bad results')
                     ->setFolderName('seo'),
                 TextareaField::create('FacebookPageDescription', 'Description')
                     ->setAttribute(
@@ -47,8 +46,7 @@ class DynamicPageSeoExtension extends DataExtension
                             $this->getOwner()->dbObject('Content')->LimitCharacters(297)
                     )
                     ->setRightTitle('If blank, inherits meta description if it exists or gets the first 
-                        297 characters from content'
-                    )
+                        297 characters from content')
                     ->setTargetLength(200, 160, 320),
             ]),
             ToggleCompositeField::create(null, 'Twitter SEO', [
