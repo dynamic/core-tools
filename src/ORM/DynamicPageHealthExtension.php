@@ -22,7 +22,12 @@ class DynamicPageHealthExtension extends DataExtension
 
         $fields->addFieldsToTab('Root.SEO', [
             ToggleCompositeField::create(null, 'SEO Health Analysis', [
-                GoogleSearchPreview::create('GoogleSearchPreview', 'Search Preview', $this->getOwner(), $this->owner->getRenderedHtmlDomParser()),
+                GoogleSearchPreview::create(
+                    'GoogleSearchPreview',
+                    'Search Preview',
+                    $this->getOwner(),
+                    $this->owner->getRenderedHtmlDomParser()
+                ),
                 TextField::create('FocusKeyword', 'Set focus keyword'),
                 HealthAnalysisField::create('ContentAnalysis', 'Content Analysis', $this->getOwner()),
             ])
