@@ -20,8 +20,8 @@ class CancelFormAction extends FormAction
      *
      * @param string $link
      * @param string $title
-     * @param null   $form
-     * @param null   $extraData
+     * @param null $form
+     * @param null $extraData
      * @param string $extraClass
      */
     public function __construct(
@@ -30,9 +30,10 @@ class CancelFormAction extends FormAction
         $form = null,
         $extraData = null,
         $extraClass = ''
-    ) {
+    )
+    {
         if (!$title) {
-            $title = _t('CancelFormAction.CANCEL', 'Cancel');
+            $title = _t('Dynamic\\CoreTools\\Form\\CancelFormAction.CANCEL', 'Cancel');
         }
 
         $this->setLink($link);
@@ -70,7 +71,7 @@ class CancelFormAction extends FormAction
     public function Field($properties = array())
     {
         $attributes = array(
-            'class' => 'cancel btn '.($this->extraClass() ? $this->extraClass() : ''),
+            'class' => 'cancel btn ' . ($this->extraClass() ? $this->extraClass() : ''),
             'id' => $this->id(),
             'name' => $this->action,
             'href' => $this->getLink(),
@@ -78,13 +79,19 @@ class CancelFormAction extends FormAction
 
         if ($this->isReadonly()) {
             $attributes['disabled'] = 'disabled';
-            $attributes['class'] = $attributes['class'].' disabled';
+            $attributes['class'] = $attributes['class'] . ' disabled';
         }
 
-        return FormField::create_tag(
-            'a',
-            $attributes,
-            $this->buttonContent ? $this->buttonContent : $this->Title()
-        );
+        $entity = "<a";
+
+        foreach ($attributes as $attributeKey => $attributeValue) {
+            $entity .= " {$attributeKey}=\"{$attributeValue}\"";
+        }
+
+        $this->buttonContent = $this->buttonContent ? $this->buttonContent : $this->Title();
+
+        $entity .= "> {$this->buttonContent}</a>";
+
+        return $entity;
     }
 }
