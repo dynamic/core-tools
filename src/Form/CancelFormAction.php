@@ -30,8 +30,7 @@ class CancelFormAction extends FormAction
         $form = null,
         $extraData = null,
         $extraClass = ''
-    )
-    {
+    ) {
         if (!$title) {
             $title = _t('Dynamic\\CoreTools\\Form\\CancelFormAction.CANCEL', 'Cancel');
         }

@@ -5,13 +5,17 @@ namespace Dynamic\CoreTools\ORM;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Core\Extension;
 
+/**
+ * Class PrevNextExtension
+ * @package Dynamic\CoreTools\ORM
+ */
 class PrevNextExtension extends Extension
 {
     /**
-     * previous/next page links on detail pages and related
+     * previous/next page links for pages in the same section
      *
      * @param string $mode
-     * @return bool|\SilverStripe\ORM\DataObject
+     * @return bool
      */
     public function PrevNext($mode = 'next')
     {
