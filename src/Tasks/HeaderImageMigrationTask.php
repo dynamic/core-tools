@@ -49,7 +49,7 @@ class HeaderImageMigrationTask extends BuildTask
         $migrationList = [];
 
         foreach ($this->getClassList() as $class) {
-            if ($class::singleton()->hasExtension(HeaderImageDataExtension::class)) {
+            if ($class::has_extension(HeaderImageDataExtension::class)) {
                 $migrationList[] = $class;
             }
         }
@@ -92,25 +92,27 @@ class HeaderImageMigrationTask extends BuildTask
     {
         foreach ($this->getRecords() as $records) {
             foreach ($records as $record) {
-                $versioned = $record->hasExtension(Versioned::class);
+                if ($record->HeaderImageID) {
+                    $versioned = $record->hasExtension(Versioned::class);
 
-                if ($versioned) {
-                    $isPublished = $record->isPublished();
-                }
+                    if ($versioned) {
+                        $isPublished = $record->isPublished();
+                    }
 
-                $headerImage = HeaderImage::create();
-                $headerImage->ImageID = $record->HeaderImageID;
-                $headerImage->write();
+                    $headerImage = HeaderImage::create();
+                    $headerImage->ImageID = $record->HeaderImageID;
+                    $headerImage->write();
 
-                $record->HeaderImageID = $headerImage->ID;
+                    $record->HeaderImageID = $headerImage->ID;
 
-                $record->write();
+                    $record->write();
 
-                if ($versioned) {
-                    $record->writeToStage(Versioned::DRAFT);
+                    if ($versioned) {
+                        $record->writeToStage(Versioned::DRAFT);
 
-                    if (isset($isPublished) && $isPublished) {
-                        $record->publishRecursive();
+                        if (isset($isPublished) && $isPublished) {
+                            $record->publishRecursive();
+                        }
                     }
                 }
             }
