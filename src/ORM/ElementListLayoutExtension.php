@@ -16,9 +16,12 @@ class ElementListLayoutExtension extends DataExtension
      * @var array
      */
     private static $db = [
-        'Columns' => 'Enum("3, 4, 6, 8, 9, 10, 12")',
+        'Columns' => 'Enum("3,4,6,8,9,10,12")',
     ];
 
+    /**
+     * @var array
+     */
     private static $defaults = [
         'Columns' => 12,
     ];
@@ -28,21 +31,23 @@ class ElementListLayoutExtension extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
+        $cols = [
+            '3' => 'One Quarter',
+            '4' => 'One Third',
+            '6' => 'Half',
+            '8' => 'Two Thirds',
+            '9' => 'Three Quarters',
+            '10' => '10 Columns Centered',
+            '12' => 'Full'
+        ];
+
         $fields->addFieldToTab(
             'Root.Layout',
             DropdownField::create(
                 'Columns',
                 'Columns',
-                [
-                    3 => 'One Quarter',
-                    4 => 'One Third',
-                    6 => 'Half',
-                    8 => 'Two Thirds',
-                    9 => 'Three Quarters',
-                    10 => '10 Columns Centered',
-                    12 => 'Full'
-                ]
-            )
+                $cols
+            )->setEmptyString('select')
         );
     }
 }
