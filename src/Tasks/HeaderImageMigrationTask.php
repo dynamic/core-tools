@@ -92,7 +92,11 @@ class HeaderImageMigrationTask extends BuildTask
     {
         foreach ($this->getRecords() as $records) {
             foreach ($records as $record) {
-                if ($record->HeaderImageID) {
+                if ($record->HeaderImageID > 0) {
+                    $fileID = $record->HeaderImageID;
+
+                    echo "Original Header Image File ID {$fileID}\n";
+
                     $versioned = $record->hasExtension(Versioned::class);
 
                     if ($versioned) {
@@ -100,10 +104,12 @@ class HeaderImageMigrationTask extends BuildTask
                     }
 
                     $headerImage = HeaderImage::create();
-                    $headerImage->ImageID = $record->HeaderImageID;
+                    $headerImage->ImageID = $fileID;
                     $headerImage->write();
 
-                    $record->HeaderImageID = $headerImage->ID;
+                    echo "New Header Image Object ID {$headerImage->ID} with related image {$headerImage->ImageID}\n";
+
+                    $record->setComponent('HeaderImage', $headerImage);
 
                     $record->write();
 
