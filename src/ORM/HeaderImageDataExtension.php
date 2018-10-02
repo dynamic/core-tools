@@ -44,7 +44,7 @@ class HeaderImageDataExtension extends DataExtension
 
         $header_field = FieldGroup::create(
             $img_field,
-            HasOneButtonField::create("HeaderImage", "", $this->owner)
+            HasOneButtonField::create($this->owner, "HeaderImage", "")
         )->setTitle('Header Image');
 
         $fields->insertAfter(
