@@ -7,6 +7,7 @@ use Dynamic\CoreTools\ORM\HeaderImageDataExtension;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Dev\BuildTask;
+use SilverStripe\Dev\Debug;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 
@@ -90,35 +91,44 @@ class HeaderImageMigrationTask extends BuildTask
      */
     protected function migrateHeaderImage()
     {
+        /**
+         * track the object ID's that have been updated to prevent running the update twice on the same record.
+         * Note: This currently assumes all objects are decendents of SiteTree.
+         */
+        $updated = [];
+
         foreach ($this->getRecords() as $records) {
             foreach ($records as $record) {
                 if ($record->HeaderImageID > 0) {
-                    $fileID = $record->HeaderImageID;
+                    if (!in_array($record->ID, $updated)) {
+                        $fileID = $record->HeaderImageID;
 
-                    echo "Original Header Image File ID {$fileID}\n";
+                        echo "Original Header Image File ID {$fileID}\n";
 
-                    $versioned = $record->hasExtension(Versioned::class);
+                        $versioned = $record->hasExtension(Versioned::class);
 
-                    if ($versioned) {
-                        $isPublished = $record->isPublished();
-                    }
-
-                    $headerImage = HeaderImage::create();
-                    $headerImage->ImageID = $fileID;
-                    $headerImage->write();
-
-                    echo "New Header Image Object ID {$headerImage->ID} with related image {$headerImage->ImageID}\n";
-
-                    $record->setComponent('HeaderImage', $headerImage);
-
-                    $record->write();
-
-                    if ($versioned) {
-                        $record->writeToStage(Versioned::DRAFT);
-
-                        if (isset($isPublished) && $isPublished) {
-                            $record->publishRecursive();
+                        if ($versioned) {
+                            $isPublished = $record->isPublished();
                         }
+
+                        $headerImage = HeaderImage::create();
+                        $headerImage->ImageID = $fileID;
+                        $headerImage->write();
+
+                        echo "New Header Image Object ID {$headerImage->ID} with related image {$headerImage->ImageID}\n";
+
+                        $record->setComponent('HeaderImage', $headerImage);
+
+                        $record->write();
+
+                        if ($versioned) {
+                            $record->writeToStage(Versioned::DRAFT);
+
+                            if (isset($isPublished) && $isPublished) {
+                                $record->publishRecursive();
+                            }
+                        }
+                        $updated[] = $record->ID;
                     }
                 }
             }
