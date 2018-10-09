@@ -33,7 +33,7 @@ class PrevNextExtension extends Extension
         }
 
         if ($page = SiteTree::get()->where($filter)->sort($sort)->first()) {
-            return $page->Link();
+            return $page;
         }
         return false;
     }
