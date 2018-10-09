@@ -115,7 +115,7 @@ class HeaderImageMigrationTask extends BuildTask
                         $headerImage->ImageID = $fileID;
                         $headerImage->write();
 
-                        echo "New Header Image Object ID {$headerImage->ID} with related image {$headerImage->ImageID}\n";
+                        echo "New Header Image ID {$headerImage->ID} with related image {$headerImage->ImageID}\n";
 
                         $record->setComponent('HeaderImage', $headerImage);
 
