@@ -9,6 +9,7 @@ use SilverStripe\Core\ClassInfo;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\Dev\Debug;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DB;
 use SilverStripe\Versioned\Versioned;
 
 /**
@@ -117,17 +118,19 @@ class HeaderImageMigrationTask extends BuildTask
 
                         echo "New Header Image ID {$headerImage->ID} with related image {$headerImage->ImageID}\n";
 
-                        $record->setComponent('HeaderImage', $headerImage);
+                        $this->setHeaderData($record, $headerImage);
 
-                        $record->write();
+                        //$record->setComponent('HeaderImage', $headerImage);
 
-                        if ($versioned) {
+                        //$record->write();
+
+                        /*if ($versioned) {
                             $record->writeToStage(Versioned::DRAFT);
 
                             if (isset($isPublished) && $isPublished) {
                                 $record->publishRecursive();
                             }
-                        }
+                        }*/
                         $updated[] = $record->ID;
                     }
                 }
@@ -157,6 +160,22 @@ class HeaderImageMigrationTask extends BuildTask
     {
         foreach ($class::get() as $record) {
             yield $record;
+        }
+    }
+
+    /**
+     * @param $record
+     * @param $headerImage
+     */
+    protected function setHeaderData($record, $headerImage)
+    {
+        $table = $record->getSchema()->tableForField($record->ClassName, 'HeaderImageID');
+
+        DB::prepared_query("UPDATE \"{$table}\" SET \"HeaderImageID\" = ? WHERE ID = ?", [$headerImage->ID, $record->ID]);
+
+        if ($record->hasExtension(Versioned::class)) {
+            DB::prepared_query("UPDATE \"{$table}_Versions\" SET \"HeaderImageID\" = ? WHERE RecordID = ?", [$headerImage->ID, $record->ID]);
+            DB::prepared_query("UPDATE \"{$table}_Live\" SET \"HeaderImageID\" = ? WHERE ID = ?", [$headerImage->ID, $record->ID]);
         }
     }
 }
