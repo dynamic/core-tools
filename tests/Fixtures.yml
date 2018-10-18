@@ -65,7 +65,7 @@ Dynamic\CoreTools\Model\FileObject:
   default:
     Title: "image.jpg"
 
-Dynamic\CoreTools\Model\Tag:
+Dynamic\CoreTools\Model\CoreTag:
   one:
     Title: "Tag One"
 
