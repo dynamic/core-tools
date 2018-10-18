@@ -171,14 +171,20 @@ class HeaderImageMigrationTask extends BuildTask
     {
         $table = $record->getSchema()->tableForField($record->ClassName, 'HeaderImageID');
 
-        DB::prepared_query("UPDATE \"{$table}\" SET \"HeaderImageID\" = ? WHERE ID = ?",
-            [$headerImage->ID, $record->ID]);
+        DB::prepared_query(
+            "UPDATE \"{$table}\" SET \"HeaderImageID\" = ? WHERE ID = ?",
+            [$headerImage->ID, $record->ID]
+        );
 
         if ($record->hasExtension(Versioned::class)) {
-            DB::prepared_query("UPDATE \"{$table}_Versions\" SET \"HeaderImageID\" = ? WHERE RecordID = ?",
-                [$headerImage->ID, $record->ID]);
-            DB::prepared_query("UPDATE \"{$table}_Live\" SET \"HeaderImageID\" = ? WHERE ID = ?",
-                [$headerImage->ID, $record->ID]);
+            DB::prepared_query(
+                "UPDATE \"{$table}_Versions\" SET \"HeaderImageID\" = ? WHERE RecordID = ?",
+                [$headerImage->ID, $record->ID]
+            );
+            DB::prepared_query(
+                "UPDATE \"{$table}_Live\" SET \"HeaderImageID\" = ? WHERE ID = ?",
+                [$headerImage->ID, $record->ID]
+            );
         }
     }
 }
