@@ -2,6 +2,7 @@
 
 namespace Dynamic\CoreTools\Tests\TestOnly\Page;
 
+use Dynamic\CoreTools\Model\CoreTag;
 use Dynamic\CoreTools\ORM\CoreToolsPageFieldsDataExtension;
 use Dynamic\CoreTools\ORM\Linkable;
 use Dynamic\CoreTools\ORM\PageSectionManager;
@@ -16,7 +17,6 @@ use Dynamic\CoreTools\ORM\PreviewExtension;
 use Dynamic\CoreTools\ORM\TagManager;
 use Dynamic\CoreTools\ORM\HeaderImageDataExtension;
 use Dynamic\CoreTools\Model\PageSection;
-use Dynamic\CoreTools\Model\Tag;
 
 /**
  * Class TestPage.
@@ -43,7 +43,7 @@ class TestPage extends Page implements TestOnly
      * @var array
      */
     private static $many_many = array(
-        'Tags' => Tag::class,
+        'Tags' => CoreTag::class,
     );
 
     /**

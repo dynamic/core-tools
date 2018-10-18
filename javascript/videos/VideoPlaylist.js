@@ -1,7 +1,7 @@
-$(document).ready(function(){
+$(document).ready(function () {
     objecthtml = $("#video").html();
 
-    $('body').on('click','.youtubeVideo',function(e){
+    $('body').on('click','.youtubeVideo',function (e) {
         e.preventDefault();
         $('#results li').removeClass("current");
         $(this).parent().addClass("current");
@@ -16,7 +16,8 @@ $(document).ready(function(){
     });
 });
 
-function buildYoutubeLink(url, title){
+function buildYoutubeLink(url, title)
+{
     var frame = '<iframe width="561" height="342" src="//www.youtube.com/embed/'+url+'" frameborder="0" allowfullscreen></iframe>';
     $("#video").html(frame);
     $('#currentVidTitle').html(title);

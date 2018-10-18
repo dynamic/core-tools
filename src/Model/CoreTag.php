@@ -10,7 +10,7 @@ use Page;
  *
  * @property string $Title
  */
-class Tag extends DataObject
+class CoreTag extends DataObject
 {
     /**
      * @var array
@@ -29,7 +29,7 @@ class Tag extends DataObject
     /**
      * @var string
      */
-    private static $table_name = 'Tag';
+    private static $table_name = 'CoreTag';
 
     /**
      * @return \SilverStripe\ORM\ValidationResult;
