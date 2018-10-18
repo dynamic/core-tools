@@ -2,7 +2,7 @@
 
 namespace Dynamic\CoreTools\Tests\Model;
 
-use Dynamic\CoreTools\Model\Tag;
+use Dynamic\CoreTools\Model\CoreTag;
 use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Security\IdentityStore;
 use SilverStripe\Security\Member;
@@ -10,9 +10,9 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\ValidationException;
 
 /**
- * Class TagTest.
+ * Class CoreTagTest.
  */
-class TagTest extends SapphireTest
+class CoreTagTest extends SapphireTest
 {
     /**
      * @var string
@@ -37,7 +37,7 @@ class TagTest extends SapphireTest
      */
     public function testValidateTitle()
     {
-        $object = $this->objFromFixture(Tag::class, 'one');
+        $object = $this->objFromFixture(CoreTag::class, 'one');
         $object->Title = '';
         $this->setExpectedException(ValidationException::class);
         $object->write();
@@ -48,7 +48,7 @@ class TagTest extends SapphireTest
      */
     public function testCanView()
     {
-        $object = $this->objFromFixture(Tag::class, 'one');
+        $object = $this->objFromFixture(CoreTag::class, 'one');
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canView());
         $this->logOut();
@@ -64,7 +64,7 @@ class TagTest extends SapphireTest
      */
     public function testCanEdit()
     {
-        $object = $this->objFromFixture(Tag::class, 'one');
+        $object = $this->objFromFixture(CoreTag::class, 'one');
         $object->write();
         $objectID = $object->ID;
         $this->logInWithPermission('ADMIN');
@@ -73,7 +73,7 @@ class TagTest extends SapphireTest
         $this->assertTrue($object->canEdit());
         $object->Title = 'Changed Title';
         $object->write();
-        $testEdit = Tag::get()->byID($objectID);
+        $testEdit = CoreTag::get()->byID($objectID);
         $this->assertEquals($testEdit->Title, 'Changed Title');
         $this->logOut();
     }
@@ -83,7 +83,7 @@ class TagTest extends SapphireTest
      */
     public function testCanDelete()
     {
-        $object = $this->objFromFixture(Tag::class, 'one');
+        $object = $this->objFromFixture(CoreTag::class, 'one');
         $object->write();
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canDelete());
@@ -97,7 +97,7 @@ class TagTest extends SapphireTest
      */
     public function testCanCreate()
     {
-        $object = Injector::inst()->create(Tag::class);
+        $object = Injector::inst()->create(CoreTag::class);
         $this->logInWithPermission('ADMIN');
         $this->assertTrue($object->canCreate());
         $this->logOut();

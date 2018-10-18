@@ -1,0 +1,16 @@
+---
+Name: coretools-legacy
+---
+SilverStripe\ORM\DatabaseAdmin:
+  classname_value_remapping:
+    ContentObject: Dynamic\CoreTools\Model\ContentObject
+    CoreTag: Dynamic\CoreTools\Model\CoreTag
+    EmailRecipient: Dynamic\CoreTools\Model\EmailRecipient
+    FileObject: Dynamic\CoreTools\Model\FileObject
+    GlobalSiteSetting: Dynamic\CoreTools\Model\GlobalSiteSetting
+    HeaderImage: Dynamic\CoreTools\Model\HeaderImage
+    NavigationColumn: Dynamic\TemplateConfig\Model\NavigationColumn
+    NavigationGroup: Dynamic\TemplateConfig\Model\NavigationGroup
+    PageSection: Dynamic\CoreTools\Model\PageSection
+    Promo: Dynamic\CoreTools\Model\Promo
+    Dynamic\CoreTools\Model\SocialLink: Dynamic\TemplateConfig\Model\SocialLink
