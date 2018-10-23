@@ -9,8 +9,15 @@ SilverStripe\ORM\DatabaseAdmin:
     FileObject: Dynamic\CoreTools\Model\FileObject
     GlobalSiteSetting: Dynamic\CoreTools\Model\GlobalSiteSetting
     HeaderImage: Dynamic\CoreTools\Model\HeaderImage
-    NavigationColumn: Dynamic\TemplateConfig\Model\NavigationColumn
-    NavigationGroup: Dynamic\TemplateConfig\Model\NavigationGroup
     PageSection: Dynamic\CoreTools\Model\PageSection
     Promo: Dynamic\CoreTools\Model\Promo
+
+---
+Only:
+  moduleexists: 'silverstripetemplate-configconfig'
+---
+SilverStripe\ORM\DatabaseAdmin:
+  classname_value_remapping:
+    NavigationColumn: Dynamic\TemplateConfig\Model\NavigationColumn
+    NavigationGroup: Dynamic\TemplateConfig\Model\NavigationGroup
     Dynamic\CoreTools\Model\SocialLink: Dynamic\TemplateConfig\Model\SocialLink
