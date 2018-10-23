@@ -39,12 +39,12 @@ class HeaderImageDataExtension extends DataExtension
         if ($this->owner->HeaderImage()->exists()) {
             $img_field = LiteralField::create("img", $this->owner->HeaderImage()->Image()->ScaleHeight(100));
         } else {
-            $img_field = HiddenField::create('img');
+            $img_field = HiddenField::create('img', '', '');
         }
 
         $header_field = FieldGroup::create(
             $img_field,
-            HasOneButtonField::create($this->owner, "HeaderImage", "")
+            HasOneButtonField::create($this->owner, "HeaderImage", '', '')
         )->setTitle('Header Image');
 
         $fields->insertAfter(
