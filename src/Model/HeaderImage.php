@@ -7,6 +7,7 @@ use Sheadawson\Linkable\Models\Link;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Security;
 
@@ -46,35 +47,35 @@ class HeaderImage extends DataObject
      */
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $this->beforeUpdateCMSFields(function (FieldList $fields) {
+            $fields->removeByName([
+                'HeaderLinkID',
+                'Image',
+                'PageID',
+            ]);
 
-        $fields->removeByName([
-            'HeaderLinkID',
-            'Image',
-            'PageID',
-        ]);
+            $fields->insertAfter(
+                'Content',
+                LinkField::create('HeaderLinkID', 'Link')
+            );
 
-        $fields->insertAfter(
-            'Content',
-            LinkField::create('HeaderLinkID', 'Link')
-        );
+            $image_field = UploadField::create('Image', 'Header Image')
+                ->setFolderName('Uploads/HeaderImages')
+                ->setIsMultiUpload(false);
+            $image_field->getValidator()->allowedExtensions = [
+                'jpg',
+                'jpeg',
+                'gif',
+                'png',
+            ];
 
-        $image_field = UploadField::create('Image', 'Header Image')
-            ->setFolderName('Uploads/HeaderImages')
-            ->setIsMultiUpload(false);
-        $image_field->getValidator()->allowedExtensions = array(
-            'jpg',
-            'jpeg',
-            'gif',
-            'png',
-        );
+            $fields->insertBefore(
+                'Title',
+                $image_field
+            );
+        });
 
-        $fields->insertBefore(
-            'Title',
-            $image_field
-        );
-
-        return $fields;
+        return parent::getCMSFields();
     }
 
     /**
