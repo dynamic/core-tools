@@ -22,17 +22,17 @@ class PreviewExtension extends DataExtension
     /**
      * @var array
      */
-    private static $db = array(
+    private static $db = [
         'PreviewTitle' => 'HTMLVarchar(255)',
         'Abstract' => 'HTMLText',
-    );
+    ];
 
     /**
      * @var array
      */
-    private static $has_one = array(
+    private static $has_one = [
         'PreviewImage' => Image::class,
-    );
+    ];
 
     /**
      * @var array
@@ -46,19 +46,27 @@ class PreviewExtension extends DataExtension
      */
     public function updateCMSFields(FieldList $fields)
     {
-        $fields->removeByName(array(
+        $fields->removeByName([
             'PreviewTitle',
             'Abstract',
             'PreviewImage',
-        ));
+        ]);
 
         $thumbnail = (class_exists('ImageUploadField'))
             ? ImageUploadField::create('PreviewImage')
             : UploadField::create('PreviewImage');
         $thumbnail->setFolderName('Uploads/Preview');
 
+        if ($this->owner->config()->preview_thumbnail_field_title) {
+            $thumbnail->setTitle($this->owner->config()->preview_thumbnail_field_title);
+        } else {
+            $thumbnail->setTitle('Preview Image');
+        }
+
         // custom field description
-        if ($this->owner->config()->customThumbnailTitle) {
+        if ($thumbnail->setDescription($this->owner->config()->preview_thumbnail_field_description)) {
+            $thumbnail->setDescription($this->owner->config()->preview_thumbnail_field_description);
+        } elseif ($this->owner->config()->customThumbnailTitle) {
             $thumbnail->setDescription($this->owner->config()->customThumbnailTitle);
         } else {
             $thumbnail->setDescription('optional, small image displayed with preview');
@@ -76,6 +84,10 @@ class PreviewExtension extends DataExtension
                 ->setDescription('optional, defaults to first paragraph of Content'),
             $thumbnail
         );
+
+        if ($this->owner->hasMethod('updatePreviewFields')) {
+            $previewFields = $this->owner->updatePreviewFields($previewFields);
+        }
 
         // Preview
         $previewField = ToggleCompositeField::create(
