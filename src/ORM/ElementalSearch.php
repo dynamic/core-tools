@@ -65,19 +65,33 @@ class ElementalSearch extends DataExtension
 
         // create content block placeholder
         if (!$this->owner->ID) {
-            if (!$this->owner->ElementAreaID) {
-                $area = ElementalArea::create();
-                $area->write();
+            foreach ($this->owner->hasOne() as $name => $type) {
+                if ($name !== 'ElementalArea') {
+                    continue;
+                }
 
-                $this->owner->ElementAreaID = $area->ID;
+                if (!is_subclass_of($type, ElementalArea::class)) {
+                    continue;
+                }
+
+                if (!$this->owner->ElementAreaID) {
+                    $area = ElementalArea::create();
+                    $area->write();
+
+                    $this->owner->ElementAreaID = $area->ID;
+                }
+                $content = ElementContent::create();
+                $content->Title = "Main Content";
+                $content->ParentID = $this->owner->ElementalArea()->ID;
+                $content->write();
             }
-            $content = ElementContent::create();
-            $content->Title = "Main Content";
-            $content->ParentID = $this->owner->ElementalArea()->ID;
-            $content->write();
         }
 
         // set Content to output of blocks for search
-        $this->owner->SearchContent = $this->owner->getElementsForSearch();
+        if ($this->owner->hasMethod('getElementsForSearch')) {
+            $this->owner->SearchContent = $this->owner->getElementsForSearch();
+        } else {
+            $this->owner->SearchContent = $this->owner->Content;
+        }
     }
 }
