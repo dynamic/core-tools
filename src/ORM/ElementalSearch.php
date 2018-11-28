@@ -25,11 +25,11 @@ class ElementalSearch extends DataExtension
         'SearchFields' => [
             'type' => 'fulltext',
             'columns' => ['SearchContent'],
-        ]
+        ],
     ];
 
     private static $create_table_options = [
-        MySQLSchemaManager::ID => 'ENGINE=MyISAM'
+        MySQLSchemaManager::ID => 'ENGINE=MyISAM',
     ];
 
     /**
@@ -52,7 +52,7 @@ class ElementalSearch extends DataExtension
     public function seoContentFields()
     {
         return [
-            'SearchContent'
+            'SearchContent',
         ];
     }
 
@@ -89,7 +89,12 @@ class ElementalSearch extends DataExtension
 
         // set Content to output of blocks for search
         if ($this->owner->hasMethod('getElementsForSearch')) {
-            $this->owner->SearchContent = $this->owner->getElementsForSearch();
+            $this->owner->SearchContent =
+                ltrim(
+                    rtrim(
+                        preg_replace("/\r|\n|\s+/", " ", $this->owner->getElementsForSearch())
+                    )
+                );
         } else {
             $this->owner->SearchContent = $this->owner->Content;
         }
