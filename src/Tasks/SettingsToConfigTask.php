@@ -2,7 +2,7 @@
 
 namespace Dynamic\CoreTools\Tasks;
 
-use Dynamic\CoreTools\ORM\GlobalSiteSetting;
+use Dynamic\CoreTools\Model\GlobalSiteSetting;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\SiteConfig\SiteConfig;
