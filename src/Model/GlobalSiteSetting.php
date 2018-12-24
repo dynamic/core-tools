@@ -52,7 +52,7 @@ class GlobalSiteSetting extends DataObject implements PermissionProvider, Templa
     /**
      * @var string
      */
-    private static $table_name = 'GlobalSiteSettings';
+    private static $table_name = 'GlobalSiteSetting';
 
     /**
      * @var array
