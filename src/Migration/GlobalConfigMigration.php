@@ -5,6 +5,7 @@ namespace Dynamic\CoreTools\Migration;
 use Dynamic\CompanyConfig\Model\CompanyConfigSetting;
 use Dynamic\TemplateConfig\Model\TemplateConfigSetting;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\ORM\DataExtension;
 
 class GlobalConfigMigration extends DataExtension
 {
