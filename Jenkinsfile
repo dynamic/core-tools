@@ -12,7 +12,7 @@ pipeline {
 
     stage('PHPUnit') {
       steps {
-        sh 'vendor/bin/phpunit --coverage-clover=build/logs/clover.xml --log-junit=build/logs/junit.xml'
+        sh 'vendor/bin/phpunit --coverage-clover=build/logs/clover.xml --log-junit=build/logs/junit.xml --coverage-xml=build/logs/coverage'
       }
     }
 
