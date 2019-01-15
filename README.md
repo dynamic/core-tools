@@ -44,6 +44,14 @@ To use `Tags`, add the `Tags` relation to the dataobjects and pages desired:
 	private static $many_many = array(
 		'Tags' => CoreTag::class,
 	);
+	
+## Elemental
+
+```
+DNADesign\Elemental\ElementalEditor:
+  extensions:
+    - Dynamic\CoreTools\ORM\ElementalEditorExtension
+```
 
 ## Upgrading
 
