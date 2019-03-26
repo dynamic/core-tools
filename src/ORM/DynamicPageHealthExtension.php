@@ -20,8 +20,12 @@ class DynamicPageHealthExtension extends DataExtension
             return;
         }
 
+        $fields->removeByName([
+            'SEOHealthAnalysis'
+        ]);
+
         $fields->addFieldsToTab('Root.SEO', [
-            ToggleCompositeField::create(null, 'SEO Health Analysis', [
+            ToggleCompositeField::create('SEOHealthAnalysis', 'SEO Health Analysis', [
                 GoogleSearchPreview::create(
                     'GoogleSearchPreview',
                     'Search Preview',
