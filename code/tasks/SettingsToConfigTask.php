@@ -32,7 +32,13 @@ class SettingsToConfigTask extends BuildTask
         if ($siteConfig->hasExtension('CompanyConfig')) {
             foreach (Config::inst()
                          ->get('CompanyConfig', 'db') as $key => $value) {
-                $config->$key = $siteConfig->$key;
+                if ($key === 'Phone') {
+                    $config->Phone = $siteConfig->PhoneNumber;
+                } elseif ($key === 'Email') {
+                    $config->Email = $siteConfig->EmailAddress;
+                } else {
+                    $config->$key = $siteConfig->$key;
+                }
             }
         }
 
