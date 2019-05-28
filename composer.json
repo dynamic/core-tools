@@ -15,7 +15,7 @@
 	"repositories": [
 		{
 			"type": "composer",
-			"url": "https://dynamicinc:I68blegDd@toran.dynamicagency.com/repo/private/"
+			"url": "https://repo.packagist.com/dynamic/"
 		}
 	],
 	"require": {
