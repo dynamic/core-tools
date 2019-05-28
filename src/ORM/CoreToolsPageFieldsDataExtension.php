@@ -44,7 +44,7 @@ class CoreToolsPageFieldsDataExtension extends DataExtension
             ->setRightTitle(
                 _t(
                     'SiteTree.METADESCHELP',
-                    'Search engines use this content for displaying search results 
+                    'Search engines use this content for displaying search results
                     (although it will not influence their ranking).'
                 )
             )
@@ -53,8 +53,8 @@ class CoreToolsPageFieldsDataExtension extends DataExtension
             ->setRightTitle(
                 _t(
                     'SiteTree.METAEXTRAHELP',
-                    'HTML tags for additional meta information. 
-                        For example &lt;meta name="customName" content="your custom content here" /&gt;'
+                    'HTML tags for additional meta information.
+                        For example <meta name="customName" content="your custom content here" />'
                 )
             )
             ->addExtraClass('help');
