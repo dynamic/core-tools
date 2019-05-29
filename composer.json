@@ -15,7 +15,7 @@
 	"repositories": [
 		{
 			"type": "composer",
-			"url": "https://dynamicinc:I68blegDd@toran.dynamicagency.com/repo/private/"
+			"url": "https://repo.packagist.com/dynamic/"
 		}
 	],
 	"require": {
@@ -28,8 +28,8 @@
 		"dnadesign/silverstripe-elemental": "^2@dev || ^3@dev || ^4@dev"
 	},
 	"require-dev": {
-		"phpunit/PHPUnit": "^5.7",
-		"squizlabs/php_codesniffer": "*",
+		"phpunit/phpunit": "^5.7",
+		"squizlabs/php_codesniffer": "^3.0",
 		"phpmd/phpmd": "^2.6",
 		"sebastian/phpcpd": "^3.0",
 		"phploc/phploc": "^4.0",
