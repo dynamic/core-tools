@@ -1,6 +1,13 @@
 # Change Log
 
-## [4.0.4](https://github.com/dynamic/core-tools/tree/4.0.4) (2019-05-28)
+## [4.0.5](https://github.com/dynamic/core-tools/tree/4.0.5) (2019-07-17)
+[Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.4...4.0.5)
+
+**Merged pull requests:**
+
+- BUGFIX ContentObject $searchable\_fields error [\#176](https://github.com/dynamic/core-tools/pull/176) ([jsirish](https://github.com/jsirish))
+
+## [4.0.4](https://github.com/dynamic/core-tools/tree/4.0.4) (2019-05-29)
 [Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.3...4.0.4)
 
 **Merged pull requests:**
@@ -254,7 +261,6 @@
 - ENHANCEMENT $FileLinkURL to return appropriate value [\#67](https://github.com/dynamic/core-tools/pull/67) ([muskie9](https://github.com/muskie9))
 - ENHANCEMENT SingleSortGroupedList [\#66](https://github.com/dynamic/core-tools/pull/66) ([muskie9](https://github.com/muskie9))
 - BUGFIX: remove duplication `TestSiteConfig` declaration [\#65](https://github.com/dynamic/core-tools/pull/65) ([jsirish](https://github.com/jsirish))
-- UtilityNavigationManager - initial [\#63](https://github.com/dynamic/core-tools/pull/63) ([jsirish](https://github.com/jsirish))
 
 ## [1.0.0-alpha1](https://github.com/dynamic/core-tools/tree/1.0.0-alpha1) (2016-11-18)
 **Implemented enhancements:**
@@ -287,6 +293,7 @@
 **Merged pull requests:**
 
 - Travis - refactor tests [\#64](https://github.com/dynamic/core-tools/pull/64) ([jsirish](https://github.com/jsirish))
+- UtilityNavigationManager - initial [\#63](https://github.com/dynamic/core-tools/pull/63) ([jsirish](https://github.com/jsirish))
 - FooterNavigationManager [\#62](https://github.com/dynamic/core-tools/pull/62) ([jsirish](https://github.com/jsirish))
 - CollectionExtension - updateCollectionForm [\#58](https://github.com/dynamic/core-tools/pull/58) ([jsirish](https://github.com/jsirish))
 - ENHANCEMENT DataList::byUrlSegment\(\) [\#56](https://github.com/dynamic/core-tools/pull/56) ([muskie9](https://github.com/muskie9))
