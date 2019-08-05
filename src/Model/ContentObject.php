@@ -3,12 +3,12 @@
 namespace Dynamic\CoreTools\Model;
 
 use DNADesign\Elemental\Forms\TextCheckboxGroupField;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\AssetAdmin\Forms\UploadField;
-use SilverStripe\Assets\Image;
 use SilverStripe\Versioned\Versioned;
 
 /**
@@ -103,8 +103,11 @@ class ContentObject extends DataObject
             $fields->removeByName('ShowTitle');
             $fields->replaceField(
                 'Title',
-                TextCheckboxGroupField::create()
-                    ->setName($this->fieldLabel('Title'))
+                TextCheckboxGroupField::create(
+                    TextField::create('Title', _t(__CLASS__ . '.TitleLabel', 'Title (displayed if checked)')),
+                    CheckboxField::create('ShowTitle', _t(__CLASS__ . '.ShowTitleLabel', 'Displayed'))
+                )
+                    ->setName('TitleAndDisplayed')
             );
 
             $ImageField = UploadField::create('Image', 'Image')
