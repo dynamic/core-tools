@@ -1,17 +1,24 @@
 # Change Log
 
-## [4.0.5](https://github.com/dynamic/core-tools/tree/4.0.5) (2019-07-17)
-[Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.4...4.0.5)
+## [5.0.0](https://github.com/dynamic/core-tools/tree/5.0.0) (2019-08-30)
+[Full Changelog](https://github.com/dynamic/core-tools/compare/4.1.0...5.0.0)
 
 **Merged pull requests:**
 
+- Removed archive button in ManyLinksManager grid field [\#180](https://github.com/dynamic/core-tools/pull/180) ([mak001](https://github.com/mak001))
+- UPDATE elemental constraint to 4 [\#179](https://github.com/dynamic/core-tools/pull/179) ([muskie9](https://github.com/muskie9))
+- Revert "Fixed content objects throwing errors in the cms" [\#178](https://github.com/dynamic/core-tools/pull/178) ([muskie9](https://github.com/muskie9))
+
+## [4.1.0](https://github.com/dynamic/core-tools/tree/4.1.0) (2019-08-05)
+[Full Changelog](https://github.com/dynamic/core-tools/compare/4.1.1...4.1.0)
+
+## [4.1.1](https://github.com/dynamic/core-tools/tree/4.1.1) (2019-08-05)
+[Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.3...4.1.1)
+
+**Merged pull requests:**
+
+- Fixed content objects throwing errors in the cms [\#177](https://github.com/dynamic/core-tools/pull/177) ([mak001](https://github.com/mak001))
 - BUGFIX ContentObject $searchable\_fields error [\#176](https://github.com/dynamic/core-tools/pull/176) ([jsirish](https://github.com/jsirish))
-
-## [4.0.4](https://github.com/dynamic/core-tools/tree/4.0.4) (2019-05-29)
-[Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.3...4.0.4)
-
-**Merged pull requests:**
-
 - task - SpiffMigrationTask [\#175](https://github.com/dynamic/core-tools/pull/175) ([jsirish](https://github.com/jsirish))
 - SettingsToConfig task - migrate phone and email [\#174](https://github.com/dynamic/core-tools/pull/174) ([jsirish](https://github.com/jsirish))
 - update vulcan SEO data extensions [\#173](https://github.com/dynamic/core-tools/pull/173) ([jsirish](https://github.com/jsirish))
@@ -60,7 +67,6 @@
 - HeaderImageDataExtension - field labels [\#159](https://github.com/dynamic/core-tools/pull/159) ([jsirish](https://github.com/jsirish))
 - revert Tag back to CoreTag [\#158](https://github.com/dynamic/core-tools/pull/158) ([jsirish](https://github.com/jsirish))
 - PrevNext - return SiteTree record rather than LInk\(\) [\#157](https://github.com/dynamic/core-tools/pull/157) ([jsirish](https://github.com/jsirish))
-- bugfix - small tweaks to ElementListLayoutExtension [\#156](https://github.com/dynamic/core-tools/pull/156) ([jsirish](https://github.com/jsirish))
 - feature - PrevNextExtension [\#155](https://github.com/dynamic/core-tools/pull/155) ([jsirish](https://github.com/jsirish))
 - CMS Design, Elemental add-ons [\#154](https://github.com/dynamic/core-tools/pull/154) ([jsirish](https://github.com/jsirish))
 - bugfix - HeaderImage - add canView permission [\#153](https://github.com/dynamic/core-tools/pull/153) ([jsirish](https://github.com/jsirish))
@@ -79,6 +85,7 @@
 
 **Merged pull requests:**
 
+- bugfix - small tweaks to ElementListLayoutExtension [\#156](https://github.com/dynamic/core-tools/pull/156) ([jsirish](https://github.com/jsirish))
 - Fixed sorting on the navigation groups and links [\#150](https://github.com/dynamic/core-tools/pull/150) ([mak001](https://github.com/mak001))
 - bugfix - HeaderImage - update canCreate to read from Page\(\)-\>canEdit\(\) [\#148](https://github.com/dynamic/core-tools/pull/148) ([jsirish](https://github.com/jsirish))
 - feature - HeaderImage, hasOne field [\#147](https://github.com/dynamic/core-tools/pull/147) ([jsirish](https://github.com/jsirish))
