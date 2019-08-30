@@ -2,20 +2,28 @@
 
 namespace Dynamic\CoreTools\ORM;
 
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
+use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
-use SilverStripe\Forms\GridField\GridFieldDetailForm;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
-use SilverStripe\Forms\GridField\GridFieldFilterHeader;
+use SilverStripe\Forms\GridField\GridFieldDetailForm;
+use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\Forms\TextField;
-use SilverStripe\CMS\Model\SiteTree;
-use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Versioned\GridFieldArchiveAction;
 use Symbiote\GridFieldExtensions\GridFieldAddExistingSearchButton;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
 
 /**
  * Class ManyLinksManager.
+ *
+ * @method \SilverStripe\ORM\ManyManyList ActionLinks()
+ *
+ * @property-read \SilverStripe\ORM\DataObject|\SilverStripe\ORM\ManyManyList $owner
  */
 class ManyLinksManager extends DataExtension
 {
@@ -46,11 +54,7 @@ class ManyLinksManager extends DataExtension
         ));
 
         if ($this->owner->ID) {
-            $config = GridFieldConfig_RelationEditor::create()
-                ->addComponent(new GridFieldOrderableRows('SortOrder'))
-                ->addComponent(new GridFieldAddExistingSearchButton())
-                ->removeComponentsByType('GridFieldAddExistingAutocompleter')
-                ->removeComponentsByType('GridFieldAddNewButton');
+            $config = GridFieldConfig_RelationEditor::create();
 
             // LinkLabel
             $linkFields = FieldList::create(
@@ -60,24 +64,28 @@ class ManyLinksManager extends DataExtension
                 )
             );
 
-            $config->removeComponentsByType(new GridFieldDetailForm());
-            $config->removeComponentsByType(new GridFieldDataColumns());
-
             $edittest = new GridFieldDetailForm();
             $edittest->setFields($linkFields);
 
-            $summaryfieldsconf = new GridFieldDataColumns();
-            $summaryfieldsconf->setDisplayFields(array(
-                'MenuTitle' => 'Menu Title',
-                'URLSegment' => 'URLSegment',
-                'LinkLabel' => 'Link Label',
-            ));
+            $config->removeComponentsByType([
+                GridFieldAddExistingAutocompleter::class,
+                GridFieldAddNewButton::class,
+                GridFieldDetailForm::class,
+                GridFieldSortableHeader::class,
+                GridFieldArchiveAction::class,
+            ])->addComponents([
+                new GridFieldOrderableRows('SortOrder'),
+                new GridFieldAddExistingSearchButton(),
+                new GridFieldTitleHeader(),
+                $edittest,
+            ]);
 
-            $config->addComponent($edittest);
-            $config->addComponent(
-                $summaryfieldsconf,
-                new GridFieldFilterHeader()
-            );
+            $config->getComponentByType(GridFieldDataColumns::class)
+                ->setDisplayFields(array(
+                    'MenuTitle' => 'Menu Title',
+                    'URLSegment' => 'URLSegment',
+                    'LinkLabel' => 'Link Label',
+                ));
 
             $linksField = GridField::create(
                 'ActionLinks',
