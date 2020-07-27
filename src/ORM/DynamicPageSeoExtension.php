@@ -2,6 +2,7 @@
 
 namespace Dynamic\CoreTools\ORM;
 
+use QuinnInteractive\Seo\Builders\FacebookMetaGenerator;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
@@ -9,8 +10,6 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\DataExtension;
-use Vulcan\Seo\Builders\FacebookMetaGenerator;
-use Vulcan\Seo\Extensions\PageSeoExtension;
 
 class DynamicPageSeoExtension extends DataExtension
 {
@@ -34,8 +33,8 @@ class DynamicPageSeoExtension extends DataExtension
                     ->setRightTitle('If blank, inherits default page title')
                     ->setTargetLength(45, 25, 70),
                 UploadField::create('FacebookPageImage', 'Image')
-                    ->setRightTitle('Facebook recommends images to be 1200 x 630 pixels. If no image is 
-                        provided, facebook will choose the first image that appears on the page which usually has 
+                    ->setRightTitle('Facebook recommends images to be 1200 x 630 pixels. If no image is
+                        provided, facebook will choose the first image that appears on the page which usually has
                         bad results')
                     ->setFolderName('seo'),
                 TextareaField::create('FacebookPageDescription', 'Description')
@@ -43,7 +42,7 @@ class DynamicPageSeoExtension extends DataExtension
                         'placeholder',
                         $this->getOwner()->MetaDescription ?:
                             $this->getOwner()->dbObject('Content')->LimitCharacters(297))
-                    ->setRightTitle('If blank, inherits meta description if it exists or gets the first 297 
+                    ->setRightTitle('If blank, inherits meta description if it exists or gets the first 297
                         characters from content')
                     ->setTargetLength(200, 160, 320),
             ]),
@@ -60,7 +59,7 @@ class DynamicPageSeoExtension extends DataExtension
                         'placeholder',
                         $this->getOwner()->MetaDescription ?:
                             $this->getOwner()->dbObject('Content')->LimitCharacters(297))
-                    ->setRightTitle('If blank, inherits meta description if it exists or gets the first 297 
+                    ->setRightTitle('If blank, inherits meta description if it exists or gets the first 297
                         characters from content')
                     ->setTargetLength(200, 160, 320),
             ])
