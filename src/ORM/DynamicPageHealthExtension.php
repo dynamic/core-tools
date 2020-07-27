@@ -2,13 +2,12 @@
 
 namespace Dynamic\CoreTools\ORM;
 
+use QuinnInteractive\Seo\Forms\GoogleSearchPreview;
+use QuinnInteractive\Seo\Forms\HealthAnalysisField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\DataExtension;
-use Vulcan\Seo\Extensions\PageHealthExtension;
-use Vulcan\Seo\Forms\GoogleSearchPreview;
-use Vulcan\Seo\Forms\HealthAnalysisField;
 
 class DynamicPageHealthExtension extends DataExtension
 {
