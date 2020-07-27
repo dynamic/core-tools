@@ -1,7 +1,20 @@
-# Change Log
+# Changelog
+
+## [5.0.1](https://github.com/dynamic/core-tools/tree/5.0.1) (2020-07-27)
+
+[Full Changelog](https://github.com/dynamic/core-tools/compare/4.1.2...5.0.1)
+
+**Merged pull requests:**
+
+- REFACTOR update SEO module namespaces [\#183](https://github.com/dynamic/core-tools/pull/183) ([jsirish](https://github.com/jsirish))
+
+## [4.1.2](https://github.com/dynamic/core-tools/tree/4.1.2) (2019-08-30)
+
+[Full Changelog](https://github.com/dynamic/core-tools/compare/5.0.0...4.1.2)
 
 ## [5.0.0](https://github.com/dynamic/core-tools/tree/5.0.0) (2019-08-30)
-[Full Changelog](https://github.com/dynamic/core-tools/compare/4.1.0...5.0.0)
+
+[Full Changelog](https://github.com/dynamic/core-tools/compare/4.1.1...5.0.0)
 
 **Merged pull requests:**
 
@@ -9,22 +22,24 @@
 - UPDATE elemental constraint to 4 [\#179](https://github.com/dynamic/core-tools/pull/179) ([muskie9](https://github.com/muskie9))
 - Revert "Fixed content objects throwing errors in the cms" [\#178](https://github.com/dynamic/core-tools/pull/178) ([muskie9](https://github.com/muskie9))
 
-## [4.1.0](https://github.com/dynamic/core-tools/tree/4.1.0) (2019-08-05)
-[Full Changelog](https://github.com/dynamic/core-tools/compare/4.1.1...4.1.0)
-
 ## [4.1.1](https://github.com/dynamic/core-tools/tree/4.1.1) (2019-08-05)
-[Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.3...4.1.1)
+
+[Full Changelog](https://github.com/dynamic/core-tools/compare/4.1.0...4.1.1)
+
+## [4.1.0](https://github.com/dynamic/core-tools/tree/4.1.0) (2019-08-05)
+
+[Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.3...4.1.0)
 
 **Merged pull requests:**
 
 - Fixed content objects throwing errors in the cms [\#177](https://github.com/dynamic/core-tools/pull/177) ([mak001](https://github.com/mak001))
 - BUGFIX ContentObject $searchable\_fields error [\#176](https://github.com/dynamic/core-tools/pull/176) ([jsirish](https://github.com/jsirish))
 - task - SpiffMigrationTask [\#175](https://github.com/dynamic/core-tools/pull/175) ([jsirish](https://github.com/jsirish))
-- SettingsToConfig task - migrate phone and email [\#174](https://github.com/dynamic/core-tools/pull/174) ([jsirish](https://github.com/jsirish))
 - update vulcan SEO data extensions [\#173](https://github.com/dynamic/core-tools/pull/173) ([jsirish](https://github.com/jsirish))
 - allow Elemental 4 [\#172](https://github.com/dynamic/core-tools/pull/172) ([jsirish](https://github.com/jsirish))
 
 ## [4.0.3](https://github.com/dynamic/core-tools/tree/4.0.3) (2019-01-07)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.2...4.0.3)
 
 **Merged pull requests:**
@@ -33,6 +48,7 @@
 - migrate to Jenkins CI [\#170](https://github.com/dynamic/core-tools/pull/170) ([jsirish](https://github.com/jsirish))
 
 ## [4.0.2](https://github.com/dynamic/core-tools/tree/4.0.2) (2018-12-24)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.1...4.0.2)
 
 **Fixed bugs:**
@@ -48,6 +64,7 @@
 - ENHANCEMENT field Title and Description config [\#163](https://github.com/dynamic/core-tools/pull/163) ([muskie9](https://github.com/muskie9))
 
 ## [4.0.1](https://github.com/dynamic/core-tools/tree/4.0.1) (2018-11-14)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/4.0.0...4.0.1)
 
 **Fixed bugs:**
@@ -59,6 +76,7 @@
 - REFACTOR header image getCMSFields [\#162](https://github.com/dynamic/core-tools/pull/162) ([muskie9](https://github.com/muskie9))
 
 ## [4.0.0](https://github.com/dynamic/core-tools/tree/4.0.0) (2018-10-23)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/2.0.1...4.0.0)
 
 **Merged pull requests:**
@@ -67,26 +85,11 @@
 - HeaderImageDataExtension - field labels [\#159](https://github.com/dynamic/core-tools/pull/159) ([jsirish](https://github.com/jsirish))
 - revert Tag back to CoreTag [\#158](https://github.com/dynamic/core-tools/pull/158) ([jsirish](https://github.com/jsirish))
 - PrevNext - return SiteTree record rather than LInk\(\) [\#157](https://github.com/dynamic/core-tools/pull/157) ([jsirish](https://github.com/jsirish))
+- bugfix - small tweaks to ElementListLayoutExtension [\#156](https://github.com/dynamic/core-tools/pull/156) ([jsirish](https://github.com/jsirish))
 - feature - PrevNextExtension [\#155](https://github.com/dynamic/core-tools/pull/155) ([jsirish](https://github.com/jsirish))
 - CMS Design, Elemental add-ons [\#154](https://github.com/dynamic/core-tools/pull/154) ([jsirish](https://github.com/jsirish))
 - bugfix - HeaderImage - add canView permission [\#153](https://github.com/dynamic/core-tools/pull/153) ([jsirish](https://github.com/jsirish))
 - Update composer requirements for Elemental [\#152](https://github.com/dynamic/core-tools/pull/152) ([jsirish](https://github.com/jsirish))
-
-## [2.0.1](https://github.com/dynamic/core-tools/tree/2.0.1) (2018-07-19)
-[Full Changelog](https://github.com/dynamic/core-tools/compare/3.0.0...2.0.1)
-
-**Implemented enhancements:**
-
-- Extra logo and favicon fields [\#134](https://github.com/dynamic/core-tools/issues/134)
-
-**Fixed bugs:**
-
-- BUG need FQN for gridfield components [\#132](https://github.com/dynamic/core-tools/issues/132)
-
-**Merged pull requests:**
-
-- bugfix - small tweaks to ElementListLayoutExtension [\#156](https://github.com/dynamic/core-tools/pull/156) ([jsirish](https://github.com/jsirish))
-- Fixed sorting on the navigation groups and links [\#150](https://github.com/dynamic/core-tools/pull/150) ([mak001](https://github.com/mak001))
 - bugfix - HeaderImage - update canCreate to read from Page\(\)-\>canEdit\(\) [\#148](https://github.com/dynamic/core-tools/pull/148) ([jsirish](https://github.com/jsirish))
 - feature - HeaderImage, hasOne field [\#147](https://github.com/dynamic/core-tools/pull/147) ([jsirish](https://github.com/jsirish))
 - bugfix - SlideImageDataExtension - use updateSlideImageFields\(\) [\#146](https://github.com/dynamic/core-tools/pull/146) ([jsirish](https://github.com/jsirish))
@@ -99,7 +102,26 @@
 - ContentObject now owns its image [\#137](https://github.com/dynamic/core-tools/pull/137) ([mak001](https://github.com/mak001))
 - REFACTOR Name/Title to Title and Checkbox to show [\#136](https://github.com/dynamic/core-tools/pull/136) ([muskie9](https://github.com/muskie9))
 
+## [2.0.1](https://github.com/dynamic/core-tools/tree/2.0.1) (2018-07-19)
+
+[Full Changelog](https://github.com/dynamic/core-tools/compare/3.0.0...2.0.1)
+
+**Implemented enhancements:**
+
+- Extra logo and favicon fields [\#134](https://github.com/dynamic/core-tools/issues/134)
+
+**Fixed bugs:**
+
+- BUG need FQN for gridfield components [\#132](https://github.com/dynamic/core-tools/issues/132)
+
+**Merged pull requests:**
+
+- Fixed sorting on the navigation groups and links [\#150](https://github.com/dynamic/core-tools/pull/150) ([mak001](https://github.com/mak001))
+- ENHANCEMENT allow extension point for archive admin form [\#119](https://github.com/dynamic/core-tools/pull/119) ([muskie9](https://github.com/muskie9))
+- Made field width show up on individual fields [\#118](https://github.com/dynamic/core-tools/pull/118) ([mak001](https://github.com/mak001))
+
 ## [3.0.0](https://github.com/dynamic/core-tools/tree/3.0.0) (2018-05-29)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/3.0.0-alpha6...3.0.0)
 
 **Fixed bugs:**
@@ -115,6 +137,7 @@
 - BUGFIX use versioned\_gridfield\_extension [\#133](https://github.com/dynamic/core-tools/pull/133) ([muskie9](https://github.com/muskie9))
 
 ## [3.0.0-alpha6](https://github.com/dynamic/core-tools/tree/3.0.0-alpha6) (2018-05-21)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/3.0.0-alpha5...3.0.0-alpha6)
 
 **Closed issues:**
@@ -127,6 +150,7 @@
 - BUGFIX ReviewContentDataExtension no longer works [\#121](https://github.com/dynamic/core-tools/pull/121) ([muskie9](https://github.com/muskie9))
 
 ## [3.0.0-alpha5](https://github.com/dynamic/core-tools/tree/3.0.0-alpha5) (2018-04-19)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/3.0.0-alpha4...3.0.0-alpha5)
 
 **Implemented enhancements:**
@@ -142,6 +166,7 @@
 - TemplateConfig - refactor coalescing operator for php 5.6 [\#124](https://github.com/dynamic/core-tools/pull/124) ([jsirish](https://github.com/jsirish))
 
 ## [3.0.0-alpha4](https://github.com/dynamic/core-tools/tree/3.0.0-alpha4) (2018-02-08)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/2.0.0-alpha5...3.0.0-alpha4)
 
 **Implemented enhancements:**
@@ -151,17 +176,19 @@
 **Merged pull requests:**
 
 - Refactor - migrate Social Config to core-tools [\#123](https://github.com/dynamic/core-tools/pull/123) ([jsirish](https://github.com/jsirish))
-- ENHANCEMENT allow extension point for archive admin form [\#119](https://github.com/dynamic/core-tools/pull/119) ([muskie9](https://github.com/muskie9))
-- Made field width show up on individual fields [\#118](https://github.com/dynamic/core-tools/pull/118) ([mak001](https://github.com/mak001))
 
 ## [2.0.0-alpha5](https://github.com/dynamic/core-tools/tree/2.0.0-alpha5) (2018-01-23)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/3.0.0-alpha3...2.0.0-alpha5)
 
 **Merged pull requests:**
 
 - Adds dropdown for field width [\#116](https://github.com/dynamic/core-tools/pull/116) ([mak001](https://github.com/mak001))
+- ENHANCEMENT Archive Admin for soft delete support [\#113](https://github.com/dynamic/core-tools/pull/113) ([muskie9](https://github.com/muskie9))
+- Fixes odd sub title field positioning on BlogPosts. [\#110](https://github.com/dynamic/core-tools/pull/110) ([mak001](https://github.com/mak001))
 
 ## [3.0.0-alpha3](https://github.com/dynamic/core-tools/tree/3.0.0-alpha3) (2018-01-13)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/3.0.0-alpha2...3.0.0-alpha3)
 
 **Fixed bugs:**
@@ -171,12 +198,11 @@
 
 **Merged pull requests:**
 
-- ENHANCEMENT Archive Admin for soft delete support [\#113](https://github.com/dynamic/core-tools/pull/113) ([muskie9](https://github.com/muskie9))
 - Composer - allow @dev packages [\#112](https://github.com/dynamic/core-tools/pull/112) ([jsirish](https://github.com/jsirish))
-- Fixes odd sub title field positioning on BlogPosts. [\#110](https://github.com/dynamic/core-tools/pull/110) ([mak001](https://github.com/mak001))
 - ENHANCEMENT - GoogleAnalyticsConfig [\#108](https://github.com/dynamic/core-tools/pull/108) ([jsirish](https://github.com/jsirish))
 
 ## [3.0.0-alpha2](https://github.com/dynamic/core-tools/tree/3.0.0-alpha2) (2017-09-30)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/2.0.0...3.0.0-alpha2)
 
 **Merged pull requests:**
@@ -184,8 +210,10 @@
 - Global Config - CMS design [\#106](https://github.com/dynamic/core-tools/pull/106) ([jsirish](https://github.com/jsirish))
 - REFACTOR - require dynamic/silverstripe-geocoder [\#103](https://github.com/dynamic/core-tools/pull/103) ([jsirish](https://github.com/jsirish))
 - UPDATE GlobalSiteSettings for SS4 [\#99](https://github.com/dynamic/core-tools/pull/99) ([muskie9](https://github.com/muskie9))
+- SS4 readme updates, changelog [\#92](https://github.com/dynamic/core-tools/pull/92) ([jsirish](https://github.com/jsirish))
 
 ## [2.0.0](https://github.com/dynamic/core-tools/tree/2.0.0) (2017-08-01)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/3.0.0-alpha1...2.0.0)
 
 **Implemented enhancements:**
@@ -198,9 +226,10 @@
 - UPDATE global config extensions to detect owner class [\#97](https://github.com/dynamic/core-tools/pull/97) ([muskie9](https://github.com/muskie9))
 - UPDATE require silverstripe-additional-formfields [\#95](https://github.com/dynamic/core-tools/pull/95) ([muskie9](https://github.com/muskie9))
 - composer - collection to ^1.0 [\#94](https://github.com/dynamic/core-tools/pull/94) ([jsirish](https://github.com/jsirish))
-- SS4 readme updates, changelog [\#92](https://github.com/dynamic/core-tools/pull/92) ([jsirish](https://github.com/jsirish))
+- BUGFIX global config not accessible in template [\#88](https://github.com/dynamic/core-tools/pull/88) ([muskie9](https://github.com/muskie9))
 
 ## [3.0.0-alpha1](https://github.com/dynamic/core-tools/tree/3.0.0-alpha1) (2017-07-06)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/2.0.0-alpha4...3.0.0-alpha1)
 
 **Fixed bugs:**
@@ -209,11 +238,10 @@
 
 **Merged pull requests:**
 
-- bugfix - set `CORE\_TOOLS\_IMAGE\_SIZE\_LIMIT` to int [\#90](https://github.com/dynamic/core-tools/pull/90) ([jsirish](https://github.com/jsirish))
-- BUGFIX global config not accessible in template [\#88](https://github.com/dynamic/core-tools/pull/88) ([muskie9](https://github.com/muskie9))
 - REFACTOR SS4 compatability [\#75](https://github.com/dynamic/core-tools/pull/75) ([muskie9](https://github.com/muskie9))
 
 ## [2.0.0-alpha4](https://github.com/dynamic/core-tools/tree/2.0.0-alpha4) (2017-06-15)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/2.0.0-alpha3...2.0.0-alpha4)
 
 **Merged pull requests:**
@@ -221,6 +249,7 @@
 - CORE\_TOOLS\_IMAGE\_SIZE\_LIMIT - convert to integer [\#87](https://github.com/dynamic/core-tools/pull/87) ([jsirish](https://github.com/jsirish))
 
 ## [2.0.0-alpha3](https://github.com/dynamic/core-tools/tree/2.0.0-alpha3) (2017-05-15)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/2.0.0-alpha2...2.0.0-alpha3)
 
 **Implemented enhancements:**
@@ -234,6 +263,7 @@
 - REFACTOR dedicated global admin [\#85](https://github.com/dynamic/core-tools/pull/85) ([muskie9](https://github.com/muskie9))
 
 ## [2.0.0-alpha2](https://github.com/dynamic/core-tools/tree/2.0.0-alpha2) (2017-03-17)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/2.0.0-alpha1...2.0.0-alpha2)
 
 **Merged pull requests:**
@@ -242,17 +272,17 @@
 - MultiLinkManager - add multiple Link objects [\#81](https://github.com/dynamic/core-tools/pull/81) ([jsirish](https://github.com/jsirish))
 - PreviewExtension - core compatability [\#80](https://github.com/dynamic/core-tools/pull/80) ([jsirish](https://github.com/jsirish))
 - REFACTOR: remove CollectionExtension [\#79](https://github.com/dynamic/core-tools/pull/79) ([jsirish](https://github.com/jsirish))
-- Tag - rename to CoreTag [\#78](https://github.com/dynamic/core-tools/pull/78) ([jsirish](https://github.com/jsirish))
 
 ## [2.0.0-alpha1](https://github.com/dynamic/core-tools/tree/2.0.0-alpha1) (2017-01-26)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/1.0.0-alpha2...2.0.0-alpha1)
 
 **Merged pull requests:**
 
 - TemplateConfig - remove FooterLinks [\#77](https://github.com/dynamic/core-tools/pull/77) ([jsirish](https://github.com/jsirish))
-- ENHANCEMENT add global variable $ShowReviewContent [\#72](https://github.com/dynamic/core-tools/pull/72) ([muskie9](https://github.com/muskie9))
 
 ## [1.0.0-alpha2](https://github.com/dynamic/core-tools/tree/1.0.0-alpha2) (2016-12-19)
+
 [Full Changelog](https://github.com/dynamic/core-tools/compare/1.0.0-alpha1...1.0.0-alpha2)
 
 **Implemented enhancements:**
@@ -270,6 +300,9 @@
 - BUGFIX: remove duplication `TestSiteConfig` declaration [\#65](https://github.com/dynamic/core-tools/pull/65) ([jsirish](https://github.com/jsirish))
 
 ## [1.0.0-alpha1](https://github.com/dynamic/core-tools/tree/1.0.0-alpha1) (2016-11-18)
+
+[Full Changelog](https://github.com/dynamic/core-tools/compare/23347b4540f4fad7808d0b6f88ab57684e396584...1.0.0-alpha1)
+
 **Implemented enhancements:**
 
 - Preview title clipping off when too long [\#47](https://github.com/dynamic/core-tools/issues/47)
@@ -286,7 +319,6 @@
 **Fixed bugs:**
 
 - PreviewExtension - fields are being added twice in 3.4 [\#51](https://github.com/dynamic/core-tools/issues/51)
-- Preview title clipping off when too long [\#47](https://github.com/dynamic/core-tools/issues/47)
 - CoreToolsPageDataExtension - Tags [\#26](https://github.com/dynamic/core-tools/issues/26)
 - YouTubeManager - requirements warning [\#13](https://github.com/dynamic/core-tools/issues/13)
 - PreviewExtension - field insert [\#45](https://github.com/dynamic/core-tools/issues/45)
@@ -340,4 +372,4 @@
 
 
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
