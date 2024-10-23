@@ -21,7 +21,7 @@
 	"require": {
 		"silverstripe/recipe-cms": "^1@dev || ^4@dev",
 		"silverstripe/vendor-plugin": "^1@dev",
-		"dynamic/silverstripe-geocoder": "^1@dev",
+		"dynamic/silverstripe-geocoder": "^1.0 || ^2.0",
 		"silvershop/silverstripe-hasonefield": "^2.1@dev",
 		"symbiote/silverstripe-gridfieldextensions": "^3@dev",
 		"unclecheese/display-logic": "^2@dev",
